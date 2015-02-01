@@ -6,14 +6,14 @@ use phamily\framework\models\PersonaInterface;
 
 class PersonaService implements PersonaServiceInterface{
 	public function create(
-			$gender,
+			$gender = self::UNDEFINED,
 			array $names = [], 
 			\DateTimeInterface $dateOfBirth = null, 
 			\DateTimeInterface $dateOfDeath = null, 
 			PersonaInterface $father = null, 
 			PersonaInterface $mother = null
 	){
-		return new Persona();
+		return new Persona($gender);
 	}
 }
 

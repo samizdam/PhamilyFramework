@@ -1,7 +1,16 @@
 <?php
 namespace phamily\framework\models;
 
-interface PersonaInterface{
+use phamily\framework\GenderAwareInterface;
+
+interface PersonaInterface extends GenderAwareInterface{
+	
+	public function setName($type, $value);
+	
+	public function setDateOfBirth(\DateTimeInterface $date);
+	public function setDateOfDeath(\DateTimeInterface $date);
+	
+	public function getGender();
 	
 	public function getNameType($type);
 	public function getFullName();

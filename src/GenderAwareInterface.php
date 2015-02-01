@@ -7,6 +7,7 @@ namespace phamily\framework;
  *
  */
 interface GenderAwareInterface{
-	const MALE = 'male';
-	const FEMALE = 'female';
+	const GENDER_MALE = 'male';
+	const GENDER_FEMALE = 'female';
+	const GENDER_UNDEFINED = null;
 }
