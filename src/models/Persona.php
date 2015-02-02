@@ -5,16 +5,30 @@ use phamily\framework\models\exceptions\LogicException;
 use phamily\framework\models\exceptions\InvalidArgumentException;
 class Persona implements PersonaInterface{
 
+	protected $id;
+	
 	protected $gender;
 	protected $names;
 	protected $father;
 	protected $mother;
 	protected $childs;
 	
-	public function __construct($gender = self::GENDER_UNDEFINED, Persona $father = null, Persona $mother = null){
+	
+	
+	public function __construct($gender = self::GENDER_UNDEFINED, array $names = [], Persona $father = null, Persona $mother = null){
 		$this->setGender($gender);
 		$this->setFather($father);
 // 		$this->mother = $mother;
+	}
+	
+	public static function populate($data){
+		$persona = new self($data->gender);
+		$persona->id = $data->id;
+		return $persona;
+	}
+	
+	public function getId(){
+		return $this->id;
 	}
 	
 	public function setName($type, $value){throw new \Exception("not implement now");}
@@ -45,7 +59,9 @@ class Persona implements PersonaInterface{
 		$this->father = $father;
 	}
 	
-	public function getFather(){throw new \Exception("not implement now");}
+	public function getFather(){
+		return $this->father;
+	}
 	public function getMother(){throw new \Exception("not implement now");}
 	
 	public function getChilds(){throw new \Exception("not implement now");}

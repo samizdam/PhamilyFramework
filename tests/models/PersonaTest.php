@@ -11,11 +11,16 @@ class PersonaTest extends UnitTest{
 		$persona->setGender(Persona::GENDER_FEMALE);
 	}
 	
+// 	public function testConstructWithNames(){
+// 		$persona = new Persona(null, []);
+// 	}
+	
 	public function testFatherFemaleException(){
 		$father = new Persona(Persona::GENDER_FEMALE);
 		
 		$this->setExpectedException(self::BASE_EXCEPTION_NS . 'LogicException', null);
-		$son = new Persona(Persona::GENDER_MALE, $father);
+		$son = new Persona(Persona::GENDER_MALE);
+		$son->setFather($father);
 	}
 	
 }

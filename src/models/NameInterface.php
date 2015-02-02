@@ -2,6 +2,6 @@
 namespace phamily\framework\models;
 
 interface NameInterface{
-	public function getType();
+	public function getKey();
 	public function getValue();
 }

@@ -3,7 +3,9 @@ namespace phamily\framework\models;
 
 use phamily\framework\GenderAwareInterface;
 
-interface PersonaInterface extends GenderAwareInterface{
+interface PersonaInterface extends ModelInterface, GenderAwareInterface{
+	
+	public function getId();
 	
 	public function setName($type, $value);
 	
