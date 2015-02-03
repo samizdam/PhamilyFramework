@@ -14,7 +14,7 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	
 	public function getGender();
 	
-	public function getNameType($type);
+	public function getName($type);
 	public function getFullName();
 	
 	public function getFather();
@@ -23,5 +23,4 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	public function getChilds();
 
 	public function getSiblings();
-
 }

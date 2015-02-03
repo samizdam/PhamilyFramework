@@ -21,10 +21,12 @@ class Persona implements PersonaInterface{
 // 		$this->mother = $mother;
 	}
 	
-	public static function populate($data){
-		$persona = new self($data->gender);
-		$persona->id = $data->id;
-		return $persona;
+	public function populate($data){
+		$data = (object) $data;
+		
+		$this->setGender($data->gender);
+		$this->id = $data->id;
+		return $this;
 	}
 	
 	public function getId(){
@@ -49,7 +51,7 @@ class Persona implements PersonaInterface{
 		return $this->gender;
 	}
 	
-	public function getNameType($type){throw new \Exception("not implement now");}
+	public function getName($type){throw new \Exception("not implement now");}
 	public function getFullName(){throw new \Exception("not implement now");}
 	
 	public function setFather(Persona $father = null){

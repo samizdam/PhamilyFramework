@@ -42,6 +42,18 @@ abstract class DbTest extends UnitTest{
 		return self::assertGreaterThan(0, $resultSet->count(), $message);
 	}
 	
+	/**
+	 * 
+	 * @param string $tableName
+	 * @param array $rowData
+	 * @param string $message
+	 */
+	static public function assertTableHasNotData($tableName, $rowData = [], $message = ''){
+		$tableGateway = self::getTableGateway($tableName);
+		$resultSet = $tableGateway->select($rowData);
+		return self::assertEquals(0, $resultSet->count(), $message);
+	}
+	
 	/*
 	 * 
 	 */

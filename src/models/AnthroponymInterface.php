@@ -1,7 +1,7 @@
 <?php
 namespace phamily\framework\models;
 
-interface NameInterface{
-	public function getKey();
+interface AnthroponymInterface{
+	public function getType();
 	public function getValue();
 }
