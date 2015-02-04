@@ -11,9 +11,12 @@ class PersonaTest extends UnitTest{
 		$persona->setGender(Persona::GENDER_FEMALE);
 	}
 	
-// 	public function testConstructWithNames(){
-// 		$persona = new Persona(null, []);
-// 	}
+	public function testConstructWithNames(){
+		$nameType = 'firstName';
+		$nameValue = 'Vasya';
+		$persona = new Persona(null, [$nameType => $nameValue]);
+		$this->assertEquals($nameValue, $persona->getName($nameType));
+	}
 	
 	public function testFatherFemaleException(){
 		$father = new Persona(Persona::GENDER_FEMALE);

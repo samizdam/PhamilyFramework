@@ -13,4 +13,8 @@ interface PersonaServiceInterface extends GenderAwareInterface{
 			PersonaInterface $father = null, 
 			PersonaInterface $mother = null
 	);
+	
+// 	public function findByNames(array $names = []){
+		
+// 	}
 }

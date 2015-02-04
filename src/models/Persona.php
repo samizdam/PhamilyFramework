@@ -13,11 +13,12 @@ class Persona implements PersonaInterface{
 	protected $mother;
 	protected $childs;
 	
-	
-	
 	public function __construct($gender = self::GENDER_UNDEFINED, array $names = [], Persona $father = null, Persona $mother = null){
 		$this->setGender($gender);
 		$this->setFather($father);
+		foreach ($names as $type => $value){
+			$this->names[$type] = new Anthroponym($type, $value);
+		}
 // 		$this->mother = $mother;
 	}
 	
@@ -51,7 +52,9 @@ class Persona implements PersonaInterface{
 		return $this->gender;
 	}
 	
-	public function getName($type){throw new \Exception("not implement now");}
+	public function getName($type){
+		return $this->names[$type];
+	}
 	public function getFullName(){throw new \Exception("not implement now");}
 	
 	public function setFather(Persona $father = null){
