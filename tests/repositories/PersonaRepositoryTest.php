@@ -44,6 +44,15 @@ class PersonaRepositoryTest extends DbTest{
 		$this->assertTableHasNotData($this->tableName, $son);
 	}
 	
+	public function testSavePersonaWithNames(){
+		$persona = new Persona();
+		
+		$repository = $this->getRepository();
+		$repository->save($persona);
+		
+// 		$this->assertTableHasData('')
+	}
+	
 	private function getFamilyFixtures(){
 		$father = ['id' => 1, 'gender' => Persona::GENDER_MALE];
 		$mother = ['id' => 2, 'gender' => Persona::GENDER_MALE];

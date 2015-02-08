@@ -8,16 +8,37 @@ class Persona implements PersonaInterface{
 	protected $id;
 	
 	protected $gender;
+	
+	/**
+	 * 
+	 * @var NameCollectionInterface
+	 */
 	protected $names;
+	
+	/**
+	 * 
+	 * @var PersonaInterface
+	 */
 	protected $father;
+	
+	/**
+	 * 
+	 * @var PersonaInterface
+	 */
 	protected $mother;
+	
+	/**
+	 * 
+	 * @var PersonaInterface[]
+	 */
 	protected $childs;
 	
 	public function __construct($gender = self::GENDER_UNDEFINED, array $names = [], Persona $father = null, Persona $mother = null){
 		$this->setGender($gender);
 		$this->setFather($father);
+		$this->names = new NameCollection();
 		foreach ($names as $type => $value){
-			$this->names[$type] = new Anthroponym($type, $value);
+			$this->names->add(new Anthroponym($type, $value));
 		}
 // 		$this->mother = $mother;
 	}
@@ -55,7 +76,10 @@ class Persona implements PersonaInterface{
 	public function getName($type){
 		return $this->names[$type];
 	}
-	public function getFullName(){throw new \Exception("not implement now");}
+	
+	public function getFullName(NamingSchemeInterface $scheme, $formName = NamingSchemeInterface::DEFAULT_FORM){
+		return $scheme->build($this->names, $formName);
+	}
 	
 	public function setFather(Persona $father = null){
 		if($father instanceof Persona && $father->getGender() !== self::GENDER_MALE){

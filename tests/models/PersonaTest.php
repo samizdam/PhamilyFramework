@@ -1,5 +1,6 @@
 <?php
 use phamily\framework\models\Persona;
+use phamily\framework\models\NamingScheme;
 class PersonaTest extends UnitTest{
 	
 	const BASE_EXCEPTION_NS = '\\phamily\\framework\\models\\exceptions\\';
@@ -24,6 +25,19 @@ class PersonaTest extends UnitTest{
 		$this->setExpectedException(self::BASE_EXCEPTION_NS . 'LogicException', null);
 		$son = new Persona(Persona::GENDER_MALE);
 		$son->setFather($father);
+	}
+	
+	public function testPersonaFullName(){
+		
+		$persona = new Persona(Persona::GENDER_MALE, ['surname' => 'Ivanov', 'firstName' => 'Ivan', 'patronym' => 'Ivanovich']);
+		$schemeConfig = ['default' =>[ 
+			'surname' => [],
+			'firstName' => [],
+			'patronym' => [],
+			]
+		];
+		$scheme = new NamingScheme('fio', $schemeConfig);
+		$this->assertEquals('Ivanov Ivan Ivanovich', $persona->getFullName($scheme));
 	}
 	
 }
