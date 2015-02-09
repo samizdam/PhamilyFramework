@@ -2,6 +2,7 @@
 namespace phamily\framework\repositories;
 
 use Zend\Db\RowGateway\RowGateway;
+use Zend\Db\TableGateway\TableGateway;
 abstract class AbstractRepository implements RepositoryInterface{
 	
 	protected $adapter;
@@ -12,5 +13,13 @@ abstract class AbstractRepository implements RepositoryInterface{
 	
 	protected function getRowGatewayInstance(){
 		return new RowGateway($this->primaryKey, $this->tableName, $this->adapter);
-	}	
+	}
+	
+	protected function createTableGateway($tableName){
+		return new TableGateway($tableName, $this->adapter);
+	}
+
+	protected function factory($repositoryType = __CLASS__){
+		return new $repositoryType($this->adapter);
+	}
 }

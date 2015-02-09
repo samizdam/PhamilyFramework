@@ -30,7 +30,7 @@ namespace phamily\framework\models;
  * 				$father = $persona->getFather();
  * 				return isset($father) ? $father->getName('surname') : null;
  * 			},
- * 		'name' => [
+ * 		'personalName' => [
  * 			'require' => true,
  * 			'multiple' => false,
  * 		],
@@ -40,7 +40,7 @@ namespace phamily\framework\models;
  * 			'formula' => function(PersonaInterface){
  * 				$father = $persona->getFather();
  * 				$patronimSuffix = ($persona->getGender() === $persona::GENDER_FEMALE) ? 'ovna' : 'ovich'; 
- * 				return isset($father) ? $father->getName('name') . $patronimSuffix : null;
+ * 				return isset($father) ? $father->getName('personalName') . $patronimSuffix : null;
  * 			},
  * 		],
  * 	],

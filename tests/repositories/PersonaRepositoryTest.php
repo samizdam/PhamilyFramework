@@ -44,13 +44,21 @@ class PersonaRepositoryTest extends DbTest{
 		$this->assertTableHasNotData($this->tableName, $son);
 	}
 	
+	/**
+	 * TODO test that names will be saved correct with person
+	 */
 	public function testSavePersonaWithNames(){
-		$persona = new Persona();
+		$namesArray = ['personalName' => 'Petr', 'surname' => 'Romanov'];
+		$persona = new Persona(Persona::GENDER_MALE, $namesArray);
 		
 		$repository = $this->getRepository();
 		$repository->save($persona);
 		
-// 		$this->assertTableHasData('')
+		$this->assertTableHasData('anthroponym', ['value' => 'Petr', 'type' => 'personalName']);
+		$this->assertTableHasData('persona_has_names', [
+					'personaId' => $persona->getId(), 
+// 					'nameId' => $persona->getName('surname')->getId()
+		]);
 	}
 	
 	private function getFamilyFixtures(){

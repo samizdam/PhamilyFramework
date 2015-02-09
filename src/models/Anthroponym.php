@@ -3,6 +3,7 @@ namespace phamily\framework\models;
 
 class Anthroponym implements AnthroponymInterface{
 	
+	protected $id;
 	protected $type;
 	protected $value;
 	
@@ -13,9 +14,14 @@ class Anthroponym implements AnthroponymInterface{
 	
 	public function populate($data){
 		$data = (object) $data;
+		$this->id = $data->id;
 		$this->type = $data->type;
 		$this->value = $data->value;
 		return $this;
+	}
+	
+	public function getId(){
+		return $this->id;
 	}
 	
 	public function getType(){

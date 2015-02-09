@@ -61,7 +61,7 @@ class Persona implements PersonaInterface{
 	public function setDateOfDeath(\DateTimeInterface $date){throw new \Exception("not implement now");}
 	
 	public function setGender($gender){
-		if($this->gender){
+		if(isset($this->gender) && $this->gender !== $gender){
 			throw new LogicException("Gender already set");
 		}elseif($gender !== self::GENDER_MALE && $gender !== self::GENDER_FEMALE && $gender !== self::GENDER_UNDEFINED){
 			throw new InvalidArgumentException("Invalid gender value: {$gender}, possible values: ".self::MALE.", ".self::FEMALE." or NULL if undefined");
@@ -71,6 +71,10 @@ class Persona implements PersonaInterface{
 	
 	public function getGender(){
 		return $this->gender;
+	}
+	
+	public function getNames(){
+		return $this->names;
 	}
 	
 	public function getName($type){

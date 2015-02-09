@@ -1,6 +1,7 @@
 <?php
 use phamily\framework\models\Anthroponym;
 use phamily\framework\repositories\AnthroponymRepository;
+use Symfony\Component\Yaml\Tests\A;
 
 class AnthroponymRepositoryTest extends DbTest{
 	
@@ -30,7 +31,21 @@ class AnthroponymRepositoryTest extends DbTest{
 	}
 	
 	public function testDeleteAnthroponym(){
-		$this->prepareFixtures();
+		$fixtures = $this->prepareFixtures();
+		$this->assertTableHasData($this->tableName, $fixtures[0]);
+		
+		$repository = $this->getRepository();
+		$anthroponym = new Anthroponym($fixtures[0]['type'], $fixtures[0]['value']);
+		$repository->delete($anthroponym);
+		
+		$this->assertTableHasNotData($this->tableName, $fixtures[0]);
+	}
+	
+	public function testDublicateNames(){
+		$fixtures = $this->prepareFixtures();
+		$dubleAnthroponym = new Anthroponym($fixtures[0]['type'], $fixtures[0]['value']);
+		$repository = $this->getRepository();
+		$repository->save($dubleAnthroponym);
 	}
 	
 	private function prepareFixtures(){

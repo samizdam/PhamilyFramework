@@ -12,10 +12,25 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 	protected $primaryKey = 'id';
 	
 	public function save(PersonaInterface &$persona){
+		/*
+		 * save persona
+		 */
 		$row = $this->getRowGatewayInstance();
 		$row->populate($this->extractData($persona));
 		$row->save();
-		return $persona->populate($row);
+		$persona->populate($row);
+		
+		/*
+		 * save names
+		 */
+		$anthroponymRepo = $this->factory(AnthroponymRepository::class);
+		foreach ($persona->getNames() as $name){
+			$anthroponymRepo->save($name);
+			$relationTableGateway = new TableGateway('persona_has_names', $this->adapter);
+			$relationTableGateway->insert(['personaId' => $persona->getId(), 'nameId' => $name->getId()]);
+		}
+		
+		return $persona; 
 	} 
 	
 	/**
