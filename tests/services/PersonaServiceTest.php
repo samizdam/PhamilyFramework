@@ -2,9 +2,20 @@
 use phamily\framework\services\PersonaService;
 
 class PersonaServiceTest extends UnitTest{
-	public function testPersonaCreating(){
+	public function testPersonaCreatingWithGender(){
 		$service = new PersonaService();
-		$persona = $service->create($service::GENDER_MALE);
+		$gender = $service::GENDER_MALE;
+		$persona = $service->create($gender);
+		
 		$this->assertInstanceOf(\phamily\framework\models\PersonaInterface::class, $persona);
+		$this->assertEquals($gender, $persona->getGender());
+	}
+	
+	public function testPersonaCreatingWithNames(){
+		$service = new PersonaService();
+		$persona = $service->create(null, ['personalName' => 'Vasya', 'surname' => 'Pupkin']);
+		
+		$this->assertEquals('Vasya', $persona->getName('personalName'));
+		$this->assertEquals('Pupkin', $persona->getName('surname'));
 	}
 }

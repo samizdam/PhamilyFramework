@@ -2,6 +2,7 @@
 namespace phamily\framework\models;
 
 use phamily\framework\GenderAwareInterface;
+use phamily\framework\value_objects\DateTimeInterface;
 
 interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	
@@ -9,8 +10,11 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	
 	public function setName($type, $value);
 	
-	public function setDateOfBirth(\DateTimeInterface $date);
-	public function setDateOfDeath(\DateTimeInterface $date);
+	public function setDateOfBirth(DateTimeInterface $date);
+	public function setDateOfDeath(DateTimeInterface $date);
+	
+	public function getDateOfBirth($format = null);
+	public function getDateOfDeath($format = null);
 	
 	public function getGender();
 	

@@ -1,6 +1,7 @@
 <?php
 use phamily\framework\models\Persona;
 use phamily\framework\models\NamingScheme;
+use phamily\framework\value_objects\DateTime;
 class PersonaTest extends UnitTest{
 	
 	const BASE_EXCEPTION_NS = '\\phamily\\framework\\models\\exceptions\\';
@@ -38,6 +39,40 @@ class PersonaTest extends UnitTest{
 		];
 		$scheme = new NamingScheme('fio', $schemeConfig);
 		$this->assertEquals('Ivanov Ivan Ivanovich', $persona->getFullName($scheme));
+	}
+	
+	public function testDateOfBirthFormating(){
+		$persona = new Persona();
+		
+		$persona->setDateOfBirth(new DateTime());
+		
+		$format = 'Y-m-d';
+		
+		$this->assertEquals(date($format), $persona->getDateOfBirth($format));
+	}
+	
+	public function testDateOfDeathFormating(){
+		$persona = new Persona();
+		
+		$persona->setDateOfDeath(new DateTime());
+		
+		$format = 'Y-m-d';
+		
+		$this->assertEquals(date($format), $persona->getDateOfDeath($format));
+	}
+	
+	public function testDeathBeforeBirthException(){
+		$persona = new Persona();
+		$persona->setDateOfBirth(new DateTime('2001-01-01'));
+		$this->setExpectedException(self::BASE_EXCEPTION_NS . 'LogicException');
+		$persona->setDateOfDeath(new DateTime('2000-01-01'));
+	}
+	
+	public function testBirthAfterDeathException(){
+		$persona = new Persona();
+		$persona->setDateOfDeath(new DateTime('2000-01-01'));
+		$this->setExpectedException(self::BASE_EXCEPTION_NS . 'LogicException');
+		$persona->setDateOfBirth(new DateTime('2001-01-01'));
 	}
 	
 }
