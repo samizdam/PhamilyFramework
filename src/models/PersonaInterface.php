@@ -23,10 +23,13 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	public function getName($type);
 	public function getFullName(NamingSchemeInterface $scheme, $formName);
 	
-	
+	public function setFather(PersonaInterface $father);
+	public function setMother(PersonaInterface $mother);
 	
 	public function getFather();
 	public function getMother();
+	
+	public function addChild(PersonaInterface $child);
 	
 	public function getChilds();
 

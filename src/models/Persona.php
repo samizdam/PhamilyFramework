@@ -4,6 +4,8 @@ namespace phamily\framework\models;
 use phamily\framework\models\exceptions\LogicException;
 use phamily\framework\models\exceptions\InvalidArgumentException;
 use phamily\framework\value_objects\DateTimeInterface;
+use phamily\framework\models\validators\ParentsValidatorInterface;
+use phamily\framework\models\validators\BaseParentsValidator;
 
 class Persona implements PersonaInterface{
 
@@ -47,13 +49,29 @@ class Persona implements PersonaInterface{
 	 */
 	protected $dateOfDeath;
 	
+	/**
+	 * 
+	 * @var ParentsValidatorInterface
+	 */
+	protected $parentsValidator;
+	
 	public function __construct($gender = self::GENDER_UNDEFINED, array $names = [], Persona $father = null, Persona $mother = null){
+		/*
+		 * TODO may be change constructor for set validatorors, or use that without arguments,
+		 * becose validators must be configure and set before persona setters will be use.  
+		 */
+		$this->parentsValidator = new BaseParentsValidator();
+		
 		$this->setGender($gender);
+		
 		$this->setFather($father);
+		$this->setMother($mother);
+		
 		$this->names = new NameCollection();
 		foreach ($names as $type => $value){
 			$this->names->add(new Anthroponym($type, $value));
 		}
+		
 	}
 	
 	public function populate($data){
@@ -139,17 +157,29 @@ class Persona implements PersonaInterface{
 		return $scheme->build($this->names, $formName);
 	}
 	
-	public function setFather(Persona $father = null){
-		if($father instanceof Persona && $father->getGender() !== self::GENDER_MALE){
+	public function setFather(PersonaInterface $father = null){
+		if($father instanceof PersonaInterface && !$this->parentsValidator->isValidFather($this, $father)){
 			throw new LogicException("Father must be a male");
 		}
 		$this->father = $father;
 	}
 	
+	public function setMother(PersonaInterface $mother = null){
+		if($mother instanceof PersonaInterface && $mother->getGender() !== self::GENDER_FEMALE){
+			throw new LogicException("Mother must be a female");
+		}
+		$this->mother = $mother;
+	}
+	
 	public function getFather(){
 		return $this->father;
 	}
-	public function getMother(){throw new \Exception("not implement now");}
+	
+	public function getMother(){
+		return $this->mother;
+	}
+	
+	public function addChild(PersonaInterface $child){throw new \Exception("not implement now");}
 	
 	public function getChilds(){throw new \Exception("not implement now");}
 	

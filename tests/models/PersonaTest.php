@@ -20,6 +20,27 @@ class PersonaTest extends UnitTest{
 		$this->assertEquals($nameValue, $persona->getName($nameType));
 	}
 	
+	public function testValidConstructWithParents(){
+		$male = Persona::GENDER_MALE;
+		$female = Persona::GENDER_FEMALE;
+		$father = new Persona($male);
+		$mother = new Persona($female);
+		
+		$persona = new Persona(Persona::GENDER_UNDEFINED, [], $father, $mother);
+		$this->assertEquals($father, $persona->getFather());
+		$this->assertEquals($mother, $persona->getMother());
+	}	
+	
+	public function testInvalidConstructWithParents(){
+		$male = Persona::GENDER_MALE;
+		$father = new Persona($male);
+		
+		$this->setExpectedException(self::BASE_EXCEPTION_NS . 'LogicException');
+		$persona = new Persona(Persona::GENDER_UNDEFINED, [], $father, $father);
+		
+		$this->assertEmpty($persona->getMother());
+	}
+	
 	public function testFatherFemaleException(){
 		$father = new Persona(Persona::GENDER_FEMALE);
 		
@@ -29,7 +50,6 @@ class PersonaTest extends UnitTest{
 	}
 	
 	public function testPersonaFullName(){
-		
 		$persona = new Persona(Persona::GENDER_MALE, ['surname' => 'Ivanov', 'firstName' => 'Ivan', 'patronym' => 'Ivanovich']);
 		$schemeConfig = ['default' =>[ 
 			'surname' => [],
