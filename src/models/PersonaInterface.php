@@ -13,6 +13,9 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	public function setDateOfBirth(DateTimeInterface $date);
 	public function setDateOfDeath(DateTimeInterface $date);
 	
+	public function hasDateOfBirth();
+	public function hasDateOfDeath();
+	
 	public function getDateOfBirth($format = null);
 	public function getDateOfDeath($format = null);
 	

@@ -1,7 +1,9 @@
 <?php
+namespace phamily\tests\repositories;
 
 use phamily\framework\models\Persona;
 use phamily\framework\repositories\PersonaRepository;
+use phamily\tests\DbTest;
 
 class PersonaRepositoryTest extends DbTest{
 	

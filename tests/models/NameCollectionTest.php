@@ -1,5 +1,9 @@
 <?php
+namespace phamily\tests\models;
+
 use phamily\framework\models\NameCollection;
+use phamily\tests\UnitTest;
+
 class NameCollectionTest extends UnitTest{
 	public function testAddNameToCollection(){
 		$nameMock = $this->getAnthroponymMock();

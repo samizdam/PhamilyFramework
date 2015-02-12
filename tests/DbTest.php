@@ -1,5 +1,5 @@
 <?php
-// namespace phamily\framework\tests;
+namespace phamily\tests;
 
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\TableGateway\TableGateway;

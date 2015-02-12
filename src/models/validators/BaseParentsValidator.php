@@ -5,15 +5,45 @@ use phamily\framework\models\PersonaInterface;
 
 class BaseParentsValidator implements ParentsValidatorInterface{
 	
+	private $errors = [];
+	
 	public function isValidFather(PersonaInterface $persona, PersonaInterface $father){
-		/*
-		 * TODO to decide: use exceptions (and refuse 'isValid' signature for favore 'checkSomething'
-		 * and where is messages? 
-		 */
-		return ($father->getGender() === $father::GENDER_MALE);
+		$errors = [];
+
+		if($father->getGender() !== $father::GENDER_MALE){
+			$errors[] = "Father must be a male";
+		}
+		if($father->hasDateOfBirth() && $persona->hasDateOfBirth()
+				 && $father->getDateOfBirth('Y') >= $persona->getDateOfBirth('Y')){
+			$errors[] = "Child must be younger than the parent";
+		}
+		
+		return $this->getResult($errors);
 	}
 	
 	public function isValidMother(PersonaInterface $persona, PersonaInterface $mother){
-		return ($mother->getGender() === $mother::GENDER_FEMALE);
+		$errors = [];
+		
+		if ($mother->getGender() !== $mother::GENDER_FEMALE){
+			$errors[] = "Mother must be a female";
+		}
+
+		if(($mother->hasDateOfBirth() && $persona->hasDateOfBirth()) 
+				&& (int) $mother->getDateOfBirth('Y') >= (int) $persona->getDateOfBirth('Y')){
+			
+			$errors[] = "Child must be younger than the parent";
+		}		
+		
+		return $this->getResult($errors);
 	}	
+	
+	
+	public function getErrors(){
+		return $this->errors;
+	}
+	
+	protected function getResult($errors){
+		$this->errors = $errors;
+		return (count($this->errors) === 0);
+	}
 }

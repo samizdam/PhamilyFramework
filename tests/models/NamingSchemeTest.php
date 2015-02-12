@@ -1,6 +1,10 @@
 <?php
+namespace phamily\tests\models;
+
 use phamily\framework\models\NamingScheme;
 use phamily\framework\models\NameCollectionInterface;
+use phamily\tests\UnitTest;
+
 class NamingSchemeTest extends UnitTest{
 	public function testConstruct(){
 		$type = 'fio';

@@ -1,7 +1,11 @@
 <?php
+namespace phamily\tests\repositories;
+
 use phamily\framework\services\PersonaService;
+use phamily\tests\UnitTest;
 
 class PersonaServiceTest extends UnitTest{
+	
 	public function testPersonaCreatingWithGender(){
 		$service = new PersonaService();
 		$gender = $service::GENDER_MALE;

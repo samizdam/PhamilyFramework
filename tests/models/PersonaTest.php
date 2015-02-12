@@ -1,7 +1,11 @@
 <?php
+namespace phamily\tests\models;
+
 use phamily\framework\models\Persona;
 use phamily\framework\models\NamingScheme;
 use phamily\framework\value_objects\DateTime;
+use phamily\tests\UnitTest;
+
 class PersonaTest extends UnitTest{
 	
 	const BASE_EXCEPTION_NS = '\\phamily\\framework\\models\\exceptions\\';

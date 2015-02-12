@@ -6,6 +6,7 @@ use phamily\framework\models\exceptions\InvalidArgumentException;
 use phamily\framework\value_objects\DateTimeInterface;
 use phamily\framework\models\validators\ParentsValidatorInterface;
 use phamily\framework\models\validators\BaseParentsValidator;
+use phamily\framework\models\validators\ValidatorInterface;
 
 class Persona implements PersonaInterface{
 
@@ -110,6 +111,14 @@ class Persona implements PersonaInterface{
 		$this->dateOfDeath = $date;
 	}
 	
+	public function hasDateOfBirth(){
+		return isset($this->dateOfBirth);
+	}
+	
+	public function hasDateOfDeath(){
+		return isset($this->dateOfDeath);
+	}	
+	
 	public function getDateOfBirth($format = null){
 		if(isset($format)){
 			if(isset($this->dateOfBirth)){
@@ -159,14 +168,14 @@ class Persona implements PersonaInterface{
 	
 	public function setFather(PersonaInterface $father = null){
 		if($father instanceof PersonaInterface && !$this->parentsValidator->isValidFather($this, $father)){
-			throw new LogicException("Father must be a male");
+			$this->throwValidationErrors($this->parentsValidator);
 		}
 		$this->father = $father;
 	}
 	
 	public function setMother(PersonaInterface $mother = null){
-		if($mother instanceof PersonaInterface && $mother->getGender() !== self::GENDER_FEMALE){
-			throw new LogicException("Mother must be a female");
+		if($mother instanceof PersonaInterface && !$this->parentsValidator->isValidMother($this, $mother)){
+			$this->throwValidationErrors($this->parentsValidator);
 		}
 		$this->mother = $mother;
 	}
@@ -183,5 +192,10 @@ class Persona implements PersonaInterface{
 	
 	public function getChilds(){throw new \Exception("not implement now");}
 	
-	public function getSiblings(){throw new \Exception("not implement now");}	
+	public function getSiblings(){throw new \Exception("not implement now");}
+
+	protected function throwValidationErrors(ValidatorInterface $validator){
+		$message = join("; ", $validator->getErrors());
+		throw new LogicException($message);
+	}
 }

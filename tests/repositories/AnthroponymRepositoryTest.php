@@ -1,7 +1,9 @@
 <?php
+namespace phamily\tests\repositories;
+
 use phamily\framework\models\Anthroponym;
 use phamily\framework\repositories\AnthroponymRepository;
-use Symfony\Component\Yaml\Tests\A;
+use phamily\tests\DbTest;
 
 class AnthroponymRepositoryTest extends DbTest{
 	
