@@ -29,10 +29,8 @@ class BaseParentsValidatorFailureTest extends UnitTest{
 	
 	public function testIsValidFatherOldFail(){
 		$personaStub = $this->createPersonaStub(null, '1986');
-// 		$personaStub->method('getDateOfBirth')->willReturn('1986');
 		
 		$fatherStub = $this->createPersonaStub(PersonaInterface::GENDER_MALE, '2012');
-// 		$fatherStub->method('getDateOfBirth')->willReturn('2012');
 		
 		$validator = new BaseParentsValidator();
 		$this->assertFalse($validator->isValidFather($personaStub, $fatherStub));
@@ -40,10 +38,8 @@ class BaseParentsValidatorFailureTest extends UnitTest{
 	
 	public function testIsValidMotherOldFail(){
 		$personaStub = $this->createPersonaStub(null, '1980');
-// 		$personaStub->method('getDateOfBirth')->willReturn('1980');
 		
 		$motherStub = $this->createPersonaStub(PersonaInterface::GENDER_FEMALE, '2003');
-// 		$motherStub->method('getDateOfBirth')->willReturn('2003');
 		
 		$validator = new BaseParentsValidator();
 		$this->assertFalse($validator->isValidMother($personaStub, $motherStub));		

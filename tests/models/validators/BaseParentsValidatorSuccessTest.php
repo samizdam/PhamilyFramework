@@ -28,32 +28,32 @@ class BaseParentsValidatorSuccessTest extends UnitTest{
 	}
 	
 	public function testIsValidFatherOldSuccess(){
-		$personaStub = $this->createPersonaStub();
-		$personaStub->method('getDateOfBirth')->willReturn('2012');
+		$personaStub = $this->createPersonaStub(null, '2012');
 		
-		$fatherStub = $this->createPersonaStub(PersonaInterface::GENDER_MALE);
-		$fatherStub->method('getDateOfBirth')->willReturn('1986');
+		$fatherStub = $this->createPersonaStub(PersonaInterface::GENDER_MALE, '1986');
 		
 		$validator = new BaseParentsValidator();
 		$this->assertTrue($validator->isValidFather($personaStub, $fatherStub));
 	}
 	
 	public function testIsValidMotherOldSuccess(){
-		$personaStub = $this->createPersonaStub();
-		$personaStub->method('getDateOfBirth')->willReturn('2003');
+		$personaStub = $this->createPersonaStub(null, '2003');
 		
-		$motherStub = $this->createPersonaStub(PersonaInterface::GENDER_FEMALE);
-		$motherStub->method('getDateOfBirth')->willReturn('1980');
+		$motherStub = $this->createPersonaStub(PersonaInterface::GENDER_FEMALE, '1980');
 		
 		$validator = new BaseParentsValidator();
 		$this->assertTrue($validator->isValidMother($personaStub, $motherStub));		
 	}
 	
-	protected function createPersonaStub($gender = null){
-		$personaStub = $this->getMockBuilder(PersonaInterface::class)->getMock();
-		if(isset($gender)){
-			$personaStub->method('getGender')->willReturn($gender);
-		}
-		return $personaStub;
+	public function testIsValidParentsWithoutOld(){
+		$personaStub = $this->createPersonaStub(null, '2003');
+		
+		$motherStub = $this->createPersonaStub(PersonaInterface::GENDER_FEMALE);
+		$fatherStub = $this->createPersonaStub(PersonaInterface::GENDER_MALE);
+		
+		$validator = new BaseParentsValidator();
+		$this->assertTrue($validator->isValidFather($personaStub, $fatherStub));
+		$this->assertTrue($validator->isValidMother($personaStub, $motherStub));
 	}
+
 }
