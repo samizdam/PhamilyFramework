@@ -36,7 +36,7 @@ class Persona implements PersonaInterface{
 	 * 
 	 * @var PersonaInterface[]
 	 */
-	protected $childs;
+	protected $childs = [];
 	
 	/**
 	 * 
@@ -94,6 +94,7 @@ class Persona implements PersonaInterface{
 	 * 
 	 */
 	public function setDateOfBirth(DateTimeInterface $date){
+		// TODO move to validator
 		if(isset($this->dateOfDeath) && $this->dateOfDeath < $date){
 			throw new LogicException("Date of birth can't follow after date of death");
 		}
@@ -105,6 +106,7 @@ class Persona implements PersonaInterface{
 	 *
 	 */
 	public function setDateOfDeath(DateTimeInterface $date){
+		// TODO move to validator
 		if(isset($this->dateOfBirth) && $this->dateOfBirth > $date){
 			throw new LogicException("Date of death can't precede before date of birth");
 		}
@@ -145,6 +147,9 @@ class Persona implements PersonaInterface{
 		if(isset($this->gender) && $this->gender !== $gender){
 			throw new LogicException("Gender already set");
 		}elseif($gender !== self::GENDER_MALE && $gender !== self::GENDER_FEMALE && $gender !== self::GENDER_UNDEFINED){
+			/*
+			 * TODO may be use UnexpectedValueException for invalid gender?
+			*/
 			throw new InvalidArgumentException("Invalid gender value: {$gender}, possible values: ".self::MALE.", ".self::FEMALE." or NULL if undefined");
 		}
 		$this->gender = $gender;
@@ -167,17 +172,34 @@ class Persona implements PersonaInterface{
 	}
 	
 	public function setFather(PersonaInterface $father = null){
-		if($father instanceof PersonaInterface && !$this->parentsValidator->isValidFather($this, $father)){
-			$this->throwValidationErrors($this->parentsValidator);
-		}
-		$this->father = $father;
+		if($father instanceof PersonaInterface){
+			if($this->parentsValidator->isValidFather($this, $father)){
+				$this->father = $father;
+				$this->father->addChild($this);
+			}else{
+				$this->throwValidationErrors($this->parentsValidator);
+			}
+		}		
 	}
 	
 	public function setMother(PersonaInterface $mother = null){
-		if($mother instanceof PersonaInterface && !$this->parentsValidator->isValidMother($this, $mother)){
-			$this->throwValidationErrors($this->parentsValidator);
+		if($mother instanceof PersonaInterface){
+			if($this->parentsValidator->isValidMother($this, $mother)){
+				$this->mother = $mother;
+				$this->mother->addChild($this);
+			}else{
+				$this->throwValidationErrors($this->parentsValidator);
+			}
 		}
-		$this->mother = $mother;
+		
+	}
+	
+	public function hasFather(){
+		return isset($this->father);
+	}
+	
+	public function hasMother(){
+		return isset($this->mother);
 	}
 	
 	public function getFather(){
@@ -188,9 +210,32 @@ class Persona implements PersonaInterface{
 		return $this->mother;
 	}
 	
-	public function addChild(PersonaInterface $child){throw new \Exception("not implement now");}
+	public function addChild(PersonaInterface $child){
+		if(in_array($child, $this->childs, true)){
+			throw new LogicException("Persona already has this child");
+		}
+		
+		switch ($this->gender){
+			case self::GENDER_MALE:
+				if(empty($child->getFather())){ 
+					$child->setFather($this);
+				}
+			break;
+			case self::GENDER_FEMALE:
+				if(empty($child->getMother())){
+					$child->setMother($this);
+				}
+			break;
+			default:
+				throw new LogicException("Can't add child for genderless persona");
+		}
+		
+		$this->childs[] = $child;
+	}
 	
-	public function getChilds(){throw new \Exception("not implement now");}
+	public function getChilds(){
+		return $this->childs;
+	}
 	
 	public function getSiblings(){throw new \Exception("not implement now");}
 

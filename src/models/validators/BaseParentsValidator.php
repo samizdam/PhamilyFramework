@@ -30,7 +30,6 @@ class BaseParentsValidator implements ParentsValidatorInterface{
 
 		if(($mother->hasDateOfBirth() && $persona->hasDateOfBirth()) 
 				&& (int) $mother->getDateOfBirth('Y') >= (int) $persona->getDateOfBirth('Y')){
-			
 			$errors[] = "Child must be younger than the parent";
 		}		
 		

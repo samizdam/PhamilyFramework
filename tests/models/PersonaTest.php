@@ -99,4 +99,33 @@ class PersonaTest extends UnitTest{
 		$persona->setDateOfBirth(new DateTime('2001-01-01'));
 	}
 	
+	public function testChildsForParents(){
+		$persona = new Persona();
+		$father = new Persona(Persona::GENDER_MALE);
+		
+		$persona->setFather($father);
+		
+		$this->assertContains($persona, $father->getChilds());
+		
+		$mother = new Persona(Persona::GENDER_FEMALE);
+		$persona->setMother($mother);
+		$this->assertContains($persona, $mother->getChilds());
+	}
+	
+	public function testParentsForChild(){
+		$persona = new Persona();
+		$father = new Persona(Persona::GENDER_MALE);
+		
+		$father->addChild($persona);
+		
+		$this->assertEquals($father, $persona->getFather());
+		
+		$mother = new Persona(Persona::GENDER_FEMALE);
+		$mother->addChild($persona);
+		$this->assertEquals($mother, $persona->getMother());
+		
+	}
+	
+	
+	
 }

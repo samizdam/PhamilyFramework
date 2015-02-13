@@ -5,6 +5,6 @@ namespace phamily\framework;
  * @author samizdam
  *
  */
-interface ExceptionInterface{
+interface PhamilyExceptionInterface{
 	
 }

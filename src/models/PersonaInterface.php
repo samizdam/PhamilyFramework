@@ -29,6 +29,9 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	public function setFather(PersonaInterface $father);
 	public function setMother(PersonaInterface $mother);
 	
+	public function hasFather();
+	public function hasMother();
+	
 	public function getFather();
 	public function getMother();
 	
