@@ -34,9 +34,9 @@ class Persona implements PersonaInterface{
 	
 	/**
 	 * 
-	 * @var PersonaInterface[]
+	 * @var ChildCollectionInterface|PersonaInterface[]
 	 */
-	protected $childs = [];
+	protected $childs;
 	
 	/**
 	 * 
@@ -62,6 +62,8 @@ class Persona implements PersonaInterface{
 		 * becose validators must be configure and set before persona setters will be use.  
 		 */
 		$this->parentsValidator = new BaseParentsValidator();
+		
+		$this->childs = new ChildCollection($this);
 		
 		$this->setGender($gender);
 		
@@ -175,7 +177,9 @@ class Persona implements PersonaInterface{
 		if($father instanceof PersonaInterface){
 			if($this->parentsValidator->isValidFather($this, $father)){
 				$this->father = $father;
-				$this->father->addChild($this);
+				if(!$this->father->getChilds()->contains($this)){
+					$this->father->addChild($this);
+				}
 			}else{
 				$this->throwValidationErrors($this->parentsValidator);
 			}
@@ -186,7 +190,9 @@ class Persona implements PersonaInterface{
 		if($mother instanceof PersonaInterface){
 			if($this->parentsValidator->isValidMother($this, $mother)){
 				$this->mother = $mother;
-				$this->mother->addChild($this);
+				if(!$this->mother->getChilds()->contains($this)){
+					$this->mother->addChild($this);
+				}
 			}else{
 				$this->throwValidationErrors($this->parentsValidator);
 			}
@@ -211,10 +217,13 @@ class Persona implements PersonaInterface{
 	}
 	
 	public function addChild(PersonaInterface $child){
-		if(in_array($child, $this->childs, true)){
-			throw new LogicException("Persona already has this child");
+		if($this->gender === self::GENDER_UNDEFINED){
+			throw new LogicException("Can't add child for genderless persona");
 		}
 		
+		$this->childs->add($child);
+		
+		// service parents
 		switch ($this->gender){
 			case self::GENDER_MALE:
 				if(empty($child->getFather())){ 
@@ -225,14 +234,15 @@ class Persona implements PersonaInterface{
 				if(empty($child->getMother())){
 					$child->setMother($this);
 				}
-			break;
-			default:
-				throw new LogicException("Can't add child for genderless persona");
+			break;				
 		}
-		
-		$this->childs[] = $child;
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see \phamily\framework\models\PersonaInterface::getChilds()
+	 * @return ChildCollectionInterface|PersonaInterface[]
+	 */
 	public function getChilds(){
 		return $this->childs;
 	}

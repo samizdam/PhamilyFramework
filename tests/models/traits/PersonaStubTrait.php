@@ -1,5 +1,5 @@
 <?php
-namespace phamily\tests\models\validators;
+namespace phamily\tests\models\traits;
 
 use phamily\framework\models\PersonaInterface;
 

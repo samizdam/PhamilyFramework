@@ -122,8 +122,7 @@ class PersonaTest extends UnitTest{
 		
 		$mother = new Persona(Persona::GENDER_FEMALE);
 		$mother->addChild($persona);
-		$this->assertEquals($mother, $persona->getMother());
-		
+		$this->assertEquals($mother, $persona->getMother());	
 	}
 	
 	

@@ -4,6 +4,7 @@ namespace phamily\tests\models\validators;
 use phamily\framework\models\PersonaInterface;
 use phamily\framework\models\validators\BaseParentsValidator;
 use phamily\tests\UnitTest;
+use phamily\tests\models\traits\PersonaStubTrait;
 
 class BaseParentsValidatorSuccessTest extends UnitTest{
 	
