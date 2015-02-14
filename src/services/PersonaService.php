@@ -7,17 +7,18 @@ use phamily\framework\value_objects\DateTimeInterface;
 use phamily\framework\repositories\PersonaRepository;
 use phamily\framework\repositories\PersonaRepositoryInterface;
 use phamily\framework\GenderAwareInterface;
+use phamily\framework\services\proxies\PersonaRepositoryProxy;
 
 class PersonaService implements PersonaServiceInterface{
 	
 	protected $repository;
 
 	public function __construct(){
-		$this->repository = new RepositoryProxy();
+		$this->repository = new PersonaRepositoryProxy();
 	}
 	
 	public function useRepository(PersonaRepositoryInterface $repository){
-		$this->repository = new RepositoryProxy($repository);
+		$this->repository->setRepository($repository);
 	}
 	
 	public function isRepositoryUsed(){
@@ -46,44 +47,5 @@ class PersonaService implements PersonaServiceInterface{
 		 * destroy object
 		 */
 		$persona = null;
-	}
-}
-
-class RepositoryProxy implements PersonaRepositoryInterface{
-	
-	protected $repository;
-	protected $active = false;
-	
-	public function __construct(PersonaRepositoryInterface $repository = null){
-		if(isset($repository)){
-			$this->setRepository($repository);
-		}
-	}
-	
-	public function setRepository(PersonaRepositoryInterface $repository){
-		$this->repository = $repository;
-		$this->active = true;
-	}
-	
-	public function isActive(){
-		return $this->active;
-	}
-	
-	public function save(PersonaInterface $persona){
-		if($this->isActive()){
-			return $this->repository->save($persona);
-		}
-	}
-	
-	public function delete(PersonaInterface $persona){
-		if($this->isActive()){
-			return $this->repository->delete($persona);
-		}
-	}
-	
-	public function getById($id){
-		if($this->isActive()){
-			return $this->repository->getById($id);
-		}
 	}
 }
