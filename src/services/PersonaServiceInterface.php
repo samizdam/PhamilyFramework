@@ -15,6 +15,8 @@ interface PersonaServiceInterface extends GenderAwareInterface{
 			DateTimeInterface $dateOfDeath = null			
 	);
 	
+	public function delete(PersonaInterface &$persona);
+	
 // 	public function findByNames(array $names = []){
 		
 // 	}

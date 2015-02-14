@@ -22,4 +22,11 @@ class PersonaServiceTest extends UnitTest{
 		$this->assertEquals('Vasya', $persona->getName('personalName'));
 		$this->assertEquals('Pupkin', $persona->getName('surname'));
 	}
+	
+	public function testDeletePersona(){
+		$service = new PersonaService();
+		$persona = $service->create();
+		$service->delete($persona);
+		$this->assertEmpty($persona);
+	}
 }
