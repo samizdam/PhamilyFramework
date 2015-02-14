@@ -90,9 +90,18 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 	}
 	
 	public function delete(PersonaInterface $persona){
+		/*
+		 * unlink parent for existing childs
+		 */
+		$table = $this->createTableGateway($this->tableName);
+		$table->update(['fatherId' => null], ['fatherId' => $persona->getId()]);
+		$table->update(['motherId' => null], ['motherId' => $persona->getId()]);
+		
+		/*
+		 * delete persona row
+		 */
 		$row = $this->getRowGatewayInstance();
 		$row->populate($this->extractData($persona), true);
 		$row->delete();
-		unset($persona);
 	}
 }

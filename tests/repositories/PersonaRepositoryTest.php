@@ -46,6 +46,22 @@ class PersonaRepositoryTest extends DbTest{
 		$this->assertTableHasNotData($this->tableName, $son);
 	}
 	
+	public function testUnlinkChildsWithDeletedPersona(){
+		$repository = $this->getRepository();
+		$fixtures = $this->getFamilyFixtures();
+		
+		$father = new Persona();
+		$father->populate($fixtures['father']);
+		
+		$fatherId = $father->getId();
+		
+		$this->assertTableHasData('persona', ['fatherId' => $father->getId()]);
+		
+		$repository->delete($father);
+		
+		$this->assertTableHasNotData('persona', ['fatherId' => $fatherId]);
+	}
+	
 	/**
 	 * TODO test that names will be saved correct with person
 	 */
