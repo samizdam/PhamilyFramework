@@ -6,7 +6,6 @@ use phamily\framework\models\PersonaInterface;
 use phamily\framework\value_objects\DateTimeInterface;
 use phamily\framework\repositories\PersonaRepository;
 use phamily\framework\repositories\PersonaRepositoryInterface;
-use phamily\framework\GenderAwareInterface;
 use phamily\framework\services\proxies\PersonaRepositoryProxy;
 
 class PersonaService implements PersonaServiceInterface{
