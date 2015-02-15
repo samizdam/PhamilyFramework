@@ -1,9 +1,9 @@
 <?php
-namespace phamily\tests\models;
+namespace phamily\tests\models\collections;
 
 use phamily\tests\UnitTest;
 use phamily\tests\models\traits\PersonaStubTrait;
-use phamily\framework\models\ChildrenCollection;
+use phamily\framework\models\collections\ChildrenCollection;
 
 class ChildrenCollectionTest extends UnitTest{
 	

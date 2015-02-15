@@ -1,14 +1,16 @@
 <?php
 namespace phamily\framework\models;
 
+use phamily\framework\models\collections\ChildrenCollectionInterface;
+use phamily\framework\models\collections\ChildrenCollection;
+use phamily\framework\models\collections\SpouseCollection;
+use phamily\framework\models\collections\SpouseCollectionInterface;
 use phamily\framework\models\exceptions\LogicException;
 use phamily\framework\models\exceptions\InvalidArgumentException;
-use phamily\framework\value_objects\DateTimeInterface;
 use phamily\framework\models\validators\ParentsValidatorInterface;
 use phamily\framework\models\validators\BaseParentsValidator;
 use phamily\framework\models\validators\ValidatorInterface;
-use phamily\framework\models\collections\SpouseCollection;
-use phamily\framework\models\collections\SpouseCollectionInterface;
+use phamily\framework\value_objects\DateTimeInterface;
 
 class Persona implements PersonaInterface{
 
