@@ -1,17 +1,25 @@
 <?php
-namespace phamily\tests\repositories;
+namespace phamily\tests\services;
 
 use phamily\framework\services\PersonaService;
 use phamily\tests\UnitTest;
 use phamily\tests\DbTest;
 use phamily\framework\repositories\PersonaRepository;
+use phamily\tests\services\traits\CreateServiceTrait;
 
 class PersonaServiceWithDbRepositoryTest extends DbTest{
 	
+	use CreateServiceTrait; 
+	
+	public function testNewPersonaIsPersisted(){
+		$service = $this->createServiceWithRepository();
+		$persona = $service->create();
+		
+		$this->assertTableHasData('persona', ['id' => $persona->getId(), 'gender' => $persona->getGender()]);
+	}
+	
 	public function testDeletePersona(){
-		$repository = new PersonaRepository($this->getDbAdapter());
-		$service = new PersonaService();
-		$service->useRepository($repository);
+		$service = $this->createServiceWithRepository();
 		
 		$persona = $service->create();
 		$personaId = $persona->getId();
@@ -21,4 +29,5 @@ class PersonaServiceWithDbRepositoryTest extends DbTest{
 		$service->delete($persona);
 		$this->assertTableHasNotData('persona', ['id' => $personaId]);
 	}
+	
 }

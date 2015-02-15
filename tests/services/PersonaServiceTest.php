@@ -1,5 +1,5 @@
 <?php
-namespace phamily\tests\repositories;
+namespace phamily\tests\services;
 
 use phamily\framework\services\PersonaService;
 use phamily\tests\UnitTest;
