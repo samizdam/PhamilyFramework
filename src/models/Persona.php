@@ -7,6 +7,8 @@ use phamily\framework\value_objects\DateTimeInterface;
 use phamily\framework\models\validators\ParentsValidatorInterface;
 use phamily\framework\models\validators\BaseParentsValidator;
 use phamily\framework\models\validators\ValidatorInterface;
+use phamily\framework\models\collections\SpouseCollection;
+use phamily\framework\models\collections\SpouseCollectionInterface;
 
 class Persona implements PersonaInterface{
 
@@ -40,6 +42,12 @@ class Persona implements PersonaInterface{
 	
 	/**
 	 * 
+	 * @var SpouseCollectionInterface|PersonaInterface[]
+	 */
+	protected $spouses;
+	
+	/**
+	 * 
 	 * @var DateTimeInterface
 	 */
 	protected $dateOfBirth;
@@ -64,6 +72,7 @@ class Persona implements PersonaInterface{
 		$this->parentsValidator = new BaseParentsValidator();
 		
 		$this->children = new ChildrenCollection($this);
+		$this->spouses = new SpouseCollection($this);
 		
 		$this->setGender($gender);
 		
@@ -248,6 +257,22 @@ class Persona implements PersonaInterface{
 	
 	public function getSiblings(){throw new \Exception("not implement now");}
 
+	public function addSpouse(PersonaInterface $spouse){
+		$this->spouses->add($spouse);
+		if(!$spouse->getSpouses()->contains($this)){
+			$spouse->addSpouse($this);
+		}
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see \phamily\framework\models\PersonaInterface::getSpouses()
+	 * @return SpouseCollectionInterface
+	 */
+	public function getSpouses(){
+		return $this->spouses;
+	}	
+	
 	protected function throwValidationErrors(ValidatorInterface $validator){
 		$message = join("; ", $validator->getErrors());
 		throw new LogicException($message);

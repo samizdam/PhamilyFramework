@@ -125,6 +125,22 @@ class PersonaTest extends UnitTest{
 		$this->assertEquals($mother, $persona->getMother());	
 	}
 	
+	public function testAddSpouseSuccess(){
+		$husband = new Persona(Persona::GENDER_MALE);
+		$wife = new Persona(Persona::GENDER_FEMALE);
+		
+		$husband->addSpouse($wife);
+		
+		$this->assertContains($wife, $husband->getSpouses());		
+	}
 	
+	public function testSpouseReflectionRelationshit(){
+		$husband = new Persona(Persona::GENDER_MALE);
+		$wife = new Persona(Persona::GENDER_FEMALE);
+		
+		$husband->addSpouse($wife);
+		
+		$this->assertContains($husband, $wife->getSpouses());
+	}
 	
 }

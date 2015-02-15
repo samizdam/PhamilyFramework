@@ -40,4 +40,8 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	public function getChildren();
 
 	public function getSiblings();
+	
+	public function addSpouse(PersonaInterface $spouse);
+	public function getSpouses();
+	
 }
