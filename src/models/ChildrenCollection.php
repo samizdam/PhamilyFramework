@@ -14,20 +14,35 @@ class ChildrenCollection implements ChildrenCollectionInterface{
 		$this->parent = $parent;
 	}
 	
+	/*
+	 * ChildrenCollectionInterface implemantation
+	 */
+	
 	public function add(PersonaInterface $child){
 		if($this->contains($child)){
 			throw new LogicException("Persona already has this child");
-		}		
+		}
+		if($this->parent === $child){
+			throw new LogicException("Persona can't be parent for self");
+		}
 		$this->children[] = $child;
-	}
-	
-	public function count(){
-		return count($this->children);
 	}
 	
 	public function contains(PersonaInterface $child){
 		return in_array($child, $this->children, true);
 	}
+	
+	/*
+	 * SPL Countable implementation
+	 */
+	
+	public function count(){
+		return count($this->children);
+	}	
+	
+	/*
+	 * SPL SeekableIterator implementation
+	 */
 	
 	protected $position = 0;
 	
