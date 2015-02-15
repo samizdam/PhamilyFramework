@@ -34,9 +34,9 @@ class Persona implements PersonaInterface{
 	
 	/**
 	 * 
-	 * @var ChildCollectionInterface|PersonaInterface[]
+	 * @var ChildrenCollectionInterface|PersonaInterface[]
 	 */
-	protected $childs;
+	protected $children;
 	
 	/**
 	 * 
@@ -63,7 +63,7 @@ class Persona implements PersonaInterface{
 		 */
 		$this->parentsValidator = new BaseParentsValidator();
 		
-		$this->childs = new ChildCollection($this);
+		$this->children = new ChildrenCollection($this);
 		
 		$this->setGender($gender);
 		
@@ -92,7 +92,7 @@ class Persona implements PersonaInterface{
 	public function setName($type, $value){throw new \Exception("not implement now");}
 	
 	/**
-	 * TODO valide with father / mother / childs DoB's
+	 * TODO valide with father / mother / child's DoB's
 	 * 
 	 */
 	public function setDateOfBirth(DateTimeInterface $date){
@@ -177,7 +177,7 @@ class Persona implements PersonaInterface{
 		if($father instanceof PersonaInterface){
 			if($this->parentsValidator->isValidFather($this, $father)){
 				$this->father = $father;
-				if(!$this->father->getChilds()->contains($this)){
+				if(!$this->father->getChildren()->contains($this)){
 					$this->father->addChild($this);
 				}
 			}else{
@@ -190,7 +190,7 @@ class Persona implements PersonaInterface{
 		if($mother instanceof PersonaInterface){
 			if($this->parentsValidator->isValidMother($this, $mother)){
 				$this->mother = $mother;
-				if(!$this->mother->getChilds()->contains($this)){
+				if(!$this->mother->getChildren()->contains($this)){
 					$this->mother->addChild($this);
 				}
 			}else{
@@ -221,7 +221,7 @@ class Persona implements PersonaInterface{
 			throw new LogicException("Can't add child for genderless persona");
 		}
 		
-		$this->childs->add($child);
+		$this->children->add($child);
 		
 		// service parents
 		switch ($this->gender){
@@ -239,12 +239,11 @@ class Persona implements PersonaInterface{
 	}
 	
 	/**
-	 * (non-PHPdoc)
-	 * @see \phamily\framework\models\PersonaInterface::getChilds()
-	 * @return ChildCollectionInterface|PersonaInterface[]
+	 * 
+	 * @return ChildrenCollectionInterface|PersonaInterface[]
 	 */
-	public function getChilds(){
-		return $this->childs;
+	public function getChildren(){
+		return $this->children;
 	}
 	
 	public function getSiblings(){throw new \Exception("not implement now");}

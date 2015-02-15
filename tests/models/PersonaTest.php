@@ -105,11 +105,11 @@ class PersonaTest extends UnitTest{
 		
 		$persona->setFather($father);
 		
-		$this->assertContains($persona, $father->getChilds());
+		$this->assertContains($persona, $father->getChildren());
 		
 		$mother = new Persona(Persona::GENDER_FEMALE);
 		$persona->setMother($mother);
-		$this->assertContains($persona, $mother->getChilds());
+		$this->assertContains($persona, $mother->getChildren());
 	}
 	
 	public function testParentsForChild(){

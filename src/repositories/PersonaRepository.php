@@ -49,8 +49,8 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 		 * TODO extract to method?
 		 * save childs after
 		 */
-		if(count($persona->getChilds())){
-			foreach ($persona->getChilds() as $child){
+		if(count($persona->getChildren())){
+			foreach ($persona->getChildren() as $child){
 				if($this->notSaved($child)){
 					$this->save($child);
 				}

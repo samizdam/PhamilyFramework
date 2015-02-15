@@ -3,15 +3,15 @@ namespace phamily\tests\models;
 
 use phamily\tests\UnitTest;
 use phamily\tests\models\traits\PersonaStubTrait;
-use phamily\framework\models\ChildCollection;
+use phamily\framework\models\ChildrenCollection;
 
-class ChildCollectionTest extends UnitTest{
+class ChildrenCollectionTest extends UnitTest{
 	
 	use PersonaStubTrait;
 	const EXCEPTION_BASE_NS = '\\phamily\\framework\\models\\exceptions\\';
 	public function testPutToCollection(){
 		$parent = $this->createPersonaStub();
-		$collection = new ChildCollection($parent);
+		$collection = new ChildrenCollection($parent);
 		
 		$childA = $this->createPersonaStub();
 		$childB = $this->createPersonaStub();
@@ -24,7 +24,7 @@ class ChildCollectionTest extends UnitTest{
 	
 	public function testDoubleChildAddException(){
 		$parent = $this->createPersonaStub();
-		$collection = new ChildCollection($parent);
+		$collection = new ChildrenCollection($parent);
 		
 		$childA = $this->createPersonaStub();
 		
