@@ -2,7 +2,7 @@
 namespace phamily\framework\models;
 
 use phamily\framework\models\exceptions\LogicException;
-use phamily\framework\models\exceptions\OutOfRangeException;
+use phamily\framework\models\exceptions\OutOfBoundsException;
 
 class ChildrenCollection implements ChildrenCollectionInterface{
 	
@@ -33,7 +33,7 @@ class ChildrenCollection implements ChildrenCollectionInterface{
 	
 	public function seek ($position) {
 		if($position >= $this->count()){
-			throw new OutOfRangeException("Persona has only {$this->count()} children");
+			throw new OutOfBoundsException("Persona has only {$this->count()} children");
 		}
 		$this->position = $position;
 	}
