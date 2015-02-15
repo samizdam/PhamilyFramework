@@ -3,14 +3,12 @@ namespace phamily\framework\models\validators;
 
 use phamily\framework\models\PersonaInterface;
 
-class BaseParentsValidator implements ParentsValidatorInterface{
-	
-	private $errors = [];
+class BaseParentsValidator extends AbstractValidator implements ParentsValidatorInterface{
 	
 	public function isValidFather(PersonaInterface $persona, PersonaInterface $father){
 		$errors = [];
 
-		if($father->getGender() !== $father::GENDER_MALE){
+		if($father->getGender() !== self::GENDER_MALE){
 			$errors[] = "Father must be a male";
 		}
 		if($father->hasDateOfBirth() && $persona->hasDateOfBirth()
@@ -24,7 +22,7 @@ class BaseParentsValidator implements ParentsValidatorInterface{
 	public function isValidMother(PersonaInterface $persona, PersonaInterface $mother){
 		$errors = [];
 		
-		if ($mother->getGender() !== $mother::GENDER_FEMALE){
+		if ($mother->getGender() !== self::GENDER_FEMALE){
 			$errors[] = "Mother must be a female";
 		}
 
@@ -34,15 +32,5 @@ class BaseParentsValidator implements ParentsValidatorInterface{
 		}		
 		
 		return $this->getResult($errors);
-	}	
-	
-	
-	public function getErrors(){
-		return $this->errors;
-	}
-	
-	protected function getResult($errors){
-		$this->errors = $errors;
-		return (count($this->errors) === 0);
 	}
 }

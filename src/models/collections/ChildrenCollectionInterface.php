@@ -1,4 +1,8 @@
 <?php
 namespace phamily\framework\models\collections;
 
-interface ChildrenCollectionInterface extends PersonaCollectionInterface{}
+interface ChildrenCollectionInterface extends PersonaCollectionInterface{
+	
+	public function getParent();
+	
+}

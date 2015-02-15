@@ -11,7 +11,7 @@ class SpouseCollectionTest extends UnitTest{
 	
 	public function testAddToCollection(){
 		$husband = $this->createPersonaStub(SpouseCollection::GENDER_MALE);
-		$wife = $this->createPersonaStub(SpouseCollection::GENDER_MALE);
+		$wife = $this->createPersonaStub(SpouseCollection::GENDER_FEMALE);
 		
 		$collection = new SpouseCollection($husband);
 		$collection->add($wife);

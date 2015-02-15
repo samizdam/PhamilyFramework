@@ -7,8 +7,8 @@ use phamily\framework\models\collections\SpouseCollection;
 use phamily\framework\models\collections\SpouseCollectionInterface;
 use phamily\framework\models\exceptions\LogicException;
 use phamily\framework\models\exceptions\InvalidArgumentException;
-use phamily\framework\models\validators\ParentsValidatorInterface;
 use phamily\framework\models\validators\BaseParentsValidator;
+use phamily\framework\models\validators\ParentsValidatorInterface;
 use phamily\framework\models\validators\ValidatorInterface;
 use phamily\framework\value_objects\DateTimeInterface;
 
@@ -114,13 +114,9 @@ class Persona implements PersonaInterface{
 		$this->dateOfBirth = $date;
 	}
 	
-	/**
-	 * TODO valide that great of DoB's
-	 *
-	 */
 	public function setDateOfDeath(DateTimeInterface $date){
-		// TODO move to validator
-		if(isset($this->dateOfBirth) && $this->dateOfBirth > $date){
+		// TODO move to validator?
+		if($this->hasDateOfBirth() && $this->dateOfBirth > $date){
 			throw new LogicException("Date of death can't precede before date of birth");
 		}
 		$this->dateOfDeath = $date;
@@ -227,11 +223,7 @@ class Persona implements PersonaInterface{
 		return $this->mother;
 	}
 	
-	public function addChild(PersonaInterface $child){
-		if($this->gender === self::GENDER_UNDEFINED){
-			throw new LogicException("Can't add child for genderless persona");
-		}
-		
+	public function addChild(PersonaInterface $child){		
 		$this->children->add($child);
 		
 		// service parents
@@ -263,7 +255,7 @@ class Persona implements PersonaInterface{
 		$this->spouses->add($spouse);
 		if(!$spouse->getSpouses()->contains($this)){
 			$spouse->addSpouse($this);
-		}
+		}			
 	}
 	
 	/**

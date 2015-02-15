@@ -2,23 +2,39 @@
 namespace phamily\framework\models\collections;
 
 use phamily\framework\models\PersonaInterface;
+use phamily\framework\models\validators\BaseChildrenValidator;
+use phamily\framework\models\validators\ChildrenValidatorInreface;
 use phamily\framework\models\exceptions\LogicException;
-use phamily\framework\models\exceptions\OutOfBoundsException;
 
 class ChildrenCollection extends AbstractPersonaCollection implements ChildrenCollectionInterface{
-		
+	
+	protected $validator;
+	
 	/*
-	 * ChildrenCollectionInterface implemantation
+	 * ChildrenCollectionInterface implementation
 	 */
 	
-	protected function validateAddition(PersonaInterface $persona){
-		if($this->contains($persona)){
-			throw new LogicException("Persona already has this child");
+	public function getParent(){
+		return $this->persona;
+	}
+
+	public function setValidator(ChildrenValidatorInreface $validator){
+		$this->validator = $validator;
+	}
+	
+	public function getValidator(){
+		if(empty($this->validator)){
+			$this->validator = new BaseChildrenValidator();
 		}
-		if($this->persona === $persona){
-			throw new LogicException("Persona can't be parent for self");
+		return $this->validator;
+	}
+	
+	protected function validateAddition(PersonaInterface $child){
+		if($this->getValidator()->isValidChild($this, $child)){
+			return true;
+		}else{
+			throw new LogicException(join("\n", $this->getValidator()->getErrors()));
 		}
-		return true;
 	}
 	
 }

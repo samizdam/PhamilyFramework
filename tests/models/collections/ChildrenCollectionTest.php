@@ -10,7 +10,7 @@ class ChildrenCollectionTest extends UnitTest{
 	use PersonaStubTrait;
 	const EXCEPTION_BASE_NS = '\\phamily\\framework\\models\\exceptions\\';
 	public function testPutToCollection(){
-		$parent = $this->createPersonaStub();
+		$parent = $this->createPersonaStub(ChildrenCollection::GENDER_MALE);
 		$collection = new ChildrenCollection($parent);
 		
 		$childA = $this->createPersonaStub();
@@ -23,7 +23,7 @@ class ChildrenCollectionTest extends UnitTest{
 	}
 	
 	public function testDoubleChildAddException(){
-		$parent = $this->createPersonaStub();
+		$parent = $this->createPersonaStub(ChildrenCollection::GENDER_MALE);
 		$collection = new ChildrenCollection($parent);
 		
 		$childA = $this->createPersonaStub();
@@ -34,7 +34,7 @@ class ChildrenCollectionTest extends UnitTest{
 	}
 	
 	public function testSeekSuccess(){
-		$parent = $this->createPersonaStub();
+		$parent = $this->createPersonaStub(ChildrenCollection::GENDER_MALE);
 		$collection = new ChildrenCollection($parent);
 		
 		$childA = $this->createPersonaStub();
@@ -52,7 +52,7 @@ class ChildrenCollectionTest extends UnitTest{
 	} 
 	
 	public function testSeekException(){
-		$parent = $this->createPersonaStub();
+		$parent = $this->createPersonaStub(ChildrenCollection::GENDER_MALE);
 		$collection = new ChildrenCollection($parent);
 		
 		$child = $this->createPersonaStub();
@@ -63,7 +63,7 @@ class ChildrenCollectionTest extends UnitTest{
 	}
 	
 	public function testParentSelfChildException(){
-		$parent = $this->createPersonaStub();
+		$parent = $this->createPersonaStub(ChildrenCollection::GENDER_MALE);
 		$collection = new ChildrenCollection($parent);
 		
 		$this->setExpectedException(self::EXCEPTION_BASE_NS . 'LogicException');
