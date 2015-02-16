@@ -25,7 +25,7 @@ class PersonaRepositoryTest extends DbTest{
 	
 	public function testGetPersonaById(){
 		$repository = $this->getRepository();
-		$fixtures = $this->getFamilyFixtures();
+		$fixtures = $this->createFamilyFixtures();
 		$son = $fixtures['son'];
 		$sonPersona = $repository->getById($son['id']);
 		$this->assertEquals($son['id'], $sonPersona->getId());
@@ -33,7 +33,7 @@ class PersonaRepositoryTest extends DbTest{
 	}
 	
 	public function testDeleteExistingPersona(){
-		$son = $this->getFamilyFixtures()['son'];
+		$son = $this->createFamilyFixtures()['son'];
 		
 		$this->assertTableHasData($this->tableName, $son);
 		
@@ -48,7 +48,7 @@ class PersonaRepositoryTest extends DbTest{
 	
 	public function testUnlinkChildsWithDeletedPersona(){
 		$repository = $this->getRepository();
-		$fixtures = $this->getFamilyFixtures();
+		$fixtures = $this->createFamilyFixtures();
 		
 		$father = new Persona();
 		$father->populate($fixtures['father']);
@@ -116,9 +116,30 @@ class PersonaRepositoryTest extends DbTest{
 		$repository->getById(100500);
 	}
 	
-	private function getFamilyFixtures(){
+	public function testSaveSpousesRelationship(){
+		$repository = $this->getRepository();
+		$husband = new Persona(Persona::GENDER_MALE);
+		$wife = new Persona(Persona::GENDER_FEMALE);
+		
+		$husband->addSpouse($wife);
+		$repository->save($husband);
+		
+		$this->assertTableHasData('spouse_relationship', ['husbandId' => $husband->getId(), 'wifeId' => $wife->getId()]);
+	}
+	
+	public function testGetPersonaWithSpouse(){
+		$fixtures = $this->createFamilyFixtures();
+		$repository = $this->getRepository();
+		
+		$father = $repository->getById($fixtures['father']['id']);
+		$fatherWife =  $father->getSpouses()->current();
+		
+		$this->assertEquals($fixtures['mother']['id'], $fatherWife->getId());
+	}
+	
+	private function createFamilyFixtures(){
 		$father = ['id' => 1, 'gender' => Persona::GENDER_MALE];
-		$mother = ['id' => 2, 'gender' => Persona::GENDER_MALE];
+		$mother = ['id' => 2, 'gender' => Persona::GENDER_FEMALE];
 		$son = ['id' => 3, 'gender' => Persona::GENDER_MALE, 'fatherId' => 1, 'motherId' => 2];
 		$fixtures = [
 			'father' => $father, 
@@ -128,6 +149,11 @@ class PersonaRepositoryTest extends DbTest{
 		foreach ($fixtures as $row){
 			$this->insertRowInTable($row, $this->tableName);
 		}
+		
+		$relationship = ['husbandId' => $father['id'], 'wifeId' => $mother['id']];
+		$this->insertRowInTable($relationship, 'spouse_relationship');
 		return $fixtures;
 	}
+	
+
 }

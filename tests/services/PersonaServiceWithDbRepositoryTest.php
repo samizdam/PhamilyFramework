@@ -2,7 +2,6 @@
 namespace phamily\tests\services;
 
 use phamily\framework\services\PersonaService;
-use phamily\tests\UnitTest;
 use phamily\tests\DbTest;
 use phamily\framework\repositories\PersonaRepository;
 use phamily\tests\services\traits\CreateServiceTrait;

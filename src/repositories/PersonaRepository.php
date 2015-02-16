@@ -6,6 +6,9 @@ use Zend\Db\RowGateway\RowGateway;
 use Zend\Db\TableGateway\TableGateway;
 use phamily\framework\models\Persona;
 use phamily\framework\repositories\exceptions\NotFoundException;
+use Zend\Db\Sql\Delete;
+use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Predicate\Predicate;
 
 class PersonaRepository extends AbstractRepository implements PersonaRepositoryInterface{
 	
@@ -46,6 +49,16 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 		}
 		
 		/*
+		 * save spouse relation
+		 */
+		$spouseRelationTableGateway = $this->createTableGateway('spouse_relationship');
+		foreach ($persona->getSpouses() as $spouse){
+			list($husband, $wife) = $this->getSpousePair($persona, $spouse);
+			$data = ['husbandId' => $husband->getId(), 'wifeId' => $wife->getId()];
+			$spouseRelationTableGateway->insert($data);
+		}
+		
+		/*
 		 * TODO extract to method?
 		 * save childs after
 		 */
@@ -60,6 +73,16 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 		return $persona; 
 	} 
 	
+	/**
+	 * 
+	 * @param PersonaInterface $persona
+	 * @param PersonaInterface $spouse
+	 * @return array($husband, $wife)
+	 */
+	protected function getSpousePair(PersonaInterface $persona, PersonaInterface $spouse){
+		return ($persona->getGender() === PersonaInterface::GENDER_MALE) ? [$persona, $spouse] : [$spouse, $persona];
+	}
+	
 	protected function notSaved(PersonaInterface $persona){
 		return $persona->getId() === null;
 	} 
@@ -73,7 +96,29 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 		$resultSet = $tableGateway->select(['id' => $id]);
 		if($resultSet->count()){
 			$data = $resultSet->current();
-			return (new Persona())->populate($data);
+			$persona = (new Persona())->populate($data);
+			
+			$spouseRelationshipTableGateway = $this->createTableGateway('spouse_relationship');
+			$spouseRelationsSet = [];
+			if($persona->getGender() === $persona::GENDER_MALE){
+				$spouseRelationsSet = $spouseRelationshipTableGateway->select(['husbandId' => $persona->getId()]);
+				foreach ($spouseRelationsSet as $spouseRelation){
+					$wifeId = $spouseRelation['wifeId'];
+					$wife = (new Persona())->populate($tableGateway->select(['id' => $wifeId])->current());
+					$persona->addSpouse($wife);
+				}
+			} elseif($persona->getGender() === $persona::GENDER_FEMALE){
+				$spouseRelationsSet = $spouseRelationshipTableGateway->select(['wifeId' => $persona->getId()]);
+				foreach ($spouseRelationsSet as $spouseRelation){
+					$husbandId = $spouseRelation['husbandId'];
+					$husband = (new Persona())->populate($tableGateway->select(['id' => $husbandId])->current());
+					$persona->addSpouse($husband);
+				}
+				
+			}
+			
+
+			return $persona; 
 		}else{	
 			throw new NotFoundException("Persona with id {$id} not found");
 		}
@@ -90,6 +135,14 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 	}
 	
 	public function delete(PersonaInterface $persona){
+		/*
+		 * inlink with spouse
+		 */
+		$spouseTableGateway = $this->createTableGateway('spouse_relationship');
+		
+		$spouseTableGateway->delete(['husbandId' => $persona->getId()]);
+		$spouseTableGateway->delete(['wifeId' => $persona->getId()]);
+		
 		/*
 		 * unlink parent for existing childs
 		 */
