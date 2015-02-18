@@ -15,6 +15,22 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 	protected $tableName = 'persona';
 	protected $primaryKey = 'id';
 	
+	const WITHOUT_RELATED 		= 0; //0x000000000;
+	
+	const WITH_CHILDREN 		= 1;//0x000000001;
+	const WITH_SPOUSES 			= 2;//0x000000010;
+	const WITH_PARENTS 			= 4;//0x000000100;
+	const WITH_SIBLINGS 		= 8;//0x000001000;
+	
+	const RECURSIVE 			= 0x000010000;
+	const FETCH_ALL_RELATED 	= 0x111111111;
+	protected $options;
+	
+	public function __construct($adapter){
+		parent::__construct($adapter);
+		$this->options = self::WITH_CHILDREN | self::WITH_SPOUSES | self::WITH_PARENTS | self::WITH_SIBLINGS | self::RECURSIVE;
+	}
+	
 	public function save(PersonaInterface $persona){
 		/*
 		 * TODO extract to method?
@@ -87,36 +103,75 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 		return $persona->getId() === null;
 	} 
 	
+	protected function isFlagSet($options, $flag){
+		return (($options & $flag) == $flag);
+	}
+	
+	protected $personCollection = [];
+	
 	/**
 	 * @throws
 	 * @return Persona
 	 */
-	public function getById($id){
+	public function getById($id, $options = self::WITHOUT_RELATED){
+		if(isset($this->personCollection[$id])){
+			return $this->personCollection[$id];
+		}
+// 		$this->options = 
+		$options;
+
 		$tableGateway = new TableGateway($this->tableName, $this->adapter);
 		$resultSet = $tableGateway->select(['id' => $id]);
 		if($resultSet->count()){
 			$data = $resultSet->current();
 			$persona = (new Persona())->populate($data);
-			
-			$spouseRelationshipTableGateway = $this->createTableGateway('spouse_relationship');
-			$spouseRelationsSet = [];
-			if($persona->getGender() === $persona::GENDER_MALE){
-				$spouseRelationsSet = $spouseRelationshipTableGateway->select(['husbandId' => $persona->getId()]);
-				foreach ($spouseRelationsSet as $spouseRelation){
-					$wifeId = $spouseRelation['wifeId'];
-					$wife = (new Persona())->populate($tableGateway->select(['id' => $wifeId])->current());
-					$persona->addSpouse($wife);
+			if(empty($this->personCollection[$persona->getId()])){
+				$this->personCollection[$persona->getId()] = $persona;
+			}
+						
+			if($this->isFlagSet($options, self::WITH_SPOUSES)){
+				$spouseRelationshipTableGateway = $this->createTableGateway('spouse_relationship');
+				$spouseRelationsSet = [];
+				if($persona->getGender() === $persona::GENDER_MALE){
+					$spouseRelationsSet = $spouseRelationshipTableGateway->select(['husbandId' => $persona->getId()]);
+					foreach ($spouseRelationsSet as $spouseRelation){
+						$wifeId = $spouseRelation['wifeId'];
+						$wife = $this->getById($wifeId, $options);
+						if(!$persona->getSpouses()->contains($wife)) $persona->addSpouse($wife);
+					}
+				} elseif($persona->getGender() === $persona::GENDER_FEMALE){
+					$spouseRelationsSet = $spouseRelationshipTableGateway->select(['wifeId' => $persona->getId()]);
+					foreach ($spouseRelationsSet as $spouseRelation){
+						$husbandId = $spouseRelation['husbandId'];
+						$husband = $this->getById($husbandId, $options);
+						if(!$persona->getSpouses()->contains($husband)) $persona->addSpouse($husband);
+					}
+					
 				}
-			} elseif($persona->getGender() === $persona::GENDER_FEMALE){
-				$spouseRelationsSet = $spouseRelationshipTableGateway->select(['wifeId' => $persona->getId()]);
-				foreach ($spouseRelationsSet as $spouseRelation){
-					$husbandId = $spouseRelation['husbandId'];
-					$husband = (new Persona())->populate($tableGateway->select(['id' => $husbandId])->current());
-					$persona->addSpouse($husband);
-				}
-				
 			}
 			
+			if($this->isFlagSet($options, self::WITH_PARENTS)){
+				if($fatherId = $data['fatherId']){
+					$father = $this->getById($fatherId, $options);
+					$persona->setFather($father);
+				}
+				if($motherId = $data['motherId']){
+					$mother = $this->getById($motherId, $options);
+					$persona->setMother($mother);					
+				}
+			}
+
+			if($this->isFlagSet($options, self::WITH_CHILDREN) && $persona->getGender() !== $persona::GENDER_UNDEFINED){
+				$parentColumnName = ($persona->getGender() === $persona::GENDER_MALE) 
+					? 'fatherId'
+					: 'motherId';
+				
+				$childrenRows = $tableGateway->select([$parentColumnName => $persona->getId()]);
+				foreach ($childrenRows as $childRow){
+					$child = $this->getById($childRow['id'], $options);
+					if(!$persona->getChildren()->contains($child))	$persona->addChild($child);
+				}
+			}
 
 			return $persona; 
 		}else{	

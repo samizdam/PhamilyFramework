@@ -127,16 +127,6 @@ class PersonaRepositoryTest extends DbTest{
 		$this->assertTableHasData('spouse_relationship', ['husbandId' => $husband->getId(), 'wifeId' => $wife->getId()]);
 	}
 	
-	public function testGetPersonaWithSpouse(){
-		$fixtures = $this->createFamilyFixtures();
-		$repository = $this->getRepository();
-		
-		$father = $repository->getById($fixtures['father']['id']);
-		$fatherWife =  $father->getSpouses()->current();
-		
-		$this->assertEquals($fixtures['mother']['id'], $fatherWife->getId());
-	}
-	
 	private function createFamilyFixtures(){
 		$father = ['id' => 1, 'gender' => Persona::GENDER_MALE];
 		$mother = ['id' => 2, 'gender' => Persona::GENDER_FEMALE];
