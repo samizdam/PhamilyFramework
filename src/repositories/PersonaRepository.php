@@ -15,20 +15,27 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 	protected $tableName = 'persona';
 	protected $primaryKey = 'id';
 	
-	const WITHOUT_RELATED 		= 0; //0x000000000;
+	const WITHOUT_KINSHIP 			= 0x000000000;
 	
-	const WITH_CHILDREN 		= 1;//0x000000001;
-	const WITH_SPOUSES 			= 2;//0x000000010;
-	const WITH_PARENTS 			= 4;//0x000000100;
-	const WITH_SIBLINGS 		= 8;//0x000001000;
+	const WITH_CHILDREN 			= 0x000000001;
+	const WITH_SPOUSES 				= 0x000000010;
+	const WITH_PARENTS 				= 0x000000100;
+	const WITH_FULL_SIBLINGS 		= 0x000001000;
+	const WITH_MATERNAL_SIBLINGS 	= 0x000010000;
+	const WITH_PATERNAL_SIBLINGS 	= 0x000100000;
+	const WITH_HALF_SIBLINGS	 	= 0x000110000;
+	const WITH_ALL_SIBLINGS 		= 0x000111000;
 	
-	const RECURSIVE 			= 0x000010000;
-	const FETCH_ALL_RELATED 	= 0x111111111;
+// 	const RECURSIVE 				= 0x000010000;
+	const WITH_ALL_KINSHIP	 		= 0x111111111;
 	protected $options;
 	
 	public function __construct($adapter){
 		parent::__construct($adapter);
-		$this->options = self::WITH_CHILDREN | self::WITH_SPOUSES | self::WITH_PARENTS | self::WITH_SIBLINGS | self::RECURSIVE;
+		$this->options = self::WITH_CHILDREN 
+						| self::WITH_SPOUSES 
+						| self::WITH_PARENTS 
+						| self::WITH_ALL_SIBLINGS;
 	}
 	
 	public function save(PersonaInterface $persona){
@@ -61,7 +68,8 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 		foreach ($persona->getNames() as $name){
 			$anthroponymRepo->save($name);
 			$relationTableGateway = new TableGateway('persona_has_names', $this->adapter);
-			$relationTableGateway->insert(['personaId' => $persona->getId(), 'nameId' => $name->getId()]);
+			$relationRowData = ['personaId' => $persona->getId(), 'nameId' => $name->getId()];
+			$relationTableGateway->insert($relationRowData);
 		}
 		
 		/*
@@ -96,7 +104,9 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 	 * @return array($husband, $wife)
 	 */
 	protected function getSpousePair(PersonaInterface $persona, PersonaInterface $spouse){
-		return ($persona->getGender() === PersonaInterface::GENDER_MALE) ? [$persona, $spouse] : [$spouse, $persona];
+		return ($persona->getGender() === PersonaInterface::GENDER_MALE) 
+			? [$persona, $spouse] 
+			: [$spouse, $persona];
 	}
 	
 	protected function notSaved(PersonaInterface $persona){
@@ -113,11 +123,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 	 * @throws
 	 * @return Persona
 	 */
-	public function getById($id, $options = self::FETCH_ALL_RELATED){
+	public function getById($id, $options = self::WITH_ALL_KINSHIP){
 		if(isset($this->personCollection[$id])){
 			return $this->personCollection[$id];
 		} 
-		$options;
 
 		$tableGateway = new TableGateway($this->tableName, $this->adapter);
 		$resultSet = $tableGateway->select(['id' => $id]);
@@ -137,13 +146,34 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 				$this->fetchParents($persona, $data, $options);
 			}
 
-			if($this->isFlagSet($options, self::WITH_CHILDREN) && $persona->getGender() !== $persona::GENDER_UNDEFINED){
+			if($this->isFlagSet($options, self::WITH_CHILDREN) 
+					&& $persona->getGender() !== $persona::GENDER_UNDEFINED){
 				$this->fetchChildren($persona, $data, $options);
+			}
+			
+			if($this->isFlagSet($options, self::WITH_FULL_SIBLINGS)){
+				$this->fetchFullSiblings($persona, $data, $options);
 			}
 
 			return $persona; 
 		}else{	
 			throw new NotFoundException("Persona with id {$id} not found");
+		}
+	}
+	
+	protected function fetchFullSiblings(PersonaInterface $persona, $data, $options){
+		if(isset($data['fatherId']) && isset($data['motherId'])){
+			$siblingCondition = [
+				'fatherId' => $data['fatherId'], 
+				'motherId' => $data['motherId']
+			];
+			$siblingRows = $this->createTableGateway($this->tableName)->select($siblingCondition);
+			foreach ($siblingRows as $row){
+				if($row['id'] !== $data['id']){
+					$persona->addSibling($this->getById($row['id'], $options), self::WITH_FULL_SIBLINGS);
+				}
+// 				var_dump($row['id']);
+			} 
 		}
 	}
 	

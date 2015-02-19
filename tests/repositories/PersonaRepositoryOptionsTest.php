@@ -18,8 +18,9 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 		$this->fixtures = $this->createFullFamilyFixtures();
 	} 
 	
-	public function testGetPersonaWithoutRelations(){		
-		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], PersonaRepository::WITHOUT_RELATED);
+	public function testGetPersonaWithoutRelations(){
+		$options = PersonaRepository::WITHOUT_KINSHIP;
+		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
 		$this->assertEmpty($son->getFather());
 		$this->assertEmpty($son->getMother());
@@ -30,7 +31,8 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 	}
 	
 	public function testGetPersonWithParents(){
-		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], PersonaRepository::WITH_PARENTS);
+		$options = PersonaRepository::WITH_PARENTS;
+		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
 		$this->assertNotEmpty($son->getFather());
 		$this->assertNotEmpty($son->getMother());
@@ -40,8 +42,9 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 		// 		$this->assertCount(0, $son->getSiblings());		
 	}
 
-	public function testGetPersonWithCHildren(){
-		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], PersonaRepository::WITH_CHILDREN);
+	public function testGetPersonWithChildren(){
+		$options = PersonaRepository::WITH_CHILDREN;
+		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
 		$this->assertEmpty($son->getFather());
 		$this->assertEmpty($son->getMother());
@@ -53,7 +56,8 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 	}
 	
 	public function testGetPersonWithSpouse(){
-		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], PersonaRepository::WITH_SPOUSES);
+		$options = PersonaRepository::WITH_SPOUSES;
+		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
 		$this->assertEmpty($son->getFather());
 		$this->assertEmpty($son->getMother());
@@ -65,10 +69,6 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 	
 	public function testGetPersonaWithChildrenAndParents(){
 		$options = PersonaRepository::WITH_PARENTS | PersonaRepository::WITH_CHILDREN;
-// 		var_dump($options);
-// 		var_dump(decbin(PersonaRepository::WITH_CHILDREN));
-// 		var_dump(decbin($options));
-// 		var_dump(($options & PersonaRepository::WITH_PARENTS));
 		
 		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
@@ -78,6 +78,18 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 		$this->assertCount(0, $son->getSpouses());
 		// TODO test after implemantation
 		// 		$this->assertCount(0, $son->getSiblings());
+	}
+	
+	public function testGetPersonaWIthAllRelated(){
+		$options = PersonaRepository::WITH_ALL_KINSHIP;
+		
+		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
+		
+		$this->assertNotEmpty($son->getFather());
+		$this->assertNotEmpty($son->getMother());
+		$this->assertCount(3, $son->getChildren());
+		$this->assertCount(1, $son->getSpouses());
+		$this->assertCount(1, $son->getSiblings());
 		
 	}
 	
@@ -104,10 +116,11 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 		
 		$son = ['id' => 5, 'gender' => $male, 'fatherId' => 3, 'motherId' => 4];
 		$sonWife = ['id' => 6, 'gender' => $female];
+		$daughter = ['id' => 7, 'gender' => $female, 'fatherId' => 3, 'motherId' => 4];
 		
-		$grandsonA = ['id' => 7, 'gender' => $male, 'fatherId' => 5, 'motherId' => 6]; 
-		$grandsonB = ['id' => 8, 'gender' => $male, 'fatherId' => 5, 'motherId' => 6]; 
-		$grandsonC = ['id' => 9, 'gender' => $male, 'fatherId' => 5, 'motherId' => 6]; 
+		$grandsonA = ['id' => 8, 'gender' => $male, 'fatherId' => 5, 'motherId' => 6]; 
+		$grandsonB = ['id' => 9, 'gender' => $male, 'fatherId' => 5, 'motherId' => 6]; 
+		$grandsonC = ['id' => 10, 'gender' => $male, 'fatherId' => 5, 'motherId' => 6]; 
 
 		
 		$fixtures = [
@@ -119,6 +132,7 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 			
 			'son' => $son,
 			'sonWife' => $sonWife,
+			'daughter' => $daughter,
 			
 			'grandsonA' => $grandsonA,
 			'grandsonB' => $grandsonB,

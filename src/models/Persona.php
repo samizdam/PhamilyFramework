@@ -11,6 +11,7 @@ use phamily\framework\models\validators\BaseParentsValidator;
 use phamily\framework\models\validators\ParentsValidatorInterface;
 use phamily\framework\models\validators\ValidatorInterface;
 use phamily\framework\value_objects\DateTimeInterface;
+use phamily\framework\models\collections\SiblingCollection;
 
 class Persona implements PersonaInterface{
 
@@ -50,6 +51,12 @@ class Persona implements PersonaInterface{
 	
 	/**
 	 * 
+	 * @var SiblingCollection
+	 */
+	protected $siblings;
+	
+	/**
+	 * 
 	 * @var DateTimeInterface
 	 */
 	protected $dateOfBirth;
@@ -75,6 +82,7 @@ class Persona implements PersonaInterface{
 		
 		$this->children = new ChildrenCollection($this);
 		$this->spouses = new SpouseCollection($this);
+		$this->siblings = new SiblingCollection($this);
 		
 		$this->setGender($gender);
 		
@@ -249,7 +257,15 @@ class Persona implements PersonaInterface{
 		return $this->children;
 	}
 	
-	public function getSiblings(){throw new \Exception("not implement now");}
+	public function addSibling(PersonaInterface $sibling){
+		if(!$this->siblings->contains($sibling)){
+			$this->siblings->add($sibling);
+		}
+	}
+	
+	public function getSiblings(){
+		return $this->siblings;
+	}
 
 	public function addSpouse(PersonaInterface $spouse){
 		$this->spouses->add($spouse);
