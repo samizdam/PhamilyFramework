@@ -26,24 +26,24 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 		$this->assertEmpty($son->getMother());
 		$this->assertCount(0, $son->getSpouses());
 		$this->assertCount(0, $son->getChildren());
-		// TODO test after implemantation
-// 		$this->assertCount(0, $son->getSiblings());
+		
+		$this->assertCount(0, $son->getSiblings());
 	}
 	
 	public function testGetPersonWithParents(){
-		$options = PersonaRepository::WITH_PARENTS;
+		$options = PersonaRepository::PARENTS;
 		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
 		$this->assertNotEmpty($son->getFather());
 		$this->assertNotEmpty($son->getMother());
 		$this->assertCount(0, $son->getSpouses());
 		$this->assertCount(0, $son->getChildren());
-		// TODO test after implemantation
-		// 		$this->assertCount(0, $son->getSiblings());		
+		
+		$this->assertCount(0, $son->getSiblings());		
 	}
 
 	public function testGetPersonWithChildren(){
-		$options = PersonaRepository::WITH_CHILDREN;
+		$options = PersonaRepository::CHILDREN;
 		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
 		$this->assertEmpty($son->getFather());
@@ -51,24 +51,24 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 		
 		$this->assertCount(3, $son->getChildren());
 		$this->assertCount(0, $son->getSpouses());
-		// TODO test after implemantation
-		// 		$this->assertCount(0, $son->getSiblings());		
+		
+		$this->assertCount(0, $son->getSiblings());		
 	}
 	
 	public function testGetPersonWithSpouse(){
-		$options = PersonaRepository::WITH_SPOUSES;
+		$options = PersonaRepository::SPOUSES;
 		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
 		$this->assertEmpty($son->getFather());
 		$this->assertEmpty($son->getMother());
 		$this->assertEmpty($son->getChildren());
 		$this->assertCount(1, $son->getSpouses());
-		// TODO test after implemantation
-		// 		$this->assertCount(0, $son->getSiblings());		
+		
+		$this->assertCount(0, $son->getSiblings());		
 	}
 	
 	public function testGetPersonaWithChildrenAndParents(){
-		$options = PersonaRepository::WITH_PARENTS | PersonaRepository::WITH_CHILDREN;
+		$options = PersonaRepository::PARENTS | PersonaRepository::CHILDREN;
 		
 		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		
@@ -76,12 +76,12 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 		$this->assertNotEmpty($son->getMother());
 		$this->assertCount(3, $son->getChildren());
 		$this->assertCount(0, $son->getSpouses());
-		// TODO test after implemantation
-		// 		$this->assertCount(0, $son->getSiblings());
+		
+		$this->assertCount(0, $son->getSiblings());
 	}
 	
 	public function testGetPersonaWIthAllRelated(){
-		$options = PersonaRepository::WITH_ALL_KINSHIP;
+		$options = PersonaRepository::ALL_KINSHIP;
 		
 		$son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
 		

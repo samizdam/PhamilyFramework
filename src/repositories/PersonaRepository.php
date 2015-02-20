@@ -9,33 +9,20 @@ use phamily\framework\repositories\exceptions\NotFoundException;
 use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Predicate\Predicate;
+use phamily\framework\KinshipAwareInterface;
 
-class PersonaRepository extends AbstractRepository implements PersonaRepositoryInterface{
+class PersonaRepository extends AbstractRepository 
+		implements PersonaRepositoryInterface, KinshipAwareInterface{
 	
 	protected $tableName = 'persona';
 	protected $primaryKey = 'id';
 	
-	const WITHOUT_KINSHIP 			= 0x000000000;
-	
-	const WITH_CHILDREN 			= 0x000000001;
-	const WITH_SPOUSES 				= 0x000000010;
-	const WITH_PARENTS 				= 0x000000100;
-	const WITH_FULL_SIBLINGS 		= 0x000001000;
-	const WITH_MATERNAL_SIBLINGS 	= 0x000010000;
-	const WITH_PATERNAL_SIBLINGS 	= 0x000100000;
-	const WITH_HALF_SIBLINGS	 	= 0x000110000;
-	const WITH_ALL_SIBLINGS 		= 0x000111000;
-	
-// 	const RECURSIVE 				= 0x000010000;
-	const WITH_ALL_KINSHIP	 		= 0x111111111;
-	protected $options;
+	const WITHOUT_KINSHIP 		= 0;
+	const ALL_KINSHIP			= 0x111111111111;
+					//ZYXWVUTSRQPONMLKJIHGFEDCBA
 	
 	public function __construct($adapter){
 		parent::__construct($adapter);
-		$this->options = self::WITH_CHILDREN 
-						| self::WITH_SPOUSES 
-						| self::WITH_PARENTS 
-						| self::WITH_ALL_SIBLINGS;
 	}
 	
 	public function save(PersonaInterface $persona){
@@ -123,11 +110,13 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 	 * @throws
 	 * @return Persona
 	 */
-	public function getById($id, $options = self::WITH_ALL_KINSHIP){
+	public function getById($id, $fetchWithOptions = self::ALL_KINSHIP){
 		if(isset($this->personCollection[$id])){
 			return $this->personCollection[$id];
 		} 
 
+		$options = $fetchWithOptions;
+		
 		$tableGateway = new TableGateway($this->tableName, $this->adapter);
 		$resultSet = $tableGateway->select(['id' => $id]);
 		
@@ -138,20 +127,20 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 				$this->personCollection[$persona->getId()] = $persona;
 			}
 						
-			if($this->isFlagSet($options, self::WITH_SPOUSES)){
+			if($this->isFlagSet($options, self::SPOUSES)){
 				$this->fetchSpouses($persona, $data, $options);
 			}
 			
-			if($this->isFlagSet($options, self::WITH_PARENTS)){
+			if($this->isFlagSet($options, self::PARENTS)){
 				$this->fetchParents($persona, $data, $options);
 			}
 
-			if($this->isFlagSet($options, self::WITH_CHILDREN) 
+			if($this->isFlagSet($options, self::CHILDREN) 
 					&& $persona->getGender() !== $persona::GENDER_UNDEFINED){
 				$this->fetchChildren($persona, $data, $options);
 			}
 			
-			if($this->isFlagSet($options, self::WITH_FULL_SIBLINGS)){
+			if($this->isFlagSet($options, self::SIBLINGS)){
 				$this->fetchFullSiblings($persona, $data, $options);
 			}
 
@@ -170,9 +159,8 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 			$siblingRows = $this->createTableGateway($this->tableName)->select($siblingCondition);
 			foreach ($siblingRows as $row){
 				if($row['id'] !== $data['id']){
-					$persona->addSibling($this->getById($row['id'], $options), self::WITH_FULL_SIBLINGS);
+					$persona->addSibling($this->getById($row['id'], $options), self::SIBLINGS);
 				}
-// 				var_dump($row['id']);
 			} 
 		}
 	}

@@ -2,7 +2,6 @@
 namespace phamily\framework;
 
 interface KinshipAwareInterface{
-	static public $s;
 					//ZYXWVUTSRQPONMLKJIHGFEDCBA	
 	const FATHER 				= 0x000000000001;
 	const MOTHER 				= 0x000000000010;
@@ -28,6 +27,6 @@ interface KinshipAwareInterface{
 	const HALF_SISTER_MATERNAL	= 0x100000000000;
 	const HALF_SIBLING_MATERNAL	= 0x110000000000;
 	
-	const HALF_SIBLING	 		= 0x111100010000;
+	const HALF_SIBLING			= 0x111100010000;
 					//ZYXWVUTSRQPONMLKJIHGFEDCBA	
 }
