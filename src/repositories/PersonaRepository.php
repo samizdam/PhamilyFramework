@@ -6,23 +6,25 @@ use Zend\Db\RowGateway\RowGateway;
 use Zend\Db\TableGateway\TableGateway;
 use phamily\framework\models\Persona;
 use phamily\framework\repositories\exceptions\NotFoundException;
-use Zend\Db\Sql\Delete;
-use Zend\Db\Sql\Where;
-use Zend\Db\Sql\Predicate\Predicate;
-use phamily\framework\KinshipAwareInterface;
+use phamily\framework\traits\BitmaskTrait; 
 
 class PersonaRepository extends AbstractRepository 
-		implements PersonaRepositoryInterface, KinshipAwareInterface{
+		implements PersonaRepositoryInterface{
+	
+	use BitmaskTrait;
 	
 	protected $tableName = 'persona';
 	protected $primaryKey = 'id';
 	
-	const WITHOUT_KINSHIP 		= 0;
-	const ALL_KINSHIP			= 0x111111111111;
-					//ZYXWVUTSRQPONMLKJIHGFEDCBA
+	/**
+	 * 
+	 * @var PersonaRepositoryCacheInterface
+	 */
+	protected $cache;
 	
 	public function __construct($adapter){
 		parent::__construct($adapter);
+		$this->cache = new BasePersonaRepositoryCache();
 	}
 	
 	public function save(PersonaInterface $persona){
@@ -30,7 +32,7 @@ class PersonaRepository extends AbstractRepository
 		 * TODO extract to method?
 		 * save parents before
 		 */
-		if($persona->hasFather()  && $this->notSaved($persona->getFather())){
+		if($persona->hasFather() && $this->notSaved($persona->getFather())){
 			$this->save($persona->getFather());
 		}
 		if($persona->hasMother() && $this->notSaved($persona->getMother())){
@@ -64,7 +66,7 @@ class PersonaRepository extends AbstractRepository
 		 */
 		$spouseRelationTableGateway = $this->createTableGateway('spouse_relationship');
 		foreach ($persona->getSpouses() as $spouse){
-			list($husband, $wife) = $this->getSpousePair($persona, $spouse);
+			list($husband, $wife) = $this->normalizeSpousePair($persona, $spouse);
 			$data = ['husbandId' => $husband->getId(), 'wifeId' => $wife->getId()];
 			$spouseRelationTableGateway->insert($data);
 		}
@@ -90,7 +92,7 @@ class PersonaRepository extends AbstractRepository
 	 * @param PersonaInterface $spouse
 	 * @return array($husband, $wife)
 	 */
-	protected function getSpousePair(PersonaInterface $persona, PersonaInterface $spouse){
+	protected function normalizeSpousePair(PersonaInterface $persona, PersonaInterface $spouse){
 		return ($persona->getGender() === PersonaInterface::GENDER_MALE) 
 			? [$persona, $spouse] 
 			: [$spouse, $persona];
@@ -100,70 +102,69 @@ class PersonaRepository extends AbstractRepository
 		return $persona->getId() === null;
 	} 
 	
-	protected function isFlagSet($options, $flag){
-		return (($options & $flag) == $flag);
-	}
-	
-	protected $personCollection = [];
-	
 	/**
 	 * @throws
 	 * @return Persona
 	 */
-	public function getById($id, $fetchWithOptions = self::ALL_KINSHIP){
-		if(isset($this->personCollection[$id])){
-			return $this->personCollection[$id];
-		} 
-
+	public function getById($id, $fetchWithOptions = self::WITHOUT_KINSHIP){
 		$options = $fetchWithOptions;
 		
-		$tableGateway = new TableGateway($this->tableName, $this->adapter);
-		$resultSet = $tableGateway->select(['id' => $id]);
-		
-		if($resultSet->count()){
-			$data = $resultSet->current();
-			$persona = (new Persona())->populate($data);
-			if(empty($this->personCollection[$persona->getId()])){
-				$this->personCollection[$persona->getId()] = $persona;
-			}
-						
-			if($this->isFlagSet($options, self::SPOUSES)){
-				$this->fetchSpouses($persona, $data, $options);
-			}
-			
-			if($this->isFlagSet($options, self::PARENTS)){
-				$this->fetchParents($persona, $data, $options);
-			}
+		if($this->cache->has($id)){
+			$persona = $this->cache->getObject($id);
+			$data = $this->cache->getData($id);
+			if($this->cache->getOptions($id) === $options){
+				return $persona;
+			}			
+		} else {
+			$tableGateway = new TableGateway($this->tableName, $this->adapter);
+			$resultSet = $tableGateway->select(['id' => $id]);
 
-			if($this->isFlagSet($options, self::CHILDREN) 
-					&& $persona->getGender() !== $persona::GENDER_UNDEFINED){
-				$this->fetchChildren($persona, $data, $options);
-			}
-			
-			if($this->isFlagSet($options, self::SIBLINGS)){
-				$this->fetchFullSiblings($persona, $data, $options);
-			}
+			if($resultSet->count()){
+				$data = $resultSet->current();
+				$persona = (new Persona())->populate($data);
+					
+				if(!$this->cache->has($id)){
+					$this->cache->add($persona, $data, $options);
+				}
+			}					
+		}	
 
-			return $persona; 
-		}else{	
+		if(empty($persona)){
 			throw new NotFoundException("Persona with id {$id} not found");
 		}
+		
+		if($this->isFlagSet($options, self::SPOUSES)){
+			$this->fetchSpouses($persona, $data, $options);
+		}
+		
+		if($this->isFlagSet($options, self::PARENTS)){
+			$this->fetchParents($persona, $data, $options);
+		}
+
+		if($this->isFlagSet($options, self::CHILDREN) 
+				&& $persona->getGender() !== $persona::GENDER_UNDEFINED){
+			$this->fetchChildren($persona, $data, $options);
+		}
+
+		return $persona; 
 	}
 	
-	protected function fetchFullSiblings(PersonaInterface $persona, $data, $options){
-		if(isset($data['fatherId']) && isset($data['motherId'])){
-			$siblingCondition = [
-				'fatherId' => $data['fatherId'], 
-				'motherId' => $data['motherId']
-			];
-			$siblingRows = $this->createTableGateway($this->tableName)->select($siblingCondition);
-			foreach ($siblingRows as $row){
-				if($row['id'] !== $data['id']){
-					$persona->addSibling($this->getById($row['id'], $options), self::SIBLINGS);
-				}
-			} 
-		}
-	}
+// 	protected function fetchFullSiblings(PersonaInterface $persona, $data, $options){
+// 		if(isset($data['fatherId']) && isset($data['motherId'])){
+// 			$siblingCondition = [
+// 				'fatherId' => $data['fatherId'], 
+// 				'motherId' => $data['motherId']
+// 			];
+// 			$siblingRows = $this->createTableGateway($this->tableName)->select($siblingCondition);
+// 			foreach ($siblingRows as $row){
+// 				if($row['id'] !== $data['id']){
+// 					$persona->addSibling($this->getById($row['id'], $options), self::FULL_SIBLINGS);
+// // 					$sibling = $this->getById($row['id'], $options;
+// // 					$persona->h
+// 				}
+// 			} 
+// 		}
+// 	}
 	
 	protected function fetchChildren(PersonaInterface $persona, $data, $options){
 		$parentColumnName = ($persona->getGender() === $persona::GENDER_MALE)

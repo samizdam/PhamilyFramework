@@ -7,8 +7,11 @@ use phamily\framework\value_objects\DateTimeInterface;
 use phamily\framework\repositories\PersonaRepository;
 use phamily\framework\repositories\PersonaRepositoryInterface;
 use phamily\framework\services\proxies\PersonaRepositoryProxy;
+use phamily\framework\traits\BitmaskTrait;
 
 class PersonaService implements PersonaServiceInterface{
+	
+	use BitmaskTrait;
 	
 	protected $repository;
 
@@ -39,6 +42,10 @@ class PersonaService implements PersonaServiceInterface{
 		return $persona;
 	}
 	
+	public function getById($id, $fetchWithOptions = self::ALL_KINSHIP){
+		return $this->repository->getById($id, $fetchWithOptions);
+	}
+	
 	public function delete(PersonaInterface &$persona){
 		$this->repository->delete($persona);
 		
@@ -46,5 +53,20 @@ class PersonaService implements PersonaServiceInterface{
 		 * destroy object
 		 */
 		$persona = null;
+	}
+	
+	public function getSiblings(PersonaInterface $persona, $degreeOfKinship = self::SIBLINGS){
+// 		switch ($degreeOfKinship){
+// 			case self::FULL_SIBLINGS: 
+// 				if(!$persona->hasFather()){
+// // 					$persona = $this->getById($this->)
+// 				}
+// 				if(!$persona->hasMother()){
+// 					$mother = $this->getById($id)
+// 				}
+// 			break;
+// 		}
+		
+// 		return $siblings;
 	}
 }

@@ -19,6 +19,7 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	public function getDateOfBirth($format = null);
 	public function getDateOfDeath($format = null);
 	
+	public function setGender($gender);
 	public function getGender();
 	
 	public function getNames();
@@ -38,8 +39,6 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	public function addChild(PersonaInterface $child);
 	
 	public function getChildren();
-
-	public function getSiblings();
 	
 	public function addSpouse(PersonaInterface $spouse);
 	public function getSpouses();

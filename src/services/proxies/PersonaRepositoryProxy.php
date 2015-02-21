@@ -36,9 +36,9 @@ class PersonaRepositoryProxy implements PersonaRepositoryInterface{
 		}
 	}
 
-	public function getById($id){
+	public function getById($id, $fetchWithOptions = self::WITHOUT_KINSHIP){
 		if($this->isActive()){
-			return $this->repository->getById($id);
+			return $this->repository->getById($id, $fetchWithOptions);
 		}
 	}
 }

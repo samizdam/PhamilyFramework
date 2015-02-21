@@ -4,8 +4,9 @@ namespace phamily\framework\services;
 use phamily\framework\models\PersonaInterface;
 use phamily\framework\GenderAwareInterface;
 use phamily\framework\value_objects\DateTimeInterface;
+use phamily\framework\KinshipAwareInterface;
 
-interface PersonaServiceInterface extends GenderAwareInterface{
+interface PersonaServiceInterface extends GenderAwareInterface, KinshipAwareInterface{
 	public function create(
 			$gender,
 			array $names = [], 
@@ -16,6 +17,10 @@ interface PersonaServiceInterface extends GenderAwareInterface{
 	);
 	
 	public function delete(PersonaInterface &$persona);
+	
+	public function getById($id, $fetchWithOptions = self::ALL_KINSHIP);
+	
+	public function getSiblings(PersonaInterface $persona, $degreeOfKinship = self::SIBLINGS);
 	
 // 	public function findByNames(array $names = []){
 		

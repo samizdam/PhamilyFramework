@@ -2,12 +2,13 @@
 namespace phamily\framework\repositories;
 
 use phamily\framework\models\PersonaInterface;
+use phamily\framework\KinshipAwareInterface;
 
-interface PersonaRepositoryInterface{
+interface PersonaRepositoryInterface extends KinshipAwareInterface{
 	
 	public function save(PersonaInterface $persona);
 	
-	public function getById($id);
+	public function getById($id, $fetchWithOptions = self::WITHOUT_KINSHIP);
 	
 	public function delete(PersonaInterface $persona);
 	

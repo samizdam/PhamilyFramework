@@ -5,10 +5,12 @@ use phamily\framework\services\PersonaService;
 use phamily\tests\DbTest;
 use phamily\framework\repositories\PersonaRepository;
 use phamily\tests\services\traits\CreateServiceTrait;
+use phamily\tests\traits\FullFamilyFixtureTrait;
 
 class PersonaServiceWithDbRepositoryTest extends DbTest{
 	
 	use CreateServiceTrait; 
+	use FullFamilyFixtureTrait;
 	
 	public function testNewPersonaIsPersisted(){
 		$service = $this->createServiceWithRepository();
@@ -29,4 +31,11 @@ class PersonaServiceWithDbRepositoryTest extends DbTest{
 		$this->assertTableHasNotData('persona', ['id' => $personaId]);
 	}
 	
+	public function testGetFullSiblings(){
+		$service = $this->createServiceWithRepository();
+		$fixtures = $this->createFullFamilyFixtures();
+		
+		$son = $service->getById($fixtures['son']['id']);
+		$service->getSiblings($son, $service::FULL_SIBLINGS);
+	}
 }
