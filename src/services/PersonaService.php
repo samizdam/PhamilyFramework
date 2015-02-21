@@ -56,17 +56,6 @@ class PersonaService implements PersonaServiceInterface{
 	}
 	
 	public function getSiblings(PersonaInterface $persona, $degreeOfKinship = self::SIBLINGS){
-// 		switch ($degreeOfKinship){
-// 			case self::FULL_SIBLINGS: 
-// 				if(!$persona->hasFather()){
-// // 					$persona = $this->getById($this->)
-// 				}
-// 				if(!$persona->hasMother()){
-// 					$mother = $this->getById($id)
-// 				}
-// 			break;
-// 		}
-		
-// 		return $siblings;
+		return $this->repository->getSiblings($persona, $degreeOfKinship);
 	}
 }

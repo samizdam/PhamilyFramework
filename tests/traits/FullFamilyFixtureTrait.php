@@ -15,6 +15,8 @@ trait FullFamilyFixtureTrait{
 		$father = ['id' => 3, 'gender' => $male, 'fatherId' => 1, 'motherId' => 2];
 		$mother = ['id' => 4, 'gender' => $female];
 	
+		// son - is perfect example of Persona: 
+		// have 3 child, 1 spouse, 1 full sibling (sister) and 2 half-siblings
 		$son = ['id' => 5, 'gender' => $male, 'fatherId' => 3, 'motherId' => 4];
 		$sonWife = ['id' => 6, 'gender' => $female];
 		$daughter = ['id' => 7, 'gender' => $female, 'fatherId' => 3, 'motherId' => 4];

@@ -23,7 +23,7 @@ class PersonaRepositoryProxy implements PersonaRepositoryInterface{
 	public function isActive(){
 		return $this->active;
 	}
-
+	
 	public function save(PersonaInterface $persona){
 		if($this->isActive()){
 			return $this->repository->save($persona);
@@ -39,6 +39,12 @@ class PersonaRepositoryProxy implements PersonaRepositoryInterface{
 	public function getById($id, $fetchWithOptions = self::WITHOUT_KINSHIP){
 		if($this->isActive()){
 			return $this->repository->getById($id, $fetchWithOptions);
+		}
+	}
+	
+	public function getSiblings(PersonaInterface $persona, $degreeOfKinship = self::SIBLINGS){
+		if($this->isActive()){
+			return $this->repository->getSiblings($persona, $degreeOfKinship);
 		}
 	}
 }

@@ -7,6 +7,7 @@ use Zend\Db\TableGateway\TableGateway;
 use phamily\framework\models\Persona;
 use phamily\framework\repositories\exceptions\NotFoundException;
 use phamily\framework\traits\BitmaskTrait; 
+use Zend\Db\Sql\Where;
 
 class PersonaRepository extends AbstractRepository 
 		implements PersonaRepositoryInterface{
@@ -149,22 +150,94 @@ class PersonaRepository extends AbstractRepository
 		return $persona; 
 	}
 	
-// 	protected function fetchFullSiblings(PersonaInterface $persona, $data, $options){
-// 		if(isset($data['fatherId']) && isset($data['motherId'])){
-// 			$siblingCondition = [
-// 				'fatherId' => $data['fatherId'], 
-// 				'motherId' => $data['motherId']
-// 			];
-// 			$siblingRows = $this->createTableGateway($this->tableName)->select($siblingCondition);
-// 			foreach ($siblingRows as $row){
-// 				if($row['id'] !== $data['id']){
-// 					$persona->addSibling($this->getById($row['id'], $options), self::FULL_SIBLINGS);
-// // 					$sibling = $this->getById($row['id'], $options;
-// // 					$persona->h
-// 				}
-// 			} 
-// 		}
-// 	}
+	public function getSiblings(PersonaInterface $persona, $degreeOfKinship = self::SIBLINGS){
+		
+		$siblings = [];
+		
+		$personaId = $persona->getId();
+		
+		$personaData = $this->cache->getData($personaId);
+		
+		$fatherId = $personaData['fatherId'];
+		$motherId = $personaData['motherId'];
+		
+		$siblingCondition = new Where();
+		
+		if($this->isFlagSet($degreeOfKinship, self::BROTHER)){
+			$where = (new Where)
+				->equalTo('fatherId', $fatherId)
+				->equalTo('motherId', $motherId)
+				->equalTo('gender', PersonaInterface::GENDER_MALE);
+			
+			$siblingCondition->orPredicate($where);
+		}
+		
+		if($this->isFlagSet($degreeOfKinship, self::SISTER)){
+			$where = (new Where)
+				->equalTo('fatherId', $fatherId)
+				->equalTo('motherId', $motherId)
+				->equalTo('gender', PersonaInterface::GENDER_FEMALE);
+			$siblingCondition->orPredicate($where);
+		}
+		
+		if($this->isFlagSet($degreeOfKinship, self::HALF_BROTHER_PATERNAL)){
+			$where = (new Where)
+				->equalTo('fatherId', $fatherId)
+				->equalTo('gender', PersonaInterface::GENDER_MALE);
+			
+			$where->andPredicate((new Where)
+					->notEqualTo('motherId', $motherId)
+					->orPredicate((new Where)->isNull('motherId'))
+			);
+			$siblingCondition->orPredicate($where);
+		}
+		
+		if($this->isFlagSet($degreeOfKinship, self::HALF_BROTHER_MATERNAL)){
+			$where = (new Where)
+				->equalTo('motherId', $motherId)
+				->equalTo('gender', PersonaInterface::GENDER_MALE);
+			
+			$where->andPredicate((new Where)
+					->notEqualTo('fatherId', $fatherId)
+					->orPredicate((new Where)->isNull('fatherId'))
+			);
+			$siblingCondition->orPredicate($where);
+		}		
+		
+		if($this->isFlagSet($degreeOfKinship, self::HALF_SISTER_PATERNAL)){
+			$where = (new Where)
+				->equalTo('fatherId', $fatherId)
+				->equalTo('gender', PersonaInterface::GENDER_FEMALE);
+			
+			$where->andPredicate((new Where)
+					->notEqualTo('motherId', $motherId)
+					->orPredicate((new Where)->isNull('motherId'))
+			);
+			$siblingCondition->orPredicate($where);
+		}
+		
+		if($this->isFlagSet($degreeOfKinship, self::HALF_SISTER_MATERNAL)){
+			$where = (new Where)
+				->equalTo('motherId', $motherId)
+				->equalTo('gender', PersonaInterface::GENDER_FEMALE);
+			
+			$where->andPredicate((new Where)
+					->notEqualTo('fatherId', $fatherId)
+					->orPredicate((new Where)->isNull('fatherId'))
+			);
+			$siblingCondition->orPredicate($where);
+		}		
+		
+		$siblingRows = $this->createTableGateway($this->tableName)->select($siblingCondition);
+// 		var_dump($siblingRows->getDataSource());
+		foreach ($siblingRows as $row){
+			if($row['id'] !== $personaId){
+				$siblings[] = $this->getById($row['id'], $degreeOfKinship);
+			} 
+		}
+		
+		return $siblings;
+	}
 	
 	protected function fetchChildren(PersonaInterface $persona, $data, $options){
 		$parentColumnName = ($persona->getGender() === $persona::GENDER_MALE)
