@@ -2,7 +2,11 @@
 namespace phamily\framework\repositories;
 
 use phamily\framework\models\PersonaInterface;
-
+/**
+ * TODO it is Identity Map, needs renamimng
+ * @author samizdam
+ *
+ */
 interface PersonaRepositoryCacheInterface{
 
 	public function add(PersonaInterface $persona, $rowData);
