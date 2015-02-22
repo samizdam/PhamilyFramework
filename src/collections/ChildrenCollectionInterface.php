@@ -1,5 +1,5 @@
 <?php
-namespace phamily\framework\models\collections;
+namespace phamily\framework\collections;
 
 interface ChildrenCollectionInterface extends PersonaCollectionInterface{
 	

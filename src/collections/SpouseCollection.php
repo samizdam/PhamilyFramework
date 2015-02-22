@@ -1,5 +1,5 @@
 <?php
-namespace phamily\framework\models\collections;
+namespace phamily\framework\collections;
 
 use phamily\framework\models\PersonaInterface;
 use phamily\framework\models\exceptions\LogicException;

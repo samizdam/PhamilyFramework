@@ -1,10 +1,10 @@
 <?php
 namespace phamily\framework\models;
 
-use phamily\framework\models\collections\ChildrenCollectionInterface;
-use phamily\framework\models\collections\ChildrenCollection;
-use phamily\framework\models\collections\SpouseCollection;
-use phamily\framework\models\collections\SpouseCollectionInterface;
+use phamily\framework\collections\ChildrenCollectionInterface;
+use phamily\framework\collections\ChildrenCollection;
+use phamily\framework\collections\SpouseCollection;
+use phamily\framework\collections\SpouseCollectionInterface;
 use phamily\framework\models\exceptions\LogicException;
 use phamily\framework\models\exceptions\InvalidArgumentException;
 use phamily\framework\validators\BaseParentsValidator;
