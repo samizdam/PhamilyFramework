@@ -21,7 +21,9 @@ CREATE TABLE IF NOT EXISTS `anthroponym` (
   CONSTRAINT `FK_anthroponym_anthroponym_type` FOREIGN KEY (`type`) REFERENCES `anthroponym_type` (`anthroponym_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы phamily_test.anthroponym: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `anthroponym` DISABLE KEYS */;
+/*!40000 ALTER TABLE `anthroponym` ENABLE KEYS */;
 
 
 -- Дамп структуры для таблица phamily_test.anthroponym_type
@@ -31,7 +33,9 @@ CREATE TABLE IF NOT EXISTS `anthroponym_type` (
   PRIMARY KEY (`anthroponym_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы phamily_test.anthroponym_type: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `anthroponym_type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `anthroponym_type` ENABLE KEYS */;
 
 
 -- Дамп структуры для таблица phamily_test.gender
@@ -41,7 +45,12 @@ CREATE TABLE IF NOT EXISTS `gender` (
   PRIMARY KEY (`gender`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы phamily_test.gender: ~2 rows (приблизительно)
+/*!40000 ALTER TABLE `gender` DISABLE KEYS */;
+INSERT INTO `gender` (`gender`) VALUES
+	('female'),
+	('male');
+/*!40000 ALTER TABLE `gender` ENABLE KEYS */;
 
 
 -- Дамп структуры для таблица phamily_test.persona
@@ -63,7 +72,9 @@ CREATE TABLE IF NOT EXISTS `persona` (
   CONSTRAINT `FK_persona_persona_2` FOREIGN KEY (`motherId`) REFERENCES `persona` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы phamily_test.persona: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+/*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 
 
 -- Дамп структуры для таблица phamily_test.persona_has_names
@@ -77,28 +88,26 @@ CREATE TABLE IF NOT EXISTS `persona_has_names` (
   CONSTRAINT `FK_persona_has_names_persona` FOREIGN KEY (`personaId`) REFERENCES `persona` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Экспортируемые данные не выделены.
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+-- Дамп данных таблицы phamily_test.persona_has_names: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `persona_has_names` DISABLE KEYS */;
+/*!40000 ALTER TABLE `persona_has_names` ENABLE KEYS */;
 
--- --------------------------------------------------------
--- Хост:                         192.168.1.42
--- Версия сервера:               5.5.38-0ubuntu0.14.04.1 - (Ubuntu)
--- ОС Сервера:                   debian-linux-gnu
--- HeidiSQL Версия:              9.1.0.4867
--- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
--- Дамп данных таблицы phamily_test.gender: ~2 rows (приблизительно)
-/*!40000 ALTER TABLE `gender` DISABLE KEYS */;
-INSERT INTO `gender` (`gender`) VALUES
-	('female'),
-	('male');
-/*!40000 ALTER TABLE `gender` ENABLE KEYS */;
+-- Дамп структуры для таблица phamily_test.spouse_relationship
+DROP TABLE IF EXISTS `spouse_relationship`;
+CREATE TABLE IF NOT EXISTS `spouse_relationship` (
+  `husbandId` int(10) unsigned DEFAULT NULL,
+  `wifeId` int(10) unsigned DEFAULT NULL,
+  `relationshipType` varchar(50) DEFAULT NULL,
+  KEY `FK__persona` (`husbandId`),
+  KEY `FK__persona_2` (`wifeId`),
+  CONSTRAINT `FK__persona` FOREIGN KEY (`husbandId`) REFERENCES `persona` (`id`),
+  CONSTRAINT `FK__persona_2` FOREIGN KEY (`wifeId`) REFERENCES `persona` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Дамп данных таблицы phamily_test.spouse_relationship: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `spouse_relationship` DISABLE KEYS */;
+/*!40000 ALTER TABLE `spouse_relationship` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
