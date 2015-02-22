@@ -3,7 +3,35 @@ namespace phamily\tests\traits;
 
 use phamily\framework\GenderAwareInterface;
 trait FullFamilyFixtureTrait{
-
+	/**
+	 * $fatherGrandPa              |===============> $sonHalfBrotherOnFatherSide
+	 *               \            /
+	 *                |===> $father
+	 *               /            \
+	 * $fatherGrandMa              |===============> $son
+	 *                             |                     \
+	 *                             |                      |=========> $grandsonA
+	 *                             |                      |
+	 *                             |                      |=========> $grandsonB
+	 *                             |                      |
+	 *                             |                      |=========> $grandsonC
+	 *                             |                    /
+	 *                             |            $sonWife 
+	 *                             |
+	 *                             |
+	 *                             |                     
+	 *                             |             
+	 *                             |==============> $daughter
+	 *                             |
+	 *                             |
+	 *                             |
+	 *                             |
+	 *                            /
+	 *                    $mother|
+	 *                            \
+	 *                             |==============> $sonHalfSisterOnMotherSide
+	 * @return array
+	 */
 	protected function createFullFamilyFixtures(){
 		$male = GenderAwareInterface::GENDER_MALE;
 		$female = GenderAwareInterface::GENDER_FEMALE;

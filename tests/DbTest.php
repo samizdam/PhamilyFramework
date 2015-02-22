@@ -66,7 +66,7 @@ abstract class DbTest extends UnitTest{
 	 *
 	 * @return AdapterInterface
 	 */
-	static protected function getDbAdapter(){
+	static public function getDbAdapter(){
 		return self::$dbAdapter;
 	}
 	

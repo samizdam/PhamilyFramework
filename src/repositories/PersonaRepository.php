@@ -161,7 +161,7 @@ class PersonaRepository extends AbstractRepository
 		$where = $siblingCondition->getPredicate($degreeOfKinship);
 		
 		$siblingRows = $this->createTableGateway($this->tableName)->select($where);
-
+		
 		foreach ($siblingRows as $row){
 				$siblings[] = $this->getById($row['id'], $degreeOfKinship);
 		}

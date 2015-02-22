@@ -5,10 +5,12 @@ use phamily\framework\models\Persona;
 use phamily\framework\repositories\PersonaRepository;
 use phamily\tests\traits\FullFamilyFixtureTrait;
 use phamily\tests\DbTest;
+use phamily\tests\repositories\traits\PersonaRepositoryTrait;
 
 class PersonaRepositoryOptioinsTest extends DbTest{
 	
 	use FullFamilyFixtureTrait;
+	use PersonaRepositoryTrait;
 	
 	private $fixtures;
 	
@@ -88,12 +90,5 @@ class PersonaRepositoryOptioinsTest extends DbTest{
 	private function getPersonaWithOptions($id, $options){
 		return $this->getRepository()->getById($id, $options);
 	}
-	 
 	
-	private function getRepository(){
-		$repository = new PersonaRepository($this->getDbAdapter());
-		return $repository;
-	}
-	
-
 }

@@ -4,15 +4,14 @@ namespace phamily\tests\repositories;
 use phamily\framework\models\Persona;
 use phamily\framework\repositories\PersonaRepository;
 use phamily\tests\DbTest;
+use phamily\tests\repositories\traits\PersonaRepositoryTrait;
 
 class PersonaRepositoryTest extends DbTest{
-	
+
+	use PersonaRepositoryTrait;	
+
 	private $tableName = 'persona';
 	const EXCEPTION_BASE_NS = '\\phamily\\framework\\repositories\\exceptions\\';
-	private function getRepository(){
-		$repository = new PersonaRepository($this->getDbAdapter());
-		return $repository;
-	}
 	
 	public function testSaveNewPersona(){
 		$repository = $this->getRepository();
