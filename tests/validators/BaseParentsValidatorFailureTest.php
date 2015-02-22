@@ -1,8 +1,8 @@
 <?php
-namespace phamily\tests\models\validators;
+namespace phamily\tests\validators;
 
 use phamily\framework\models\PersonaInterface;
-use phamily\framework\models\validators\BaseParentsValidator;
+use phamily\framework\validators\BaseParentsValidator;
 use phamily\tests\UnitTest;
 use phamily\tests\models\traits\PersonaStubTrait;
 

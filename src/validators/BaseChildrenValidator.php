@@ -1,5 +1,5 @@
 <?php
-namespace phamily\framework\models\validators;
+namespace phamily\framework\validators;
 
 use phamily\framework\models\PersonaInterface;
 use phamily\framework\models\collections\ChildrenCollectionInterface;

@@ -2,8 +2,8 @@
 namespace phamily\framework\models\collections;
 
 use phamily\framework\models\PersonaInterface;
-use phamily\framework\models\validators\BaseChildrenValidator;
-use phamily\framework\models\validators\ChildrenValidatorInreface;
+use phamily\framework\validators\BaseChildrenValidator;
+use phamily\framework\validators\ChildrenValidatorInreface;
 use phamily\framework\models\exceptions\LogicException;
 
 class ChildrenCollection extends AbstractPersonaCollection implements ChildrenCollectionInterface{

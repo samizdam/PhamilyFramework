@@ -1,5 +1,5 @@
 <?php
-namespace phamily\framework\models\validators;
+namespace phamily\framework\validators;
 
 interface ValidatorInterface{
 	public function getErrors();

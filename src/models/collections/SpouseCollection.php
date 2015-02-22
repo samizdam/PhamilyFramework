@@ -3,8 +3,8 @@ namespace phamily\framework\models\collections;
 
 use phamily\framework\models\PersonaInterface;
 use phamily\framework\models\exceptions\LogicException;
-use phamily\framework\models\validators\SpouseValidatorInterface;
-use phamily\framework\models\validators\BaseSpouseValidator;
+use phamily\framework\validators\SpouseValidatorInterface;
+use phamily\framework\validators\BaseSpouseValidator;
 
 class SpouseCollection extends AbstractPersonaCollection implements SpouseCollectionInterface{
 	

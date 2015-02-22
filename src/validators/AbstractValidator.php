@@ -1,5 +1,5 @@
 <?php
-namespace phamily\framework\models\validators;
+namespace phamily\framework\validators;
 
 abstract class AbstractValidator implements ValidatorInterface{
 	protected $errors = [];
