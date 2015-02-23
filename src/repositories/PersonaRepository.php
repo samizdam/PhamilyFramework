@@ -68,6 +68,9 @@ class PersonaRepository extends AbstractRepository
 		 */
 		$spouseRelationTableGateway = $this->createTableGateway('spouse_relationship');
 		foreach ($persona->getSpouses() as $spouse){
+			if($this->notSaved($spouse)){
+				$this->save($spouse);
+			}
 			list($husband, $wife) = $this->normalizeSpousePair($persona, $spouse);
 			$data = ['husbandId' => $husband->getId(), 'wifeId' => $wife->getId()];
 			$spouseRelationTableGateway->insert($data);
