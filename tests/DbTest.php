@@ -76,21 +76,59 @@ abstract class DbTest extends UnitTest{
 	
 	
 	private function cleanupDb(){
-		$platformName = $this->getDbAdapter()->getDriver()->getDatabasePlatformName();
-		if($platformName === 'Mysql'){
-			$connection = $this->getDbAdapter()->getDriver()->getConnection();
-			$result = $connection->execute("SHOW TABLES;");
-			$connection->execute("SET FOREIGN_KEY_CHECKS=0;");
-			foreach ($result as $table){
-				$tableName = $table["Tables_in_{$connection->getCurrentSchema()}"];
-				if(!in_array($tableName, $this->getTablesWithData())){
-					$connection->execute("TRUNCATE `{$tableName}`;");
-				}
+		$connection = $this->getDbAdapter()->getDriver()->getConnection();
+			
+		foreach ($this->getTables() as $tableName){
+			if(!in_array($tableName, $this->getTablesWithData())){
+				$this->truncate($tableName);
 			}
-			$connection->execute("SET FOREIGN_KEY_CHECKS=1;");
-		}else{
-			throw new \Exception("DB {$platformName} not supported in tests");
 		}
 	}	
+	
+	private function getTables(){
+		
+		$platformName = $this->getDbAdapter()->getDriver()->getDatabasePlatformName();
+		$connection = $this->getDbAdapter()->getDriver()->getConnection();
+		$schema = $connection->getCurrentSchema();
+		$tables = [];
+		
+		switch ($platformName){
+			case 'Mysql':
+			
+				$result = $connection->execute("SELECT table_name FROM information_schema.tables WHERE table_schema = '{$schema}';");
+			break;
+			case 'Postgresql':
+				$result = $connection->execute("SELECT tablename AS table_name FROM pg_catalog.pg_tables where schemaname = '{$schema}';");
+			break;
+			default: 
+				throw new \Exception("DB {$platformName} not supported in tests");
+		}
+		foreach ($result as $table){
+			$tables[] = $table['table_name'];
+		}
+		return $tables;
+	}
+	
+	protected function truncate($tableName, $forced = true){
+		$platformName = $this->getDbAdapter()->getDriver()->getDatabasePlatformName();
+		$connection = $this->getDbAdapter()->getDriver()->getConnection();
+		$schema = $connection->getCurrentSchema();
+		switch ($platformName){
+			case 'Mysql':
+				if($forced){
+					$connection->execute("SET FOREIGN_KEY_CHECKS=0;");
+				}
+				$connection->execute("TRUNCATE `{$tableName}`;");
+				if($forced){
+					$connection->execute("SET FOREIGN_KEY_CHECKS=1;");
+				}
+			break;
+			case 'Postgresql':
+				$connection->execute("TRUNCATE {$tableName} RESTART IDENTITY CASCADE;");
+			break;
+			default:
+				throw new \Exception("DB {$platformName} not supported in tests");
+		}		
+	}
 	
 }

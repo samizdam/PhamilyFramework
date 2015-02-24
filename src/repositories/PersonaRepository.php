@@ -9,6 +9,7 @@ use phamily\framework\repositories\exceptions\NotFoundException;
 use phamily\framework\traits\BitmaskTrait; 
 use Zend\Db\Sql\Where;
 use phamily\framework\repositories\conditions\SiblingsQueryCondition;
+use Zend\Db\TableGateway\Feature\SequenceFeature;
 
 class PersonaRepository extends AbstractRepository 
 		implements PersonaRepositoryInterface{
@@ -46,10 +47,26 @@ class PersonaRepository extends AbstractRepository
 		 * 
 		 * save persona
 		 */
-		$row = $this->getRowGatewayInstance();
-		$row->populate($this->extractData($persona), !$this->notSaved($persona));
-		$row->save();
-		$persona->populate($row);
+		$rowData = $this->extractData($persona);
+		
+		if($this->notSaved($persona)){
+			$ai = new SequenceFeature($this->primaryKey, 'persona_id_increment');
+			$tgw = $this->createTableGateway($this->tableName, $ai);
+			
+			$rowData['createdAt'] = date('Y-m-d H:i:s');
+			$tgw->insert($rowData);
+			$rowData = $tgw->select(['id' => $tgw->getLastInsertValue()])->current();
+		}else{
+			$row = $this->getRowGatewayInstance();
+			$row->populate($rowData, true);
+			$row->save();
+			$rowData = $row->toArray();
+		}
+		
+		$persona->populate($rowData);
+// 		$row->populate($this->extractData($persona), !$this->notSaved($persona));
+		
+		
 
 		/*
 		 * TODO extract to method?
@@ -220,11 +237,13 @@ class PersonaRepository extends AbstractRepository
 	
 	protected function extractData(PersonaInterface $persona){
 		$data = [
-			'id' => $persona->getId(),
 			'gender' => $persona->getGender(),
 			'fatherId' => $persona->hasFather() ? $persona->getFather()->getId() : null,
 			'motherId' => $persona->hasMother() ? $persona->getMother()->getId() : null,
 		];
+		if(!$this->notSaved($persona)){
+			$data['id'] = $persona->getId(); 
+		}
 		return $data;
 	}
 	

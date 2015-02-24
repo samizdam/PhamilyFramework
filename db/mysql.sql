@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `anthroponym` (
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`type`,`value`),
   UNIQUE KEY `id` (`id`),
-  CONSTRAINT `FK_anthroponym_anthroponym_type` FOREIGN KEY (`type`) REFERENCES `anthroponym_type` (`anthroponym_type`)
+  CONSTRAINT `fk_anthroponym_anthroponym_type` FOREIGN KEY (`type`) REFERENCES `anthroponym_type` (`anthroponym_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы phamily_test.anthroponym: ~0 rows (приблизительно)
@@ -62,14 +62,15 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `gender` varchar(6) DEFAULT NULL,
   `dateOfBirth` bigint(20) unsigned DEFAULT NULL,
   `dateOfDeath` bigint(20) unsigned DEFAULT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `FK_persona_gender` (`gender`),
-  KEY `FK_persona_persona` (`fatherId`),
-  KEY `FK_persona_persona_2` (`motherId`),
-  CONSTRAINT `FK_persona_gender` FOREIGN KEY (`gender`) REFERENCES `gender` (`gender`),
-  CONSTRAINT `FK_persona_persona` FOREIGN KEY (`fatherId`) REFERENCES `persona` (`id`),
-  CONSTRAINT `FK_persona_persona_2` FOREIGN KEY (`motherId`) REFERENCES `persona` (`id`)
+  KEY `fk_persona_gender` (`gender`),
+  KEY `fk_persona_father` (`fatherId`),
+  KEY `fk_persona_mother` (`motherId`),
+  CONSTRAINT `fk_persona_father` FOREIGN KEY (`fatherId`) REFERENCES `persona` (`id`),
+  CONSTRAINT `fk_persona_gender` FOREIGN KEY (`gender`) REFERENCES `gender` (`gender`),
+  CONSTRAINT `fk_persona_mother` FOREIGN KEY (`motherId`) REFERENCES `persona` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы phamily_test.persona: ~0 rows (приблизительно)
@@ -82,10 +83,10 @@ DROP TABLE IF EXISTS `persona_has_names`;
 CREATE TABLE IF NOT EXISTS `persona_has_names` (
   `personaId` int(11) unsigned NOT NULL,
   `nameId` int(11) unsigned NOT NULL,
-  KEY `FK_persona_has_names_anthroponym` (`nameId`),
-  KEY `FK_persona_has_names_persona` (`personaId`),
-  CONSTRAINT `FK_persona_has_names_anthroponym` FOREIGN KEY (`nameId`) REFERENCES `anthroponym` (`id`),
-  CONSTRAINT `FK_persona_has_names_persona` FOREIGN KEY (`personaId`) REFERENCES `persona` (`id`)
+  KEY `fk_persona_has_names_anthroponym` (`nameId`),
+  KEY `fk_persona_has_names_persona` (`personaId`),
+  CONSTRAINT `fk_persona_has_names_anthroponym` FOREIGN KEY (`nameId`) REFERENCES `anthroponym` (`id`),
+  CONSTRAINT `fk_persona_has_names_persona` FOREIGN KEY (`personaId`) REFERENCES `persona` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы phamily_test.persona_has_names: ~0 rows (приблизительно)
@@ -96,13 +97,12 @@ CREATE TABLE IF NOT EXISTS `persona_has_names` (
 -- Дамп структуры для таблица phamily_test.spouse_relationship
 DROP TABLE IF EXISTS `spouse_relationship`;
 CREATE TABLE IF NOT EXISTS `spouse_relationship` (
-  `husbandId` int(10) unsigned DEFAULT NULL,
-  `wifeId` int(10) unsigned DEFAULT NULL,
-  `relationshipType` varchar(50) DEFAULT NULL,
-  KEY `FK__persona` (`husbandId`),
-  KEY `FK__persona_2` (`wifeId`),
-  CONSTRAINT `FK__persona` FOREIGN KEY (`husbandId`) REFERENCES `persona` (`id`),
-  CONSTRAINT `FK__persona_2` FOREIGN KEY (`wifeId`) REFERENCES `persona` (`id`)
+  `husbandId` int(10) unsigned NOT NULL,
+  `wifeId` int(10) unsigned NOT NULL,
+  KEY `fk_persona_husband` (`husbandId`),
+  KEY `fk_persona_wife` (`wifeId`),
+  CONSTRAINT `fk_persona_husband` FOREIGN KEY (`husbandId`) REFERENCES `persona` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_persona_wife` FOREIGN KEY (`wifeId`) REFERENCES `persona` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы phamily_test.spouse_relationship: ~0 rows (приблизительно)

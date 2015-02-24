@@ -22,11 +22,14 @@ class AnthroponymRepository extends AbstractRepository implements AnthroponymRep
 	}
 	
 	protected function extractData(AnthroponymInterface $anthroponym){
-		return [
-			'id' => $anthroponym->getId(),
+		$data =  [
 			'type' => $anthroponym->getType(),
 			'value' => $anthroponym->getValue(),
 		];
+		if($anthroponym->getId() !== null){
+			$data['id'] = $anthroponym->getId();
+		}
+		return $data;
 	}
 	
 	protected function checkAnthroponymExists(AnthroponymInterface &$anthroponym){
