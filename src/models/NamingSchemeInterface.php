@@ -2,6 +2,7 @@
 namespace phamily\framework\models;
 
 interface NamingSchemeInterface{
+	
 	const DEFAULT_FORM = 'default';
 
 	public function setType($type);
@@ -12,5 +13,5 @@ interface NamingSchemeInterface{
 	
 	public function hasForm($formName);
 	
-	public function build(NameCollectionInterface $names, $formName);
+	public function build(NameCollectionInterface $names, $formName = self::DEFAULT_FORM);
 }

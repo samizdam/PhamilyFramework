@@ -4,11 +4,25 @@ namespace phamily\framework\models;
 class Anthroponym implements AnthroponymInterface{
 	
 	protected $id;
+	
 	protected $type;
+	
 	protected $value;
 	
+	protected $isMultiple = false;
+	
+	/**
+	 * 
+	 * @param string $type
+	 * @param string|array $value
+	 */
 	public function __construct($type, $value){
 		$this->type = $type;
+		
+		if(is_array($value)){
+			$this->isMultiple = true;
+		}
+		
 		$this->value = $value;
 	}
 	
@@ -20,6 +34,11 @@ class Anthroponym implements AnthroponymInterface{
 		return $this;
 	}
 	
+	
+	public function isMultiple(){
+		return $this->isMultiple;
+	}
+	
 	public function getId(){
 		return $this->id;
 	}
@@ -28,7 +47,7 @@ class Anthroponym implements AnthroponymInterface{
 		return $this->type;
 	}
 	
-	public function getValue(){
+	public function getValue($form = self::FORM_CANONICAL){
 		return $this->value;
 	}
 	

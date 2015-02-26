@@ -11,4 +11,12 @@ class AnthroponymTest extends UnitTest{
 		$anthroponym = new Anthroponym($type, $value);
 		$this->assertEquals($value, $anthroponym->getValue());
 	}
+	
+	public function testIsMultiple(){
+		$type = 'middleName';
+		$value = ['Philip', 'Arthur', 'George'];
+		$anthroponym = new Anthroponym($type, $value);
+		$this->assertTrue($anthroponym->isMultiple());
+	}	
+
 }

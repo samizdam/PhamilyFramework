@@ -4,10 +4,11 @@ namespace phamily\framework\models;
  * 
  *  
  * $config = [
- * 	'formName' => [
+ * 	'schemeForm' => [
  * 		'anthroponymTypeName' => [
  * 			'require' => boolean,
  * 			'multiple' => boolean,
+ * 			'form' => string, (by default FORM_CANONICAL)
  * 			'formula' => callable
  * 		]
  * 	]	
@@ -59,12 +60,22 @@ class NamingScheme implements NamingSchemeInterface{
 	protected $type;
 	
 	public function __construct($type, array $config){
-		$this->setConfig($config);
 		$this->setType($type);
+		$this->setConfig($config);
 	}
 	
 	public function setConfig(array $config){
-		$this->config = $config;
+		$this->config = $this->normalizeConfig($config);
+	}
+	
+	protected function normalizeConfig($config){
+		$validConfig = [];
+		if(count($config) === 1 && !array_key_exists(self::DEFAULT_FORM, $config)){
+			$validConfig[self::DEFAULT_FORM] = $config;
+		} else {
+			$validConfig = $config;
+		}
+		return $validConfig;
 	}
 	
 	public function setType($type){

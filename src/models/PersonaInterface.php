@@ -8,7 +8,14 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	
 	public function getId();
 	
+	public function setGender($gender);
+	public function getGender();
+	
 	public function setName($type, $value);
+	public function getName($type);
+	
+	public function getNames();
+	public function getFullName(NamingSchemeInterface $scheme, $form = NamingSchemeInterface::DEFAULT_FORM);
 	
 	public function setDateOfBirth(DateTimeInterface $date);
 	public function setDateOfDeath(DateTimeInterface $date);
@@ -18,14 +25,6 @@ interface PersonaInterface extends ModelInterface, GenderAwareInterface{
 	
 	public function getDateOfBirth($format = null);
 	public function getDateOfDeath($format = null);
-	
-	public function setGender($gender);
-	public function getGender();
-	
-	public function getNames();
-	
-	public function getName($type);
-	public function getFullName(NamingSchemeInterface $scheme, $formName);
 	
 	public function setFather(PersonaInterface $father);
 	public function setMother(PersonaInterface $mother);

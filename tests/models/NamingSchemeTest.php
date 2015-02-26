@@ -16,10 +16,10 @@ class NamingSchemeTest extends UnitTest{
 		$this->assertEquals($config, $scheme->getConfig());
 	}
 	
-// 	public function testConstructWithSingleDefaultForm(){
-// 		$scheme = new NamingScheme('fio', ['formula' => function(){}]);
-// 		$this->assertTrue($scheme->hasForm('default'));
-// 	}
+	public function testConstructWithSingleDefaultForm(){
+		$scheme = new NamingScheme('fio', ['formula' => function(){}]);
+		$this->assertTrue($scheme->hasForm('default'));
+	}
 	
 	public function testSchemeHasDefaultForm(){
 		$scheme = new NamingScheme('fio', $this->getSchemeConfigSample());
