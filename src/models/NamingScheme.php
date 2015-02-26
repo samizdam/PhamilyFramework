@@ -1,5 +1,6 @@
 <?php
 namespace phamily\framework\models;
+use phamily\framework\collections\NameCollectionInterface;
 /**
  * 
  *  

@@ -11,6 +11,8 @@ use phamily\framework\validators\BaseParentsValidator;
 use phamily\framework\validators\ParentsValidatorInterface;
 use phamily\framework\validators\ValidatorInterface;
 use phamily\framework\value_objects\DateTimeInterface;
+use phamily\framework\collections\NameCollection;
+use phamily\framework\collections\NameCollectionInterface;
 
 class Persona implements PersonaInterface{
 
@@ -82,6 +84,7 @@ class Persona implements PersonaInterface{
 		$this->setMother($mother);
 		
 		$this->names = new NameCollection();
+		
 		foreach ($names as $type => $value){
 			$this->names->add(new Anthroponym($type, $value));
 		}

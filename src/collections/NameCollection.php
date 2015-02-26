@@ -1,5 +1,7 @@
 <?php
-namespace phamily\framework\models;
+namespace phamily\framework\collections;
+
+use phamily\framework\models\AnthroponymInterface;
 
 class NameCollection extends \ArrayObject implements NameCollectionInterface{
 	

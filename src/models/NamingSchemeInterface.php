@@ -1,6 +1,8 @@
 <?php
 namespace phamily\framework\models;
 
+use phamily\framework\collections\NameCollectionInterface;
+
 interface NamingSchemeInterface{
 	
 	const DEFAULT_FORM = 'default';
