@@ -15,8 +15,8 @@ abstract class AbstractRepository implements RepositoryInterface{
 		return new RowGateway($this->primaryKey, $this->tableName, $this->adapter);
 	}
 	
-	protected function createTableGateway($tableName){
-		return new TableGateway($tableName, $this->adapter);
+	protected function createTableGateway($tableName, $f = []){
+		return new TableGateway($tableName, $this->adapter, $f);
 	}
 
 	protected function factory($repositoryType = __CLASS__){
