@@ -16,8 +16,10 @@
 
 ## 0.0.2 - 2015-10-XX
 ### Added
-
+- FakeTrueValidator (SpounseValidatorInterface support only in this version). 
+  
 ### Changed
+- psr-2 autoformat. 
 
 ## 0.0.1 - 2015-10-02
 ### Added

@@ -1,4 +1,6 @@
 <?php
 namespace phamily\framework\collections;
 
-interface SpouseCollectionInterface extends PersonaCollectionInterface{}
+interface SpouseCollectionInterface extends PersonaCollectionInterface
+{
+}
