@@ -14,6 +14,11 @@
 ### Changed
 - Namespaces for tests. 
 
+## 0.0.2 - 2015-10-XX
+### Added
+
+### Changed
+
 ## 0.0.1 - 2015-10-02
 ### Added
 - Current change log. 
