@@ -14,7 +14,7 @@
 ### Changed
 - Namespaces for tests. 
 
-## 0.0.2 - 2015-10-XX
+## 0.0.2 - 2015-10-03
 ### Added
 - FakeTrueValidator (SpounseValidatorInterface support only in this version). 
   
