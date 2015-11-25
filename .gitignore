@@ -8,7 +8,8 @@
 # vendors
 vendor/*
 
+# local configs
 config.php
 tests/config.php
-tests/phpunit.xml
+phpunit.xml
 tests/_coverage/*
