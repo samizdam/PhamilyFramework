@@ -1,6 +1,14 @@
+
+# IDE
+.buildpath
+.project
+.settings/
+
+
+# vendors
 vendor/*
+
 config.php
 tests/config.php
-tests/phpunit.phar
 tests/phpunit.xml
 tests/_coverage/*
