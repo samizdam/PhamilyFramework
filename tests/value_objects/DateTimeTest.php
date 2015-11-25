@@ -1,7 +1,6 @@
 <?php
-namespace phamily\tests\value_objects;
+namespace phamily\framework\value_objects;
 
-use phamily\framework\value_objects\DateTime;
 use phamily\tests\UnitTest;
 
 class DateTimeTest extends UnitTest

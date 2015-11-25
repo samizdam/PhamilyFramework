@@ -1,9 +1,8 @@
 <?php
-namespace phamily\tests\validators;
+namespace phamily\framework\validators;
 
 use phamily\tests\UnitTest;
-use phamily\tests\models\traits\PersonaStubTrait;
-use phamily\framework\validators\BaseChildrenValidator;
+use phamily\framework\models\traits\PersonaStubTrait;
 use phamily\framework\collections\ChildrenCollection;
 
 class BaseChildrenValidatorFailTest extends UnitTest

@@ -1,5 +1,5 @@
 <?php
-namespace phamily\tests\repositories;
+namespace phamily\framework\repositories;
 
 use phamily\tests\DbTest;
 use phamily\tests\traits\FullFamilyFixtureTrait;

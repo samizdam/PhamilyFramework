@@ -1,10 +1,9 @@
 <?php
-namespace phamily\tests\validators;
+namespace phamily\framework\validators;
 
 use phamily\framework\models\PersonaInterface;
-use phamily\framework\validators\BaseParentsValidator;
 use phamily\tests\UnitTest;
-use phamily\tests\models\traits\PersonaStubTrait;
+use phamily\framework\models\traits\PersonaStubTrait;
 
 class BaseParentsValidatorSuccessTest extends UnitTest
 {

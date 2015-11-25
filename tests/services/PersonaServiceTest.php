@@ -1,7 +1,6 @@
 <?php
-namespace phamily\tests\services;
+namespace phamily\framework\services;
 
-use phamily\framework\services\PersonaService;
 use phamily\tests\UnitTest;
 
 class PersonaServiceTest extends UnitTest

@@ -1,9 +1,7 @@
 <?php
-namespace phamily\tests\services;
+namespace phamily\framework\services;
 
-use phamily\framework\services\PersonaService;
 use phamily\tests\DbTest;
-use phamily\framework\repositories\PersonaRepository;
 use phamily\tests\services\traits\CreateServiceTrait;
 use phamily\tests\traits\FullFamilyFixtureTrait;
 

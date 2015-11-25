@@ -1,8 +1,6 @@
 <?php
-namespace phamily\tests\repositories;
+namespace phamily\framework\repositories;
 
-use phamily\framework\models\Persona;
-use phamily\framework\repositories\PersonaRepository;
 use phamily\tests\traits\FullFamilyFixtureTrait;
 use phamily\tests\DbTest;
 use phamily\tests\repositories\traits\PersonaRepositoryTrait;

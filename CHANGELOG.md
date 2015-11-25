@@ -15,7 +15,7 @@
 - Namespaces for tests. 
 - Run tests from project root. 
 
-## 0.0.3 - 2015-10-XX
+## 0.0.3 - 2015-11-XX
 
 
 ## 0.0.2 - 2015-10-03

@@ -1,16 +1,14 @@
 <?php
-namespace phamily\tests\collections;
+namespace phamily\framework\collections;
 
 use phamily\tests\UnitTest;
-use phamily\tests\models\traits\PersonaStubTrait;
-use phamily\framework\collections\ChildrenCollection;
+use phamily\framework\models\traits\PersonaStubTrait;
+use phamily\framework\models\exceptions;
 
 class ChildrenCollectionTest extends UnitTest
 {
     
     use PersonaStubTrait;
-
-    const EXCEPTION_BASE_NS = '\\phamily\\framework\\models\\exceptions\\';
 
     public function testPutToCollection()
     {
@@ -34,7 +32,7 @@ class ChildrenCollectionTest extends UnitTest
         $childA = $this->createPersonaStub();
         
         $collection->add($childA);
-        $this->setExpectedException(self::EXCEPTION_BASE_NS . 'LogicException');
+        $this->setExpectedException(exceptions\LogicException::class);
         $collection->add($childA);
     }
 
@@ -65,7 +63,7 @@ class ChildrenCollectionTest extends UnitTest
         $child = $this->createPersonaStub();
         $collection->add($child);
         
-        $this->setExpectedException(self::EXCEPTION_BASE_NS . 'OutOfBoundsException');
+        $this->setExpectedException(exceptions\OutOfBoundsException::class);
         $collection->seek(5);
     }
 
@@ -74,7 +72,7 @@ class ChildrenCollectionTest extends UnitTest
         $parent = $this->createPersonaStub(ChildrenCollection::GENDER_MALE);
         $collection = new ChildrenCollection($parent);
         
-        $this->setExpectedException(self::EXCEPTION_BASE_NS . 'LogicException');
+        $this->setExpectedException(exceptions\LogicException::class);
         $collection->add($parent);
     }
 }

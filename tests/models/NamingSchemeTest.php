@@ -1,8 +1,6 @@
 <?php
-namespace phamily\tests\models;
+namespace phamily\framework\models;
 
-use phamily\framework\models\NamingScheme;
-use phamily\framework\models\NameCollectionInterface;
 use phamily\tests\UnitTest;
 
 class NamingSchemeTest extends UnitTest
@@ -43,7 +41,6 @@ class NamingSchemeTest extends UnitTest
                     return join(' ', $names);
                 }
             ]
-        ]
-        ;
+        ];
     }
 }

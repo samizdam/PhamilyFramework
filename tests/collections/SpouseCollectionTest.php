@@ -1,10 +1,8 @@
 <?php
-namespace phamily\tests\collections;
+namespace phamily\framework\collections;
 
 use phamily\tests\UnitTest;
-use phamily\tests\models\traits\PersonaStubTrait;
-use phamily\framework\collections\SpouseCollection;
-use phamily\framework\collections\AbstractPersonaCollection;
+use phamily\framework\models\traits\PersonaStubTrait;
 use phamily\framework\models\exceptions\LogicException;
 use phamily\framework\validators\FakeTrueValidator;
 

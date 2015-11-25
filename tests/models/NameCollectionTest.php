@@ -1,7 +1,6 @@
 <?php
-namespace phamily\tests\models;
+namespace phamily\framework\models;
 
-use phamily\framework\models\NameCollection;
 use phamily\tests\UnitTest;
 
 class NameCollectionTest extends UnitTest

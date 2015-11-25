@@ -16,7 +16,7 @@
     ],
     "minimum-stability": "dev",
     "autoload": {
-    	"psr-4": { "phamily\\framework\\" : "src/" }
+    	"psr-4": { "phamily\\framework\\" : ["src/", "tests/"] }
     },
     "autoload-dev": {
     	"psr-4": { "phamily\\tests\\" : "tests/" }

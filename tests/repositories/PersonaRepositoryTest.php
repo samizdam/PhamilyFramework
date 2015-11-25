@@ -1,8 +1,7 @@
 <?php
-namespace phamily\tests\repositories;
+namespace phamily\framework\repositories;
 
 use phamily\framework\models\Persona;
-use phamily\framework\repositories\PersonaRepository;
 use phamily\tests\DbTest;
 use phamily\tests\repositories\traits\PersonaRepositoryTrait;
 
@@ -91,9 +90,9 @@ class PersonaRepositoryTest extends DbTest
         ]);
         $this->assertTableHasData('persona_has_names', [
             'personaId' => $persona->getId()
-        ]
+        ])
         // 'nameId' => $persona->getName('surname')->getId()
-        );
+        ;
     }
 
     public function testSavePersonaWithParents()

@@ -1,8 +1,6 @@
 <?php
-namespace phamily\tests\models;
+namespace phamily\framework\models;
 
-use phamily\framework\models\Persona;
-use phamily\framework\models\NamingScheme;
 use phamily\framework\value_objects\DateTime;
 use phamily\tests\UnitTest;
 
