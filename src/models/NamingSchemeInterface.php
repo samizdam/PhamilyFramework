@@ -1,9 +1,9 @@
 <?php
+
 namespace phamily\framework\models;
 
 interface NamingSchemeInterface
 {
-
     const DEFAULT_FORM = 'default';
 
     public function setType($type);

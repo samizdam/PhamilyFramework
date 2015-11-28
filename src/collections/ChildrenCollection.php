@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\collections;
 
 use phamily\framework\models\PersonaInterface;
@@ -8,7 +9,6 @@ use phamily\framework\models\exceptions\LogicException;
 
 class ChildrenCollection extends AbstractPersonaCollection implements ChildrenCollectionInterface
 {
-
     protected $validator;
 
     /*
@@ -29,6 +29,7 @@ class ChildrenCollection extends AbstractPersonaCollection implements ChildrenCo
         if (empty($this->validator)) {
             $this->validator = new BaseChildrenValidator();
         }
+
         return $this->validator;
     }
 
@@ -37,7 +38,7 @@ class ChildrenCollection extends AbstractPersonaCollection implements ChildrenCo
         if ($this->getValidator()->isValidChild($this, $child)) {
             return true;
         } else {
-            throw new LogicException(join("\n", $this->getValidator()->getErrors()));
+            throw new LogicException(implode("\n", $this->getValidator()->getErrors()));
         }
     }
 }

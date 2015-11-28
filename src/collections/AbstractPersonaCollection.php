@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\collections;
 
 use phamily\framework\models\PersonaInterface;
@@ -6,7 +7,6 @@ use phamily\framework\models\exceptions\OutOfBoundsException;
 
 abstract class AbstractPersonaCollection implements PersonaCollectionInterface
 {
-
     protected $persona;
 
     public function __construct(PersonaInterface $persona)
@@ -61,7 +61,7 @@ abstract class AbstractPersonaCollection implements PersonaCollectionInterface
 
     public function next()
     {
-        ++ $this->position;
+        ++$this->position;
     }
 
     public function key()

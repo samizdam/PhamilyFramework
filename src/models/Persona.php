@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\models;
 
 use phamily\framework\collections\ChildrenCollectionInterface;
@@ -14,55 +15,46 @@ use phamily\framework\value_objects\DateTimeInterface;
 
 class Persona implements PersonaInterface
 {
-
     protected $id;
 
     protected $gender;
 
     /**
-     *
      * @var NameCollectionInterface
      */
     protected $names;
 
     /**
-     *
      * @var PersonaInterface
      */
     protected $father;
 
     /**
-     *
      * @var PersonaInterface
      */
     protected $mother;
 
     /**
-     *
      * @var ChildrenCollectionInterface|PersonaInterface[]
      */
     protected $children;
 
     /**
-     *
      * @var SpouseCollectionInterface|PersonaInterface[]
      */
     protected $spouses;
 
     /**
-     *
      * @var DateTimeInterface
      */
     protected $dateOfBirth;
 
     /**
-     *
      * @var DateTimeInterface
      */
     protected $dateOfDeath;
 
     /**
-     *
      * @var ParentsValidatorInterface
      */
     protected $parentsValidator;
@@ -74,15 +66,15 @@ class Persona implements PersonaInterface
          * becose validators must be configure and set before persona setters will be use.
          */
         $this->parentsValidator = new BaseParentsValidator();
-        
+
         $this->children = new ChildrenCollection($this);
         $this->spouses = new SpouseCollection($this);
-        
+
         $this->setGender($gender);
-        
+
         $this->setFather($father);
         $this->setMother($mother);
-        
+
         $this->names = new NameCollection();
         foreach ($names as $type => $value) {
             $this->names->add(new Anthroponym($type, $value));
@@ -92,9 +84,10 @@ class Persona implements PersonaInterface
     public function populate($data)
     {
         $data = (object) $data;
-        
+
         $this->setGender($data->gender);
         $this->id = $data->id;
+
         return $this;
     }
 
@@ -105,11 +98,11 @@ class Persona implements PersonaInterface
 
     public function setName($type, $value)
     {
-        throw new \Exception("not implement now");
+        throw new \Exception('not implement now');
     }
 
     /**
-     * TODO valide with father / mother / child's DoB's
+     * TODO valide with father / mother / child's DoB's.
      */
     public function setDateOfBirth(DateTimeInterface $date)
     {
@@ -148,6 +141,7 @@ class Persona implements PersonaInterface
                 throw new LogicException("date of birth not set for this persona, and can't be formated");
             }
         }
+
         return $this->dateOfBirth;
     }
 
@@ -160,18 +154,19 @@ class Persona implements PersonaInterface
                 throw new LogicException("date of death not set for this persona, and can't be formated");
             }
         }
+
         return $this->dateOfDeath;
     }
 
     public function setGender($gender)
     {
         if (isset($this->gender) && $this->gender !== $gender) {
-            throw new LogicException("Gender already set");
+            throw new LogicException('Gender already set');
         } elseif ($gender !== self::GENDER_MALE && $gender !== self::GENDER_FEMALE && $gender !== self::GENDER_UNDEFINED) {
             /*
              * TODO may be use UnexpectedValueException for invalid gender?
              */
-            throw new InvalidArgumentException("Invalid gender value: {$gender}, possible values: " . self::MALE . ", " . self::FEMALE . " or NULL if undefined");
+            throw new InvalidArgumentException("Invalid gender value: {$gender}, possible values: ".self::MALE.', '.self::FEMALE.' or NULL if undefined');
         }
         $this->gender = $gender;
     }
@@ -201,7 +196,7 @@ class Persona implements PersonaInterface
         if ($father instanceof PersonaInterface) {
             if ($this->parentsValidator->isValidFather($this, $father)) {
                 $this->father = $father;
-                if (! $this->father->getChildren()->contains($this)) {
+                if (!$this->father->getChildren()->contains($this)) {
                     $this->father->addChild($this);
                 }
             } else {
@@ -215,7 +210,7 @@ class Persona implements PersonaInterface
         if ($mother instanceof PersonaInterface) {
             if ($this->parentsValidator->isValidMother($this, $mother)) {
                 $this->mother = $mother;
-                if (! $this->mother->getChildren()->contains($this)) {
+                if (!$this->mother->getChildren()->contains($this)) {
                     $this->mother->addChild($this);
                 }
             } else {
@@ -247,7 +242,7 @@ class Persona implements PersonaInterface
     public function addChild(PersonaInterface $child)
     {
         $this->children->add($child);
-        
+
         // service parents
         switch ($this->gender) {
             case self::GENDER_MALE:
@@ -264,7 +259,6 @@ class Persona implements PersonaInterface
     }
 
     /**
-     *
      * @return ChildrenCollectionInterface|PersonaInterface[]
      */
     public function getChildren()
@@ -275,15 +269,16 @@ class Persona implements PersonaInterface
     public function addSpouse(PersonaInterface $spouse)
     {
         $this->spouses->add($spouse);
-        if (! $spouse->getSpouses()->contains($this)) {
+        if (!$spouse->getSpouses()->contains($this)) {
             $spouse->addSpouse($this);
         }
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPdoc).
      * 
      * @see \phamily\framework\models\PersonaInterface::getSpouses()
+     *
      * @return SpouseCollectionInterface
      */
     public function getSpouses()
@@ -293,7 +288,7 @@ class Persona implements PersonaInterface
 
     protected function throwValidationErrors(ValidatorInterface $validator)
     {
-        $message = join("; ", $validator->getErrors());
+        $message = implode('; ', $validator->getErrors());
         throw new LogicException($message);
     }
 }

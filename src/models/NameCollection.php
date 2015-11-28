@@ -1,9 +1,9 @@
 <?php
+
 namespace phamily\framework\models;
 
 class NameCollection extends \ArrayObject implements NameCollectionInterface
 {
-
     public function __construct(array $namesArray = [])
     {
         foreach ($namesArray as $name) {

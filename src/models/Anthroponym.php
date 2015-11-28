@@ -1,9 +1,9 @@
 <?php
+
 namespace phamily\framework\models;
 
 class Anthroponym implements AnthroponymInterface
 {
-
     protected $id;
 
     protected $type;
@@ -22,6 +22,7 @@ class Anthroponym implements AnthroponymInterface
         $this->id = $data->id;
         $this->type = $data->type;
         $this->value = $data->value;
+
         return $this;
     }
 

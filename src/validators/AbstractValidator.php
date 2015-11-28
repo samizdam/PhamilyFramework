@@ -1,9 +1,9 @@
 <?php
+
 namespace phamily\framework\validators;
 
 abstract class AbstractValidator implements ValidatorInterface
 {
-
     protected $errors = [];
 
     public function getErrors()
@@ -14,6 +14,7 @@ abstract class AbstractValidator implements ValidatorInterface
     protected function getResult($errors)
     {
         $this->errors = $errors;
+
         return (count($this->errors) === 0);
     }
 

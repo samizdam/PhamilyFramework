@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\repositories;
 
 use Zend\Db\RowGateway\RowGateway;
@@ -6,7 +7,6 @@ use Zend\Db\TableGateway\TableGateway;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
-
     protected $adapter;
 
     public function __construct($adapter)

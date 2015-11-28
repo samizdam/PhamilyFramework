@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\services\proxies;
 
 use phamily\tests\DbTest;
@@ -6,11 +7,9 @@ use phamily\tests\services\traits\CreateServiceTrait;
 use phamily\framework\repositories\PersonaRepository;
 
 /**
- *
  * @author samizdam
- *        
  */
-class PersonaRepositoryProxyTest extends DbTest
+class PersonRepositoryProxyTest extends DbTest
 {
     use CreateServiceTrait;
 

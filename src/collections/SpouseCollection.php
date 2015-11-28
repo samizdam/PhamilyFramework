@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\collections;
 
 use phamily\framework\models\PersonaInterface;
@@ -8,7 +9,6 @@ use phamily\framework\validators\BaseSpouseValidator;
 
 class SpouseCollection extends AbstractPersonaCollection implements SpouseCollectionInterface
 {
-
     protected $validator;
 
     public function getOwner()
@@ -26,6 +26,7 @@ class SpouseCollection extends AbstractPersonaCollection implements SpouseCollec
         if (empty($this->validator)) {
             $this->validator = new BaseSpouseValidator();
         }
+
         return $this->validator;
     }
 
@@ -34,7 +35,7 @@ class SpouseCollection extends AbstractPersonaCollection implements SpouseCollec
         if ($this->getValidator()->isValidSpouse($this->getOwner(), $spouse)) {
             return true;
         } else {
-            throw new LogicException(join("\n", $this->getValidator()->getErrors()));
+            throw new LogicException(implode("\n", $this->getValidator()->getErrors()));
         }
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\models;
 
 use phamily\framework\GenderAwareInterface;
@@ -6,7 +7,6 @@ use phamily\framework\value_objects\DateTimeInterface;
 
 interface PersonaInterface extends ModelInterface, GenderAwareInterface
 {
-
     public function getId();
 
     public function setName($type, $value);

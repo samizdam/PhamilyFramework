@@ -1,17 +1,15 @@
 <?php
+
 namespace phamily\framework\validators;
 
 use phamily\tests\UnitTest;
 use phamily\framework\models\traits\PersonaStubTrait;
 
 /**
- *
  * @author samizdam
- *        
  */
 class BaseSpouseValidatorFailTest extends UnitTest
 {
-    
     use PersonaStubTrait;
 
     public function testWithGender()
@@ -19,7 +17,7 @@ class BaseSpouseValidatorFailTest extends UnitTest
         $validator = new BaseSpouseValidator();
         $persona = $this->createPersonaStub($validator::GENDER_FEMALE);
         $spouse = $this->createPersonaStub($validator::GENDER_FEMALE);
-        
+
         $this->assertFalse($validator->isValidSpouse($persona, $spouse));
         $this->assertCount(1, $validator->getErrors());
     }
@@ -29,7 +27,7 @@ class BaseSpouseValidatorFailTest extends UnitTest
         $validator = new BaseSpouseValidator();
         $persona = $this->createPersonaStub($validator::GENDER_FEMALE);
         $spouse = $this->createPersonaStub();
-        
+
         $this->assertFalse($validator->isValidSpouse($persona, $spouse));
         $this->assertCount(1, $validator->getErrors());
     }
@@ -39,7 +37,7 @@ class BaseSpouseValidatorFailTest extends UnitTest
         $validator = new BaseSpouseValidator();
         $persona = $this->createPersonaStub($validator::GENDER_FEMALE);
         $spouse = $persona;
-        
+
         $this->assertFalse($validator->isValidSpouse($persona, $spouse));
         $this->assertCount(2, $validator->getErrors());
     }
@@ -49,10 +47,10 @@ class BaseSpouseValidatorFailTest extends UnitTest
         $validator = new BaseSpouseValidator();
         $persona = $this->createPersonaStub($validator::GENDER_FEMALE, 2010, 2050);
         $spouse = $this->createPersonaStub($validator::GENDER_MALE, 1900, 1950);
-        
+
         $this->assertFalse($validator->isValidSpouse($persona, $spouse));
         $this->assertCount(1, $validator->getErrors());
-        
+
         $this->assertFalse($validator->isValidSpouse($spouse, $persona));
         $this->assertCount(1, $validator->getErrors());
     }
@@ -62,10 +60,10 @@ class BaseSpouseValidatorFailTest extends UnitTest
         $validator = new BaseSpouseValidator();
         $persona = $this->createPersonaStub();
         $spouse = $persona;
-        
+
         $validator->isValidSpouse($persona, $spouse);
         $this->assertGreaterThanOrEqual(1, $validator->getErrors());
-        
+
         $validator->reset();
         $this->assertCount(0, $validator->getErrors());
     }

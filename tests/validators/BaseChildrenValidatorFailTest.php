@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\validators;
 
 use phamily\tests\UnitTest;
@@ -6,13 +7,10 @@ use phamily\framework\models\traits\PersonaStubTrait;
 use phamily\framework\collections\ChildrenCollection;
 
 /**
- *
  * @author samizdam
- *        
  */
 class BaseChildrenValidatorFailTest extends UnitTest
 {
-    
     use PersonaStubTrait;
 
     public function testGenderlessParent()
@@ -21,7 +19,7 @@ class BaseChildrenValidatorFailTest extends UnitTest
         $parent = $this->createPersonaStub();
         $collection = new ChildrenCollection($parent);
         $child = $this->createPersonaStub();
-        
+
         $this->assertFalse($validator->isValidChild($collection, $child));
     }
 
@@ -30,7 +28,7 @@ class BaseChildrenValidatorFailTest extends UnitTest
         $validator = new BaseChildrenValidator();
         $parent = $this->createPersonaStub();
         $collection = new ChildrenCollection($parent);
-        
+
         $this->assertFalse($validator->isValidChild($collection, $parent));
     }
 
@@ -41,7 +39,7 @@ class BaseChildrenValidatorFailTest extends UnitTest
         $collection = new ChildrenCollection($parent);
         $child = $this->createPersonaStub();
         $collection->add($child);
-        
+
         $this->assertFalse($validator->isValidChild($collection, $child));
     }
 }

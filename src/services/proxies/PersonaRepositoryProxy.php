@@ -1,4 +1,5 @@
 <?php
+
 namespace phamily\framework\services\proxies;
 
 use phamily\framework\repositories\PersonaRepositoryInterface;
@@ -6,7 +7,6 @@ use phamily\framework\models\PersonaInterface;
 
 class PersonaRepositoryProxy implements PersonaRepositoryInterface
 {
-
     protected $repository;
 
     protected $active = false;

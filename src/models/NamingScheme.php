@@ -1,9 +1,8 @@
 <?php
+
 namespace phamily\framework\models;
 
 /**
- *
- *
  * $config = [
  * 'formName' => [
  * 'anthroponymTypeName' => [
@@ -50,13 +49,10 @@ namespace phamily\framework\models;
  *         
  *          for Petr, son of Ivan Ivanov, we get result: Ivanov Petr Ivanovich.
  *         
- *         
  * @author samizdam
- *        
  */
 class NamingScheme implements NamingSchemeInterface
 {
-
     protected $config;
 
     protected $type;
@@ -98,8 +94,9 @@ class NamingScheme implements NamingSchemeInterface
         $schemeOrder = array_keys($formConfig);
         $result = '';
         foreach ($formConfig as $anthroponymType => $rules) {
-            $result .= $names->offsetGet($anthroponymType) . ' ';
+            $result .= $names->offsetGet($anthroponymType).' ';
         }
+
         return trim($result);
     }
 }
