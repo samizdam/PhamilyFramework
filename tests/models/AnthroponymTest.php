@@ -1,11 +1,14 @@
 <?php
+
 namespace phamily\framework\models;
 
 use phamily\tests\UnitTest;
 
+/**
+ * @author samizdam
+ */
 class AnthroponymTest extends UnitTest
 {
-
     public function testAnthroponymCreating()
     {
         $type = 'simpleName';

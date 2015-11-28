@@ -1,12 +1,15 @@
 <?php
+
 namespace phamily\framework\repositories;
 
 use phamily\framework\models\Anthroponym;
 use phamily\tests\DbTest;
 
+/**
+ * @author samizdam
+ */
 class AnthroponymRepositoryTest extends DbTest
 {
-
     private $tableName = 'anthroponym';
 
     public function testSaveNewAnthroponym()
@@ -15,16 +18,16 @@ class AnthroponymRepositoryTest extends DbTest
         $value = 'Vasya';
         $data = [
             'type' => $type,
-            'value' => $value
+            'value' => $value,
         ];
-        
+
         $this->assertTableHasNotData($this->tableName, $data);
-        
+
         $anthroponym = new Anthroponym($type, $value);
         $repository = $this->getRepository();
-        
+
         $repository->save($anthroponym);
-        
+
         $this->assertTableHasData($this->tableName, $data);
     }
 
@@ -41,11 +44,11 @@ class AnthroponymRepositoryTest extends DbTest
     {
         $fixtures = $this->prepareFixtures();
         $this->assertTableHasData($this->tableName, $fixtures[0]);
-        
+
         $repository = $this->getRepository();
         $anthroponym = new Anthroponym($fixtures[0]['type'], $fixtures[0]['value']);
         $repository->delete($anthroponym);
-        
+
         $this->assertTableHasNotData($this->tableName, $fixtures[0]);
     }
 
@@ -62,16 +65,16 @@ class AnthroponymRepositoryTest extends DbTest
         $fixtures = [
             [
                 'type' => 'firstName',
-                'value' => 'Vasia'
-            ]
+                'value' => 'Vasia',
+            ],
         ];
         foreach ($fixtures as $rowData) {
             $this->insertRowInTable([
-                'anthroponym_type' => $rowData['type']
+                'anthroponym_type' => $rowData['type'],
             ], 'anthroponym_type');
             $this->insertRowInTable($rowData, $this->tableName);
         }
-        
+
         return $fixtures;
     }
 

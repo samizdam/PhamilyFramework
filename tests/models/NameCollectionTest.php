@@ -1,17 +1,20 @@
 <?php
+
 namespace phamily\framework\models;
 
 use phamily\tests\UnitTest;
 
+/**
+ * @author samizdam
+ */
 class NameCollectionTest extends UnitTest
 {
-
     public function testAddNameToCollection()
     {
         $nameMock = $this->getAnthroponymMock();
-        
+
         $collection = new NameCollection();
-        
+
         $collection->add($nameMock);
         $this->assertContains($nameMock, $collection);
     }
@@ -20,11 +23,11 @@ class NameCollectionTest extends UnitTest
     {
         $nameMock = $this->getAnthroponymMock();
         $nameMock->method('getType')->willReturn('firstName');
-        
+
         $collection = new NameCollection([
-            $nameMock
+            $nameMock,
         ]);
-        
+
         $this->assertContains($nameMock, $collection);
         $collection->remove($nameMock);
         $this->assertNotContains($nameMock, $collection);

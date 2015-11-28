@@ -3,6 +3,11 @@ namespace phamily\tests\traits;
 
 use phamily\framework\GenderAwareInterface;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 trait FullFamilyFixtureTrait
 {
 
@@ -33,7 +38,7 @@ trait FullFamilyFixtureTrait
      * $mother|
      * \
      * |==============> $sonHalfSisterOnMotherSide
-     * 
+     *
      * @return array
      */
     protected function createFullFamilyFixtures()

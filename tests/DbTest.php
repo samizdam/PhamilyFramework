@@ -1,13 +1,16 @@
 <?php
+
 namespace phamily\tests;
 
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter;
 
+/**
+ * @author samizdam
+ */
 abstract class DbTest extends UnitTest
 {
-
     protected static $dbAdapter;
 
     public static function setConfig(array $config)
@@ -22,44 +25,44 @@ abstract class DbTest extends UnitTest
     }
 
     /**
-     * TODO move to configuration
-     * 
+     * TODO move to configuration.
+     *
      * @return multitype:string
      */
     protected function getTablesWithData()
     {
         return [
-            'gender'
+            'gender',
         ];
     }
 
     /*
      * asserts
      */
-    
+
     /**
-     *
-     * @param string $tableName            
-     * @param array $rowData            
-     * @param string $message            
+     * @param string $tableName
+     * @param array  $rowData
+     * @param string $message
      */
-    static public function assertTableHasData($tableName, $rowData = [], $message = '')
+    public static function assertTableHasData($tableName, $rowData = [], $message = '')
     {
         $tableGateway = self::getTableGateway($tableName);
         $resultSet = $tableGateway->select($rowData);
+
         return self::assertGreaterThan(0, $resultSet->count(), $message);
     }
 
     /**
-     *
-     * @param string $tableName            
-     * @param array $rowData            
-     * @param string $message            
+     * @param string $tableName
+     * @param array  $rowData
+     * @param string $message
      */
-    static public function assertTableHasNotData($tableName, $rowData = [], $message = '')
+    public static function assertTableHasNotData($tableName, $rowData = [], $message = '')
     {
         $tableGateway = self::getTableGateway($tableName);
         $resultSet = $tableGateway->select($rowData);
+
         return self::assertEquals(0, $resultSet->count(), $message);
     }
 
@@ -72,15 +75,14 @@ abstract class DbTest extends UnitTest
     }
 
     /**
-     *
      * @return AdapterInterface
      */
-    static public function getDbAdapter()
+    public static function getDbAdapter()
     {
         return self::$dbAdapter;
     }
 
-    static protected function getTableGateway($tableName)
+    protected static function getTableGateway($tableName)
     {
         return new TableGateway($tableName, self::getDbAdapter());
     }
@@ -90,9 +92,9 @@ abstract class DbTest extends UnitTest
         $connection = $this->getDbAdapter()
             ->getDriver()
             ->getConnection();
-        
+
         foreach ($this->getTables() as $tableName) {
-            if (! in_array($tableName, $this->getTablesWithData())) {
+            if (!in_array($tableName, $this->getTablesWithData())) {
                 $this->truncate($tableName);
             }
         }
@@ -108,10 +110,10 @@ abstract class DbTest extends UnitTest
             ->getConnection();
         $schema = $connection->getCurrentSchema();
         $tables = [];
-        
+
         switch ($platformName) {
             case 'Mysql':
-                
+
                 $result = $connection->execute("SELECT table_name FROM information_schema.tables WHERE table_schema = '{$schema}';");
                 break;
             case 'Postgresql':
@@ -123,6 +125,7 @@ abstract class DbTest extends UnitTest
         foreach ($result as $table) {
             $tables[] = $table['table_name'];
         }
+
         return $tables;
     }
 
@@ -138,11 +141,11 @@ abstract class DbTest extends UnitTest
         switch ($platformName) {
             case 'Mysql':
                 if ($forced) {
-                    $connection->execute("SET FOREIGN_KEY_CHECKS=0;");
+                    $connection->execute('SET FOREIGN_KEY_CHECKS=0;');
                 }
                 $connection->execute("TRUNCATE `{$tableName}`;");
                 if ($forced) {
-                    $connection->execute("SET FOREIGN_KEY_CHECKS=1;");
+                    $connection->execute('SET FOREIGN_KEY_CHECKS=1;');
                 }
                 break;
             case 'Postgresql':

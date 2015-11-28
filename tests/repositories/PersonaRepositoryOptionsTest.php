@@ -1,13 +1,16 @@
 <?php
+
 namespace phamily\framework\repositories;
 
 use phamily\tests\traits\FullFamilyFixtureTrait;
 use phamily\tests\DbTest;
 use phamily\tests\repositories\traits\PersonaRepositoryTrait;
 
-class PersonaRepositoryOptioinsTest extends DbTest
+/**
+ * @author samizdam
+ */
+class PersonaRepositoryOptionsTest extends DbTest
 {
-    
     use FullFamilyFixtureTrait;
     use PersonaRepositoryTrait;
 
@@ -29,7 +32,7 @@ class PersonaRepositoryOptioinsTest extends DbTest
     {
         $options = PersonaRepository::WITHOUT_KINSHIP;
         $son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
-        
+
         $this->assertEmpty($son->getFather());
         $this->assertEmpty($son->getMother());
         $this->assertCount(0, $son->getSpouses());
@@ -40,7 +43,7 @@ class PersonaRepositoryOptioinsTest extends DbTest
     {
         $options = PersonaRepository::PARENTS;
         $son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
-        
+
         $this->assertNotEmpty($son->getFather());
         $this->assertNotEmpty($son->getMother());
         $this->assertCount(0, $son->getSpouses());
@@ -51,10 +54,10 @@ class PersonaRepositoryOptioinsTest extends DbTest
     {
         $options = PersonaRepository::CHILDREN;
         $son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
-        
+
         $this->assertEmpty($son->getFather());
         $this->assertEmpty($son->getMother());
-        
+
         $this->assertCount(3, $son->getChildren());
         $this->assertCount(0, $son->getSpouses());
     }
@@ -63,7 +66,7 @@ class PersonaRepositoryOptioinsTest extends DbTest
     {
         $options = PersonaRepository::SPOUSES;
         $son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
-        
+
         $this->assertEmpty($son->getFather());
         $this->assertEmpty($son->getMother());
         $this->assertEmpty($son->getChildren());
@@ -73,9 +76,9 @@ class PersonaRepositoryOptioinsTest extends DbTest
     public function testGetPersonaWithChildrenAndParents()
     {
         $options = PersonaRepository::PARENTS | PersonaRepository::CHILDREN;
-        
+
         $son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
-        
+
         $this->assertNotEmpty($son->getFather());
         $this->assertNotEmpty($son->getMother());
         $this->assertCount(3, $son->getChildren());
@@ -85,9 +88,9 @@ class PersonaRepositoryOptioinsTest extends DbTest
     public function testGetPersonaWithAllRelated()
     {
         $options = PersonaRepository::ALL_KINSHIP;
-        
+
         $son = $this->getPersonaWithOptions($this->fixtures['son']['id'], $options);
-        
+
         $this->assertNotEmpty($son->getFather());
         $this->assertNotEmpty($son->getMother());
         $this->assertCount(3, $son->getChildren());

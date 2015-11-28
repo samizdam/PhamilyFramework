@@ -1,6 +1,11 @@
 <?php
 namespace phamily\framework;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 interface KinshipAwareInterface
 {
 

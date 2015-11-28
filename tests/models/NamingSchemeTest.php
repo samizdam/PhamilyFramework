@@ -1,22 +1,25 @@
 <?php
+
 namespace phamily\framework\models;
 
 use phamily\tests\UnitTest;
 
+/**
+ * @author samizdam
+ */
 class NamingSchemeTest extends UnitTest
 {
-
     public function testConstruct()
     {
         $type = 'fio';
         $config = $this->getSchemeConfigSample();
-        
+
         $scheme = new NamingScheme($type, $config);
-        
+
         $this->assertEquals($type, $scheme->getType());
         $this->assertEquals($config, $scheme->getConfig());
     }
-    
+
     // public function testConstructWithSingleDefaultForm(){
     // $scheme = new NamingScheme('fio', ['formula' => function(){}]);
     // $this->assertTrue($scheme->hasForm('default'));
@@ -38,9 +41,9 @@ class NamingSchemeTest extends UnitTest
         return [
             'default' => [
                 'formula' => function (NameCollectionInterface $names) {
-                    return join(' ', $names);
-                }
-            ]
+                    return implode(' ', $names);
+                },
+            ],
         ];
     }
 }

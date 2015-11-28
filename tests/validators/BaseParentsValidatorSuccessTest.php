@@ -5,6 +5,11 @@ use phamily\framework\models\PersonaInterface;
 use phamily\tests\UnitTest;
 use phamily\framework\models\traits\PersonaStubTrait;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 class BaseParentsValidatorSuccessTest extends UnitTest
 {
     

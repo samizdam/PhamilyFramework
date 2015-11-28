@@ -4,6 +4,11 @@ namespace phamily\tests\repositories\traits;
 use phamily\framework\repositories\PersonaRepository;
 use phamily\tests\DbTest;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 trait PersonaRepositoryTrait
 {
 

@@ -5,6 +5,11 @@ use phamily\framework\models\Persona;
 use phamily\tests\DbTest;
 use phamily\tests\repositories\traits\PersonaRepositoryTrait;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 class PersonaRepositoryTest extends DbTest
 {
     
@@ -90,9 +95,9 @@ class PersonaRepositoryTest extends DbTest
         ]);
         $this->assertTableHasData('persona_has_names', [
             'personaId' => $persona->getId()
-        ])
+        ]);
         // 'nameId' => $persona->getName('surname')->getId()
-        ;
+        
     }
 
     public function testSavePersonaWithParents()

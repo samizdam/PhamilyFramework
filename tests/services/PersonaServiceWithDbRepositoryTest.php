@@ -5,6 +5,11 @@ use phamily\tests\DbTest;
 use phamily\tests\services\traits\CreateServiceTrait;
 use phamily\tests\traits\FullFamilyFixtureTrait;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 class PersonaServiceWithDbRepositoryTest extends DbTest
 {
     

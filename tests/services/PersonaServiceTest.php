@@ -3,6 +3,11 @@ namespace phamily\framework\services;
 
 use phamily\tests\UnitTest;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 class PersonaServiceTest extends UnitTest
 {
 

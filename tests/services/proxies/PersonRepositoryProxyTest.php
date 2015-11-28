@@ -5,6 +5,11 @@ use phamily\tests\DbTest;
 use phamily\tests\services\traits\CreateServiceTrait;
 use phamily\framework\repositories\PersonaRepository;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 class PersonaRepositoryProxyTest extends DbTest
 {
     use CreateServiceTrait;

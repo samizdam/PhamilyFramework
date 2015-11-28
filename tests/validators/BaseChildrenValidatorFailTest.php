@@ -5,6 +5,11 @@ use phamily\tests\UnitTest;
 use phamily\framework\models\traits\PersonaStubTrait;
 use phamily\framework\collections\ChildrenCollection;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 class BaseChildrenValidatorFailTest extends UnitTest
 {
     

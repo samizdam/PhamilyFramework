@@ -4,6 +4,11 @@ namespace phamily\framework\validators;
 use phamily\framework\models\traits\PersonaStubTrait;
 use phamily\tests\UnitTest;
 
+/**
+ *
+ * @author samizdam
+ *        
+ */
 class BaseSpouseValidatorSuccessTest extends UnitTest
 {
     
