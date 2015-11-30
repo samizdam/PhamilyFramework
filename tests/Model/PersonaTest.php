@@ -2,7 +2,7 @@
 
 namespace phamily\framework\Model;
 
-use phamily\framework\value_objects\DateTime;
+use phamily\framework\ValueObject\DateTime;
 use phamily\tests\UnitTest;
 use phamily\framework\Model\exceptions\LogicException;
 

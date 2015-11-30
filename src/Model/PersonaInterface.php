@@ -3,7 +3,7 @@
 namespace phamily\framework\Model;
 
 use phamily\framework\GenderAwareInterface;
-use phamily\framework\value_objects\DateTimeInterface;
+use phamily\framework\ValueObject\DateTimeInterface;
 
 interface PersonaInterface extends ModelInterface, GenderAwareInterface
 {

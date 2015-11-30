@@ -4,7 +4,7 @@ namespace phamily\framework\Service;
 
 use phamily\framework\Model\PersonaInterface;
 use phamily\framework\GenderAwareInterface;
-use phamily\framework\value_objects\DateTimeInterface;
+use phamily\framework\ValueObject\DateTimeInterface;
 use phamily\framework\KinshipAwareInterface;
 
 interface PersonaServiceInterface extends GenderAwareInterface, KinshipAwareInterface

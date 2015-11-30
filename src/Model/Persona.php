@@ -11,7 +11,7 @@ use phamily\framework\Model\exceptions\InvalidArgumentException;
 use phamily\framework\Validator\BaseParentsValidator;
 use phamily\framework\Validator\ParentsValidatorInterface;
 use phamily\framework\Validator\ValidatorInterface;
-use phamily\framework\value_objects\DateTimeInterface;
+use phamily\framework\ValueObject\DateTimeInterface;
 
 class Persona implements PersonaInterface
 {
