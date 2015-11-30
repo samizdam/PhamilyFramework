@@ -2,9 +2,9 @@
 
 namespace phamily\framework\repositories;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 use Zend\Db\TableGateway\TableGateway;
-use phamily\framework\models\Persona;
+use phamily\framework\Model\Persona;
 use phamily\framework\repositories\exceptions\NotFoundException;
 use phamily\framework\traits\BitmaskTrait;
 use phamily\framework\repositories\conditions\SiblingsQueryCondition;

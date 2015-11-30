@@ -2,8 +2,8 @@
 
 namespace phamily\framework\Collection;
 
-use phamily\framework\models\PersonaInterface;
-use phamily\framework\models\exceptions\LogicException;
+use phamily\framework\Model\PersonaInterface;
+use phamily\framework\Model\exceptions\LogicException;
 use phamily\framework\validators\SpouseValidatorInterface;
 use phamily\framework\validators\BaseSpouseValidator;
 

@@ -2,7 +2,7 @@
 
 namespace phamily\framework\services;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 use phamily\framework\GenderAwareInterface;
 use phamily\framework\value_objects\DateTimeInterface;
 use phamily\framework\KinshipAwareInterface;

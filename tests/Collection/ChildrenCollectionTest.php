@@ -3,8 +3,8 @@
 namespace phamily\framework\Collection;
 
 use phamily\tests\UnitTest;
-use phamily\framework\models\traits\PersonaStubTrait;
-use phamily\framework\models\exceptions;
+use phamily\framework\Model\traits\PersonaStubTrait;
+use phamily\framework\Model\exceptions;
 
 /**
  * @author samizdam

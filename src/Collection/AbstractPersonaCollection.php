@@ -2,8 +2,8 @@
 
 namespace phamily\framework\Collection;
 
-use phamily\framework\models\PersonaInterface;
-use phamily\framework\models\exceptions\OutOfBoundsException;
+use phamily\framework\Model\PersonaInterface;
+use phamily\framework\Model\exceptions\OutOfBoundsException;
 
 abstract class AbstractPersonaCollection implements PersonaCollectionInterface
 {

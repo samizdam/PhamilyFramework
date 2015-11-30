@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\models;
+namespace phamily\framework\Model;
 
 class NameCollection extends \ArrayObject implements NameCollectionInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\models\exceptions;
+namespace phamily\framework\Model\exceptions;
 
 class OutOfRangeException extends \OutOfRangeException implements ExceptionInterface
 {

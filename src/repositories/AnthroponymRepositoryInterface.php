@@ -2,7 +2,7 @@
 
 namespace phamily\framework\repositories;
 
-use phamily\framework\models\AnthroponymInterface;
+use phamily\framework\Model\AnthroponymInterface;
 
 interface AnthroponymRepositoryInterface
 {

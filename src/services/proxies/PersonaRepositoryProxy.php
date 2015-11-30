@@ -3,7 +3,7 @@
 namespace phamily\framework\services\proxies;
 
 use phamily\framework\repositories\PersonaRepositoryInterface;
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 
 class PersonaRepositoryProxy implements PersonaRepositoryInterface
 {

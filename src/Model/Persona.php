@@ -1,13 +1,13 @@
 <?php
 
-namespace phamily\framework\models;
+namespace phamily\framework\Model;
 
 use phamily\framework\Collection\ChildrenCollectionInterface;
 use phamily\framework\Collection\ChildrenCollection;
 use phamily\framework\Collection\SpouseCollection;
 use phamily\framework\Collection\SpouseCollectionInterface;
-use phamily\framework\models\exceptions\LogicException;
-use phamily\framework\models\exceptions\InvalidArgumentException;
+use phamily\framework\Model\exceptions\LogicException;
+use phamily\framework\Model\exceptions\InvalidArgumentException;
 use phamily\framework\validators\BaseParentsValidator;
 use phamily\framework\validators\ParentsValidatorInterface;
 use phamily\framework\validators\ValidatorInterface;
@@ -277,7 +277,7 @@ class Persona implements PersonaInterface
     /**
      * (non-PHPdoc).
      * 
-     * @see \phamily\framework\models\PersonaInterface::getSpouses()
+     * @see \phamily\framework\Model\PersonaInterface::getSpouses()
      *
      * @return SpouseCollectionInterface
      */

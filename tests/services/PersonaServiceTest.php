@@ -15,7 +15,7 @@ class PersonaServiceTest extends UnitTest
         $gender = $service::GENDER_MALE;
         $persona = $service->create($gender);
 
-        $this->assertInstanceOf(\phamily\framework\models\PersonaInterface::class, $persona);
+        $this->assertInstanceOf(\phamily\framework\Model\PersonaInterface::class, $persona);
         $this->assertEquals($gender, $persona->getGender());
     }
 

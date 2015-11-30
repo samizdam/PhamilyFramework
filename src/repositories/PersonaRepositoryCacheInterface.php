@@ -2,7 +2,7 @@
 
 namespace phamily\framework\repositories;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 
 /**
  * TODO it is Identity Map, needs renamimng.

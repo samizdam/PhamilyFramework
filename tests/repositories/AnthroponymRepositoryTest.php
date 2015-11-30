@@ -2,7 +2,7 @@
 
 namespace phamily\framework\repositories;
 
-use phamily\framework\models\Anthroponym;
+use phamily\framework\Model\Anthroponym;
 use phamily\tests\DbTest;
 
 /**

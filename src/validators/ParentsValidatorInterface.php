@@ -2,7 +2,7 @@
 
 namespace phamily\framework\validators;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 use phamily\framework\GenderAwareInterface;
 
 interface ParentsValidatorInterface extends ValidatorInterface, GenderAwareInterface

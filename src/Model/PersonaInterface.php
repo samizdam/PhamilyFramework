@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\models;
+namespace phamily\framework\Model;
 
 use phamily\framework\GenderAwareInterface;
 use phamily\framework\value_objects\DateTimeInterface;

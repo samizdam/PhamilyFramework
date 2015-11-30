@@ -2,7 +2,7 @@
 
 namespace phamily\framework\repositories;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 use phamily\framework\KinshipAwareInterface;
 
 interface PersonaRepositoryInterface extends KinshipAwareInterface

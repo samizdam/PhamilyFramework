@@ -2,7 +2,7 @@
 
 namespace phamily\framework\repositories;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 
 class BasePersonaRepositoryCache implements PersonaRepositoryCacheInterface
 {

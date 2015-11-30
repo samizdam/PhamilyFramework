@@ -2,8 +2,8 @@
 
 namespace phamily\framework\repositories;
 
-use phamily\framework\models\AnthroponymInterface;
-use phamily\framework\models\Anthroponym;
+use phamily\framework\Model\AnthroponymInterface;
+use phamily\framework\Model\Anthroponym;
 
 class AnthroponymRepository extends AbstractRepository implements AnthroponymRepositoryInterface
 {

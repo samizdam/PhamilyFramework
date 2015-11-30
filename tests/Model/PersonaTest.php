@@ -1,22 +1,22 @@
 <?php
 
-namespace phamily\framework\models;
+namespace phamily\framework\Model;
 
 use phamily\framework\value_objects\DateTime;
 use phamily\tests\UnitTest;
+use phamily\framework\Model\exceptions\LogicException;
 
 /**
  * @author samizdam
  */
 class PersonaTest extends UnitTest
 {
-    const BASE_EXCEPTION_NS = '\\phamily\\framework\\models\\exceptions\\';
 
     public function testConstructWithGender()
     {
         $persona = new Persona(Persona::GENDER_MALE);
         $this->assertEquals(Persona::GENDER_MALE, $persona->getGender());
-        $this->setExpectedException(self::BASE_EXCEPTION_NS.'LogicException');
+        $this->setExpectedException(LogicException::class);
         $persona->setGender(Persona::GENDER_FEMALE);
     }
 
@@ -47,7 +47,7 @@ class PersonaTest extends UnitTest
         $male = Persona::GENDER_MALE;
         $father = new Persona($male);
 
-        $this->setExpectedException(self::BASE_EXCEPTION_NS.'LogicException');
+        $this->setExpectedException(LogicException::class);
         $persona = new Persona(Persona::GENDER_UNDEFINED, [], $father, $father);
 
         $this->assertEmpty($persona->getMother());
@@ -57,7 +57,7 @@ class PersonaTest extends UnitTest
     {
         $father = new Persona(Persona::GENDER_FEMALE);
 
-        $this->setExpectedException(self::BASE_EXCEPTION_NS.'LogicException', null);
+        $this->setExpectedException(LogicException::class, null);
         $son = new Persona(Persona::GENDER_MALE);
         $son->setFather($father);
     }
@@ -106,7 +106,7 @@ class PersonaTest extends UnitTest
     {
         $persona = new Persona();
         $persona->setDateOfBirth(new DateTime('2001-01-01'));
-        $this->setExpectedException(self::BASE_EXCEPTION_NS.'LogicException');
+        $this->setExpectedException(LogicException::class);
         $persona->setDateOfDeath(new DateTime('2000-01-01'));
     }
 
@@ -114,7 +114,7 @@ class PersonaTest extends UnitTest
     {
         $persona = new Persona();
         $persona->setDateOfDeath(new DateTime('2000-01-01'));
-        $this->setExpectedException(self::BASE_EXCEPTION_NS.'LogicException');
+        $this->setExpectedException(LogicException::class);
         $persona->setDateOfBirth(new DateTime('2001-01-01'));
     }
 

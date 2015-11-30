@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\models;
+namespace phamily\framework\Model;
 
 use phamily\tests\UnitTest;
 
@@ -35,6 +35,6 @@ class NameCollectionTest extends UnitTest
 
     private function getAnthroponymMock()
     {
-        return $this->getMockBuilder(\phamily\framework\models\AnthroponymInterface::class)->getMock();
+        return $this->getMockBuilder(\phamily\framework\Model\AnthroponymInterface::class)->getMock();
     }
 }

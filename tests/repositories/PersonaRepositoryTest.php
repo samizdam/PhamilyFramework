@@ -2,7 +2,7 @@
 
 namespace phamily\framework\repositories;
 
-use phamily\framework\models\Persona;
+use phamily\framework\Model\Persona;
 use phamily\tests\DbTest;
 use phamily\tests\repositories\traits\PersonaRepositoryTrait;
 

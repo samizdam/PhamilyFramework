@@ -2,9 +2,9 @@
 
 namespace phamily\framework\validators;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 use phamily\tests\UnitTest;
-use phamily\framework\models\traits\PersonaStubTrait;
+use phamily\framework\Model\traits\PersonaStubTrait;
 
 /**
  * @author samizdam

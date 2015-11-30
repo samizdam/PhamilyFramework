@@ -2,7 +2,7 @@
 
 namespace phamily\framework\validators;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 use phamily\framework\Collection\ChildrenCollectionInterface;
 use phamily\framework\GenderAwareInterface;
 

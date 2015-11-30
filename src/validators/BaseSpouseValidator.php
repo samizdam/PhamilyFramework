@@ -2,7 +2,7 @@
 
 namespace phamily\framework\validators;
 
-use phamily\framework\models\PersonaInterface;
+use phamily\framework\Model\PersonaInterface;
 
 class BaseSpouseValidator extends AbstractValidator implements SpouseValidatorInterface
 {

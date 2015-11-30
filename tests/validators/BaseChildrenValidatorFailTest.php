@@ -3,7 +3,7 @@
 namespace phamily\framework\validators;
 
 use phamily\tests\UnitTest;
-use phamily\framework\models\traits\PersonaStubTrait;
+use phamily\framework\Model\traits\PersonaStubTrait;
 use phamily\framework\Collection\ChildrenCollection;
 
 /**

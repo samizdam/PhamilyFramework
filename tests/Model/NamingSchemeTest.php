@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\models;
+namespace phamily\framework\Model;
 
 use phamily\tests\UnitTest;
 
