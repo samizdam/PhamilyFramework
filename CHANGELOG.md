@@ -7,9 +7,13 @@
 - Export data from mainstream formats in subj. 
 - More persistanse storages support. 
 - Import to some formats and API for representations.
-- Integration for Yii.   
+- Integration with Yii.   
 - Configuration for CI. 
 - Search.
+
+## 0.0.4 - 2015-12-XX
+### Changed
+- Update vendor dependencies.  
 
 ## 0.0.3 - 2015-11-25
 ### Changed

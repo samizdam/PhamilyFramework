@@ -5,7 +5,7 @@
         "zendframework/zend-db": "2.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.3"
+        "phpunit/phpunit": "5"
     },
     "license": "MIT",
     "authors": [
@@ -16,10 +16,15 @@
     ],
     "minimum-stability": "dev",
     "autoload": {
-    	"psr-4": { "phamily\\framework\\" : ["src/", "tests/"] }
+    	"psr-4": { 
+    		"phamily\\framework\\" : "src/" 
+    	}
     },
     "autoload-dev": {
-    	"psr-4": { "phamily\\tests\\" : "tests/" }
+    	"psr-4": { 
+    		"phamily\\framework\\": "tests/", 
+    		"phamily\\tests\\" : "tests/" 
+    	}
     }
     
 }
