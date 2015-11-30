@@ -3,8 +3,8 @@
 namespace phamily\framework\Collection;
 
 use phamily\framework\Model\PersonaInterface;
-use phamily\framework\validators\BaseChildrenValidator;
-use phamily\framework\validators\ChildrenValidatorInreface;
+use phamily\framework\Validator\BaseChildrenValidator;
+use phamily\framework\Validator\ChildrenValidatorInreface;
 use phamily\framework\Model\exceptions\LogicException;
 
 class ChildrenCollection extends AbstractPersonaCollection implements ChildrenCollectionInterface

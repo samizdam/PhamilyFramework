@@ -5,7 +5,7 @@ namespace phamily\framework\Collection;
 use phamily\tests\UnitTest;
 use phamily\framework\Model\traits\PersonaStubTrait;
 use phamily\framework\Model\exceptions\LogicException;
-use phamily\framework\validators\FakeTrueValidator;
+use phamily\framework\Validator\FakeTrueValidator;
 
 /**
  * @author samizdam

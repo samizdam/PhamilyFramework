@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\validators;
+namespace phamily\framework\Validator;
 
 use phamily\tests\UnitTest;
 use phamily\framework\Model\traits\PersonaStubTrait;

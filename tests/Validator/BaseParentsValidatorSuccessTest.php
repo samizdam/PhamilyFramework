@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\validators;
+namespace phamily\framework\Validator;
 
 use phamily\framework\Model\PersonaInterface;
 use phamily\tests\UnitTest;

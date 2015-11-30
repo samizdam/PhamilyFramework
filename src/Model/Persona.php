@@ -8,9 +8,9 @@ use phamily\framework\Collection\SpouseCollection;
 use phamily\framework\Collection\SpouseCollectionInterface;
 use phamily\framework\Model\exceptions\LogicException;
 use phamily\framework\Model\exceptions\InvalidArgumentException;
-use phamily\framework\validators\BaseParentsValidator;
-use phamily\framework\validators\ParentsValidatorInterface;
-use phamily\framework\validators\ValidatorInterface;
+use phamily\framework\Validator\BaseParentsValidator;
+use phamily\framework\Validator\ParentsValidatorInterface;
+use phamily\framework\Validator\ValidatorInterface;
 use phamily\framework\value_objects\DateTimeInterface;
 
 class Persona implements PersonaInterface

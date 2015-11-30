@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\validators;
+namespace phamily\framework\Validator;
 
 abstract class AbstractValidator implements ValidatorInterface
 {
