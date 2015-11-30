@@ -1,10 +1,11 @@
 <?php
 
-namespace phamily\framework\repositories;
+namespace phamily\framework\Repository;
 
 use phamily\framework\Model\Persona;
 use phamily\tests\DbTest;
-use phamily\tests\repositories\traits\PersonaRepositoryTrait;
+use phamily\tests\Repository\traits\PersonaRepositoryTrait;
+use phamily\framework\Repository\exceptions\NotFoundException;
 
 /**
  * @author samizdam
@@ -14,8 +15,6 @@ class PersonaRepositoryTest extends DbTest
     use PersonaRepositoryTrait;
 
     private $tableName = 'persona';
-
-    const EXCEPTION_BASE_NS = '\\phamily\\framework\\repositories\\exceptions\\';
 
     public function testSaveNewPersona()
     {
@@ -144,7 +143,7 @@ class PersonaRepositoryTest extends DbTest
     public function testPesonaNotFoundException()
     {
         $repository = $this->getRepository();
-        $this->setExpectedException(self::EXCEPTION_BASE_NS.'NotFoundException');
+        $this->setExpectedException(NotFoundException::class);
         $repository->getById(100500);
     }
 

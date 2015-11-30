@@ -2,7 +2,7 @@
 
 namespace phamily\tests\services\traits;
 
-use phamily\framework\repositories\PersonaRepository;
+use phamily\framework\Repository\PersonaRepository;
 use phamily\framework\services\PersonaService;
 
 /**

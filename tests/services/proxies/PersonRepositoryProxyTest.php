@@ -4,7 +4,7 @@ namespace phamily\framework\services\proxies;
 
 use phamily\tests\DbTest;
 use phamily\tests\services\traits\CreateServiceTrait;
-use phamily\framework\repositories\PersonaRepository;
+use phamily\framework\Repository\PersonaRepository;
 
 /**
  * @author samizdam

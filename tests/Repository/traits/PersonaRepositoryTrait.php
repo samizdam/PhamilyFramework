@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\tests\repositories\traits;
+namespace phamily\tests\Repository\traits;
 
-use phamily\framework\repositories\PersonaRepository;
+use phamily\framework\Repository\PersonaRepository;
 use phamily\tests\DbTest;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\repositories\conditions;
+namespace phamily\framework\Repository\conditions;
 
 use phamily\framework\KinshipAwareInterface;
 use phamily\framework\GenderAwareInterface;

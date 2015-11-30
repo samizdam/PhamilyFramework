@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\repositories\exceptions;
+namespace phamily\framework\Repository\exceptions;
 
 class NotFoundException extends \OutOfBoundsException implements ExceptionInterface
 {

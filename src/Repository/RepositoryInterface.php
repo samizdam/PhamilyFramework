@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\repositories;
+namespace phamily\framework\Repository;
 
 interface RepositoryInterface
 {

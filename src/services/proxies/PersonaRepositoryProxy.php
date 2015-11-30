@@ -2,7 +2,7 @@
 
 namespace phamily\framework\services\proxies;
 
-use phamily\framework\repositories\PersonaRepositoryInterface;
+use phamily\framework\Repository\PersonaRepositoryInterface;
 use phamily\framework\Model\PersonaInterface;
 
 class PersonaRepositoryProxy implements PersonaRepositoryInterface

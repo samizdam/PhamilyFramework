@@ -1,10 +1,10 @@
 <?php
 
-namespace phamily\framework\repositories;
+namespace phamily\framework\Repository;
 
 use phamily\tests\traits\FullFamilyFixtureTrait;
 use phamily\tests\DbTest;
-use phamily\tests\repositories\traits\PersonaRepositoryTrait;
+use phamily\tests\Repository\traits\PersonaRepositoryTrait;
 
 /**
  * @author samizdam
@@ -17,8 +17,6 @@ class PersonaRepositoryOptionsTest extends DbTest
     private $fixtures;
 
     private $tableName = 'persona';
-
-    const EXCEPTION_BASE_NS = '\\phamily\\framework\\repositories\\exceptions\\';
 
     protected $repository;
 

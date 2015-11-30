@@ -5,7 +5,7 @@ namespace phamily\framework\services;
 use phamily\framework\Model\Persona;
 use phamily\framework\Model\PersonaInterface;
 use phamily\framework\value_objects\DateTimeInterface;
-use phamily\framework\repositories\PersonaRepositoryInterface;
+use phamily\framework\Repository\PersonaRepositoryInterface;
 use phamily\framework\services\proxies\PersonaRepositoryProxy;
 use phamily\framework\traits\BitmaskTrait;
 
