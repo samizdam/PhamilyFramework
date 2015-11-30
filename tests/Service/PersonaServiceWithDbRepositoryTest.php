@@ -1,10 +1,10 @@
 <?php
 
-namespace phamily\framework\services;
+namespace phamily\framework\Service;
 
 use phamily\tests\DbTest;
-use phamily\tests\services\traits\CreateServiceTrait;
 use phamily\tests\traits\FullFamilyFixtureTrait;
+use phamily\tests\Service\traits\CreateServiceTrait;
 
 /**
  * @author samizdam

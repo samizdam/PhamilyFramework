@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\services\proxies;
+namespace phamily\framework\Service\proxies;
 
 use phamily\framework\Repository\PersonaRepositoryInterface;
 use phamily\framework\Model\PersonaInterface;

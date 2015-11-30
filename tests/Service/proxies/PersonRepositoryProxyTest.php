@@ -1,10 +1,10 @@
 <?php
 
-namespace phamily\framework\services\proxies;
+namespace phamily\framework\Service\proxies;
 
 use phamily\tests\DbTest;
-use phamily\tests\services\traits\CreateServiceTrait;
 use phamily\framework\Repository\PersonaRepository;
+use phamily\tests\Service\traits\CreateServiceTrait;
 
 /**
  * @author samizdam

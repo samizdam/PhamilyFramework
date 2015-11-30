@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\services;
+namespace phamily\framework\Service;
 
 use phamily\framework\Model\PersonaInterface;
 use phamily\framework\GenderAwareInterface;
