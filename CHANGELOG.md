@@ -11,14 +11,14 @@
 - Configuration for CI. 
 - Search.
 
-### Changed
-- Use UpperCamelCase and singular naming in namespaces. 
+### Changed 
 - Use migrations for create database schemas. 
 - Make tests runnable with different db-drivers.   
 
-## 0.0.4 - 2015-12-XX
+## 0.0.4 - 2015-12-01
 ### Changed
 - Update vendor dependencies. 
+- Use UpperCamelCase and singular naming in namespaces: all classes are renamed. 
 
 ## 0.0.3 - 2015-11-25
 ### Changed
