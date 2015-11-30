@@ -13,10 +13,12 @@
 
 ### Changed
 - Use UpperCamelCase and singular naming in namespaces. 
+- Use migrations for create database schemas. 
+- Make tests runnable with different db-drivers.   
 
 ## 0.0.4 - 2015-12-XX
 ### Changed
-- Update vendor dependencies.  
+- Update vendor dependencies. 
 
 ## 0.0.3 - 2015-11-25
 ### Changed

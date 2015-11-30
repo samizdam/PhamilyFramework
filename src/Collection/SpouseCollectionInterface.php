@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\collections;
+namespace phamily\framework\Collection;
 
 interface SpouseCollectionInterface extends PersonaCollectionInterface
 {

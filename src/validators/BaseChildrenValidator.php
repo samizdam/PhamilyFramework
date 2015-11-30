@@ -3,7 +3,7 @@
 namespace phamily\framework\validators;
 
 use phamily\framework\models\PersonaInterface;
-use phamily\framework\collections\ChildrenCollectionInterface;
+use phamily\framework\Collection\ChildrenCollectionInterface;
 
 class BaseChildrenValidator extends AbstractValidator implements ChildrenValidatorInreface
 {

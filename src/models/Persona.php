@@ -2,10 +2,10 @@
 
 namespace phamily\framework\models;
 
-use phamily\framework\collections\ChildrenCollectionInterface;
-use phamily\framework\collections\ChildrenCollection;
-use phamily\framework\collections\SpouseCollection;
-use phamily\framework\collections\SpouseCollectionInterface;
+use phamily\framework\Collection\ChildrenCollectionInterface;
+use phamily\framework\Collection\ChildrenCollection;
+use phamily\framework\Collection\SpouseCollection;
+use phamily\framework\Collection\SpouseCollectionInterface;
 use phamily\framework\models\exceptions\LogicException;
 use phamily\framework\models\exceptions\InvalidArgumentException;
 use phamily\framework\validators\BaseParentsValidator;

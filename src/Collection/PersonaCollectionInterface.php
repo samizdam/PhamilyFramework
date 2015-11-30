@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\collections;
+namespace phamily\framework\Collection;
 
 use phamily\framework\GenderAwareInterface;
 use phamily\framework\models\PersonaInterface;

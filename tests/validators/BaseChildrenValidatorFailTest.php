@@ -4,7 +4,7 @@ namespace phamily\framework\validators;
 
 use phamily\tests\UnitTest;
 use phamily\framework\models\traits\PersonaStubTrait;
-use phamily\framework\collections\ChildrenCollection;
+use phamily\framework\Collection\ChildrenCollection;
 
 /**
  * @author samizdam

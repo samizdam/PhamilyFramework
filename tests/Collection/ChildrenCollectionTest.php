@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\collections;
+namespace phamily\framework\Collection;
 
 use phamily\tests\UnitTest;
 use phamily\framework\models\traits\PersonaStubTrait;
