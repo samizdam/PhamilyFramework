@@ -1,13 +1,13 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\framework\Model\PersonaInterface;
+use Phamily\Framework\Model\PersonaInterface;
 use Zend\Db\TableGateway\TableGateway;
-use phamily\framework\Model\Persona;
-use phamily\framework\Repository\exceptions\NotFoundException;
-use phamily\framework\traits\BitmaskTrait;
-use phamily\framework\Repository\conditions\SiblingsQueryCondition;
+use Phamily\Framework\Model\Persona;
+use Phamily\Framework\Repository\exceptions\NotFoundException;
+use Phamily\Framework\traits\BitmaskTrait;
+use Phamily\Framework\Repository\conditions\SiblingsQueryCondition;
 use Zend\Db\TableGateway\Feature\SequenceFeature;
 
 class PersonaRepository extends AbstractRepository implements PersonaRepositoryInterface

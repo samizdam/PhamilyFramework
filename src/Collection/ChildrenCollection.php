@@ -1,11 +1,11 @@
 <?php
 
-namespace phamily\framework\Collection;
+namespace Phamily\Framework\Collection;
 
-use phamily\framework\Model\PersonaInterface;
-use phamily\framework\Validator\BaseChildrenValidator;
-use phamily\framework\Validator\ChildrenValidatorInreface;
-use phamily\framework\Model\exceptions\LogicException;
+use Phamily\Framework\Model\PersonaInterface;
+use Phamily\Framework\Validator\BaseChildrenValidator;
+use Phamily\Framework\Validator\ChildrenValidatorInreface;
+use Phamily\Framework\Model\exceptions\LogicException;
 
 class ChildrenCollection extends AbstractPersonaCollection implements ChildrenCollectionInterface
 {

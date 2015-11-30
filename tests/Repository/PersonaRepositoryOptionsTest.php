@@ -1,10 +1,10 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\tests\traits\FullFamilyFixtureTrait;
-use phamily\tests\DbTest;
-use phamily\tests\Repository\traits\PersonaRepositoryTrait;
+use Phamily\tests\traits\FullFamilyFixtureTrait;
+use Phamily\tests\DbTest;
+use Phamily\tests\Repository\traits\PersonaRepositoryTrait;
 
 /**
  * @author samizdam

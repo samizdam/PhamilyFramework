@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\framework\Model\AnthroponymInterface;
-use phamily\framework\Model\Anthroponym;
+use Phamily\Framework\Model\AnthroponymInterface;
+use Phamily\Framework\Model\Anthroponym;
 
 class AnthroponymRepository extends AbstractRepository implements AnthroponymRepositoryInterface
 {

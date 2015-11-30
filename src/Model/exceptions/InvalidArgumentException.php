@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\Model\exceptions;
+namespace Phamily\Framework\Model\exceptions;
 
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {

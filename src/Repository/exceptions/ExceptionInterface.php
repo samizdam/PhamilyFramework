@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Repository\exceptions;
+namespace Phamily\Framework\Repository\exceptions;
 
-use phamily\framework\PhamilyExceptionInterface;
+use Phamily\Framework\PhamilyExceptionInterface;
 
 interface ExceptionInterface extends PhamilyExceptionInterface
 {

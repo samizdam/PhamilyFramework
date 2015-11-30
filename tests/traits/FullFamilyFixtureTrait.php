@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\tests\traits;
+namespace Phamily\tests\traits;
 
-use phamily\framework\GenderAwareInterface;
+use Phamily\Framework\GenderAwareInterface;
 
 /**
  * @author samizdam

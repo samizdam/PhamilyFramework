@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\framework\Model\Anthroponym;
-use phamily\tests\DbTest;
+use Phamily\Framework\Model\Anthroponym;
+use Phamily\tests\DbTest;
 
 /**
  * @author samizdam

@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Collection;
+namespace Phamily\Framework\Collection;
 
-use phamily\framework\Model\PersonaInterface;
-use phamily\framework\Model\exceptions\OutOfBoundsException;
+use Phamily\Framework\Model\PersonaInterface;
+use Phamily\Framework\Model\exceptions\OutOfBoundsException;
 
 abstract class AbstractPersonaCollection implements PersonaCollectionInterface
 {

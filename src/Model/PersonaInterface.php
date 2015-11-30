@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Model;
+namespace Phamily\Framework\Model;
 
-use phamily\framework\GenderAwareInterface;
-use phamily\framework\ValueObject\DateTimeInterface;
+use Phamily\Framework\GenderAwareInterface;
+use Phamily\Framework\ValueObject\DateTimeInterface;
 
 interface PersonaInterface extends ModelInterface, GenderAwareInterface
 {

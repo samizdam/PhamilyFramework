@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework;
+namespace Phamily\Framework;
 
 /**
  * TODO move to samizdam/vo.

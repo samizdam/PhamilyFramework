@@ -1,10 +1,10 @@
 <?php
 
-namespace phamily\framework\Repository\conditions;
+namespace Phamily\Framework\Repository\conditions;
 
-use phamily\framework\KinshipAwareInterface;
-use phamily\framework\GenderAwareInterface;
-use phamily\framework\traits\BitmaskTrait;
+use Phamily\Framework\KinshipAwareInterface;
+use Phamily\Framework\GenderAwareInterface;
+use Phamily\Framework\traits\BitmaskTrait;
 use Zend\Db\Sql\Where;
 
 class SiblingsQueryCondition implements KinshipAwareInterface, GenderAwareInterface

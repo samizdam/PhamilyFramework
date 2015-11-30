@@ -1,11 +1,11 @@
 <?php
 
-namespace phamily\framework\Collection;
+namespace Phamily\Framework\Collection;
 
-use phamily\tests\UnitTest;
-use phamily\framework\Model\traits\PersonaStubTrait;
-use phamily\framework\Model\exceptions\LogicException;
-use phamily\framework\Validator\FakeTrueValidator;
+use Phamily\tests\UnitTest;
+use Phamily\Framework\Model\traits\PersonaStubTrait;
+use Phamily\Framework\Model\exceptions\LogicException;
+use Phamily\Framework\Validator\FakeTrueValidator;
 
 /**
  * @author samizdam

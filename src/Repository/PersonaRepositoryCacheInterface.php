@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\framework\Model\PersonaInterface;
+use Phamily\Framework\Model\PersonaInterface;
 
 /**
  * TODO it is Identity Map, needs renamimng.

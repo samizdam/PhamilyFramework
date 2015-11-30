@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\tests\Repository\traits;
+namespace Phamily\tests\Repository\traits;
 
-use phamily\framework\Repository\PersonaRepository;
-use phamily\tests\DbTest;
+use Phamily\Framework\Repository\PersonaRepository;
+use Phamily\tests\DbTest;
 
 /**
  * @author samizdam

@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\framework\Model\PersonaInterface;
+use Phamily\Framework\Model\PersonaInterface;
 
 class BasePersonaRepositoryCache implements PersonaRepositoryCacheInterface
 {

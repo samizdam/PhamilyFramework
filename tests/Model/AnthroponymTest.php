@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Model;
+namespace Phamily\Framework\Model;
 
-use phamily\tests\UnitTest;
+use Phamily\tests\UnitTest;
 
 /**
  * @author samizdam

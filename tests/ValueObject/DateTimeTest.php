@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\ValueObject;
+namespace Phamily\Framework\ValueObject;
 
-use phamily\tests\UnitTest;
+use Phamily\tests\UnitTest;
 
 class DateTimeTest extends UnitTest
 {

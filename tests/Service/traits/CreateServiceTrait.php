@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\tests\Service\traits;
+namespace Phamily\tests\Service\traits;
 
-use phamily\framework\Repository\PersonaRepository;
-use phamily\framework\Service\PersonaService;
+use Phamily\Framework\Repository\PersonaRepository;
+use Phamily\Framework\Service\PersonaService;
 
 /**
  * @author samizdam

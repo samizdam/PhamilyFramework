@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\traits;
+namespace Phamily\Framework\traits;
 
 trait BitmaskTrait
 {

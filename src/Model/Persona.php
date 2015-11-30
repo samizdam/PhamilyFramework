@@ -1,17 +1,17 @@
 <?php
 
-namespace phamily\framework\Model;
+namespace Phamily\Framework\Model;
 
-use phamily\framework\Collection\ChildrenCollectionInterface;
-use phamily\framework\Collection\ChildrenCollection;
-use phamily\framework\Collection\SpouseCollection;
-use phamily\framework\Collection\SpouseCollectionInterface;
-use phamily\framework\Model\exceptions\LogicException;
-use phamily\framework\Model\exceptions\InvalidArgumentException;
-use phamily\framework\Validator\BaseParentsValidator;
-use phamily\framework\Validator\ParentsValidatorInterface;
-use phamily\framework\Validator\ValidatorInterface;
-use phamily\framework\ValueObject\DateTimeInterface;
+use Phamily\Framework\Collection\ChildrenCollectionInterface;
+use Phamily\Framework\Collection\ChildrenCollection;
+use Phamily\Framework\Collection\SpouseCollection;
+use Phamily\Framework\Collection\SpouseCollectionInterface;
+use Phamily\Framework\Model\exceptions\LogicException;
+use Phamily\Framework\Model\exceptions\InvalidArgumentException;
+use Phamily\Framework\Validator\BaseParentsValidator;
+use Phamily\Framework\Validator\ParentsValidatorInterface;
+use Phamily\Framework\Validator\ValidatorInterface;
+use Phamily\Framework\ValueObject\DateTimeInterface;
 
 class Persona implements PersonaInterface
 {
@@ -277,7 +277,7 @@ class Persona implements PersonaInterface
     /**
      * (non-PHPdoc).
      * 
-     * @see \phamily\framework\Model\PersonaInterface::getSpouses()
+     * @see \Phamily\Framework\Model\PersonaInterface::getSpouses()
      *
      * @return SpouseCollectionInterface
      */

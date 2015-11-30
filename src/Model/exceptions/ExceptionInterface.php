@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Model\exceptions;
+namespace Phamily\Framework\Model\exceptions;
 
-use phamily\framework\PhamilyExceptionInterface;
+use Phamily\Framework\PhamilyExceptionInterface;
 
 /**
  * namespaced stuff for type hinting

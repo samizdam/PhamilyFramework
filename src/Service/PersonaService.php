@@ -1,13 +1,13 @@
 <?php
 
-namespace phamily\framework\Service;
+namespace Phamily\Framework\Service;
 
-use phamily\framework\Model\Persona;
-use phamily\framework\Model\PersonaInterface;
-use phamily\framework\ValueObject\DateTimeInterface;
-use phamily\framework\Repository\PersonaRepositoryInterface;
-use phamily\framework\Service\Proxy\PersonaRepositoryProxy;
-use phamily\framework\traits\BitmaskTrait;
+use Phamily\Framework\Model\Persona;
+use Phamily\Framework\Model\PersonaInterface;
+use Phamily\Framework\ValueObject\DateTimeInterface;
+use Phamily\Framework\Repository\PersonaRepositoryInterface;
+use Phamily\Framework\Service\Proxy\PersonaRepositoryProxy;
+use Phamily\Framework\traits\BitmaskTrait;
 
 class PersonaService implements PersonaServiceInterface
 {

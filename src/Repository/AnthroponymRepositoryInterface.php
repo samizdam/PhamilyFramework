@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\framework\Model\AnthroponymInterface;
+use Phamily\Framework\Model\AnthroponymInterface;
 
 interface AnthroponymRepositoryInterface
 {

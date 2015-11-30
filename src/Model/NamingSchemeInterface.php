@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\Model;
+namespace Phamily\Framework\Model;
 
 interface NamingSchemeInterface
 {

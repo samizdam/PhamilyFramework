@@ -1,11 +1,11 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\framework\Model\Persona;
-use phamily\tests\DbTest;
-use phamily\tests\Repository\traits\PersonaRepositoryTrait;
-use phamily\framework\Repository\exceptions\NotFoundException;
+use Phamily\Framework\Model\Persona;
+use Phamily\tests\DbTest;
+use Phamily\tests\Repository\traits\PersonaRepositoryTrait;
+use Phamily\Framework\Repository\exceptions\NotFoundException;
 
 /**
  * @author samizdam

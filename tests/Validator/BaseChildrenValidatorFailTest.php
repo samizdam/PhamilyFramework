@@ -1,10 +1,10 @@
 <?php
 
-namespace phamily\framework\Validator;
+namespace Phamily\Framework\Validator;
 
-use phamily\tests\UnitTest;
-use phamily\framework\Model\traits\PersonaStubTrait;
-use phamily\framework\Collection\ChildrenCollection;
+use Phamily\tests\UnitTest;
+use Phamily\Framework\Model\traits\PersonaStubTrait;
+use Phamily\Framework\Collection\ChildrenCollection;
 
 /**
  * @author samizdam

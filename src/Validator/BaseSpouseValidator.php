@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Validator;
+namespace Phamily\Framework\Validator;
 
-use phamily\framework\Model\PersonaInterface;
+use Phamily\Framework\Model\PersonaInterface;
 
 class BaseSpouseValidator extends AbstractValidator implements SpouseValidatorInterface
 {

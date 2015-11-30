@@ -1,11 +1,11 @@
 <?php
 
-namespace phamily\framework\Collection;
+namespace Phamily\Framework\Collection;
 
-use phamily\framework\Model\PersonaInterface;
-use phamily\framework\Model\exceptions\LogicException;
-use phamily\framework\Validator\SpouseValidatorInterface;
-use phamily\framework\Validator\BaseSpouseValidator;
+use Phamily\Framework\Model\PersonaInterface;
+use Phamily\Framework\Model\exceptions\LogicException;
+use Phamily\Framework\Validator\SpouseValidatorInterface;
+use Phamily\Framework\Validator\BaseSpouseValidator;
 
 class SpouseCollection extends AbstractPersonaCollection implements SpouseCollectionInterface
 {

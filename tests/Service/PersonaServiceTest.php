@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Service;
+namespace Phamily\Framework\Service;
 
-use phamily\tests\UnitTest;
+use Phamily\tests\UnitTest;
 
 /**
  * @author samizdam
@@ -15,7 +15,7 @@ class PersonaServiceTest extends UnitTest
         $gender = $service::GENDER_MALE;
         $persona = $service->create($gender);
 
-        $this->assertInstanceOf(\phamily\framework\Model\PersonaInterface::class, $persona);
+        $this->assertInstanceOf(\Phamily\Framework\Model\PersonaInterface::class, $persona);
         $this->assertEquals($gender, $persona->getGender());
     }
 

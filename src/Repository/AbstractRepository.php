@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
 use Zend\Db\RowGateway\RowGateway;
 use Zend\Db\TableGateway\TableGateway;

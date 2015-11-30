@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\tests;
+namespace Phamily\tests;
 
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\TableGateway\TableGateway;

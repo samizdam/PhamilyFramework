@@ -1,10 +1,10 @@
 <?php
 
-namespace phamily\framework\Model;
+namespace Phamily\Framework\Model;
 
-use phamily\framework\ValueObject\DateTime;
-use phamily\tests\UnitTest;
-use phamily\framework\Model\exceptions\LogicException;
+use Phamily\Framework\ValueObject\DateTime;
+use Phamily\tests\UnitTest;
+use Phamily\Framework\Model\exceptions\LogicException;
 
 /**
  * @author samizdam

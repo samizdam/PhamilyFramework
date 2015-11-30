@@ -1,10 +1,10 @@
 <?php
 
-namespace phamily\framework\Validator;
+namespace Phamily\Framework\Validator;
 
-use phamily\framework\Model\PersonaInterface;
-use phamily\framework\Collection\ChildrenCollectionInterface;
-use phamily\framework\GenderAwareInterface;
+use Phamily\Framework\Model\PersonaInterface;
+use Phamily\Framework\Collection\ChildrenCollectionInterface;
+use Phamily\Framework\GenderAwareInterface;
 
 interface ChildrenValidatorInreface extends ValidatorInterface, GenderAwareInterface
 {

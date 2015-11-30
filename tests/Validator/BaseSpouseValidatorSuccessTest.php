@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Validator;
+namespace Phamily\Framework\Validator;
 
-use phamily\framework\Model\traits\PersonaStubTrait;
-use phamily\tests\UnitTest;
+use Phamily\Framework\Model\traits\PersonaStubTrait;
+use Phamily\tests\UnitTest;
 
 /**
  * @author samizdam

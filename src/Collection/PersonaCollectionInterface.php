@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Collection;
+namespace Phamily\Framework\Collection;
 
-use phamily\framework\GenderAwareInterface;
-use phamily\framework\Model\PersonaInterface;
+use Phamily\Framework\GenderAwareInterface;
+use Phamily\Framework\Model\PersonaInterface;
 
 interface PersonaCollectionInterface extends \Countable, \SeekableIterator, GenderAwareInterface
 {

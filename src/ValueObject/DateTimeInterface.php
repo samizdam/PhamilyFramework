@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\ValueObject;
+namespace Phamily\Framework\ValueObject;
 
 interface DateTimeInterface extends \DateTimeInterface
 {

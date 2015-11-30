@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\tests;
+namespace Phamily\tests;
 
 /**
  * @author samizdam

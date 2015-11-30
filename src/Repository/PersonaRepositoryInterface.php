@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Repository;
+namespace Phamily\Framework\Repository;
 
-use phamily\framework\Model\PersonaInterface;
-use phamily\framework\KinshipAwareInterface;
+use Phamily\Framework\Model\PersonaInterface;
+use Phamily\Framework\KinshipAwareInterface;
 
 interface PersonaRepositoryInterface extends KinshipAwareInterface
 {

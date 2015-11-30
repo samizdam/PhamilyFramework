@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Validator;
+namespace Phamily\Framework\Validator;
 
-use phamily\framework\Model\PersonaInterface;
-use phamily\framework\Collection\ChildrenCollectionInterface;
+use Phamily\Framework\Model\PersonaInterface;
+use Phamily\Framework\Collection\ChildrenCollectionInterface;
 
 class BaseChildrenValidator extends AbstractValidator implements ChildrenValidatorInreface
 {

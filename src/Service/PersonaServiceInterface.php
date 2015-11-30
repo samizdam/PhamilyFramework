@@ -1,11 +1,11 @@
 <?php
 
-namespace phamily\framework\Service;
+namespace Phamily\Framework\Service;
 
-use phamily\framework\Model\PersonaInterface;
-use phamily\framework\GenderAwareInterface;
-use phamily\framework\ValueObject\DateTimeInterface;
-use phamily\framework\KinshipAwareInterface;
+use Phamily\Framework\Model\PersonaInterface;
+use Phamily\Framework\GenderAwareInterface;
+use Phamily\Framework\ValueObject\DateTimeInterface;
+use Phamily\Framework\KinshipAwareInterface;
 
 interface PersonaServiceInterface extends GenderAwareInterface, KinshipAwareInterface
 {

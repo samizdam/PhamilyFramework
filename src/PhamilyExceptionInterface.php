@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework;
+namespace Phamily\Framework;
 
 /**
  * namespaced stuff for type hinting.

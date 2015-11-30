@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Model\traits;
+namespace Phamily\Framework\Model\traits;
 
-use phamily\framework\Model\PersonaInterface;
+use Phamily\Framework\Model\PersonaInterface;
 
 /**
  * @author samizdam

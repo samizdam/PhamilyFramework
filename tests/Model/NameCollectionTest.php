@@ -1,8 +1,8 @@
 <?php
 
-namespace phamily\framework\Model;
+namespace Phamily\Framework\Model;
 
-use phamily\tests\UnitTest;
+use Phamily\tests\UnitTest;
 
 /**
  * @author samizdam
@@ -35,6 +35,6 @@ class NameCollectionTest extends UnitTest
 
     private function getAnthroponymMock()
     {
-        return $this->getMockBuilder(\phamily\framework\Model\AnthroponymInterface::class)->getMock();
+        return $this->getMockBuilder(\Phamily\Framework\Model\AnthroponymInterface::class)->getMock();
     }
 }

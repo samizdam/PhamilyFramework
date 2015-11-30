@@ -1,9 +1,9 @@
 <?php
 
-namespace phamily\framework\Service\Proxy;
+namespace Phamily\Framework\Service\Proxy;
 
-use phamily\framework\Repository\PersonaRepositoryInterface;
-use phamily\framework\Model\PersonaInterface;
+use Phamily\Framework\Repository\PersonaRepositoryInterface;
+use Phamily\Framework\Model\PersonaInterface;
 
 class PersonaRepositoryProxy implements PersonaRepositoryInterface
 {

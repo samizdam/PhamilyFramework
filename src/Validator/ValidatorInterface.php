@@ -1,6 +1,6 @@
 <?php
 
-namespace phamily\framework\Validator;
+namespace Phamily\Framework\Validator;
 
 interface ValidatorInterface
 {
