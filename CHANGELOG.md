@@ -11,6 +11,9 @@
 - Configuration for CI. 
 - Search.
 
+### Changed
+- Use UpperCamelCase and singular naming in namespaces. 
+
 ## 0.0.4 - 2015-12-XX
 ### Changed
 - Update vendor dependencies.  
