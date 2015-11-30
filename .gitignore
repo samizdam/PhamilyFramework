@@ -1,4 +1,3 @@
-
 # IDE
 .buildpath
 .project
@@ -12,4 +11,5 @@ vendor/*
 config.php
 tests/config.php
 phpunit.xml
-tests/_coverage/*
+# phpunit coverage
+_coverage/*
