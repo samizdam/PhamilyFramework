@@ -2,8 +2,15 @@
     "name": "phamily/framework",
     "description": "Framework for developing genealogic's tree",
     "require": {
-        "zendframework/zend-db": "2.6.*"
+        "zendframework/zend-db": "2.6.*",
+        "robmorgan/phinx": "dev-i-697-options-constants"
     },
+    "repositories": [
+    	{
+    		"type": "vcs",
+    		"url": "git@github.com:samizdam/phinx.git"
+    	}
+    ],
     "require-dev": {
         "phpunit/phpunit": "5"
     },

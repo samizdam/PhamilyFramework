@@ -11,5 +11,7 @@ vendor/*
 config.php
 tests/config.php
 phpunit.xml
+phinx.yml
+
 # phpunit coverage
 _coverage/*
