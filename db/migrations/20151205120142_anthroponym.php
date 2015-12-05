@@ -8,7 +8,22 @@ class Anthroponym extends AbstractMigration
 
     public function up()
     {
-        $this->table("Anthroponym")
+        $this->table("Anthroponym", [
+            "id" => false,
+            'primary_key' => [
+                "type",
+                "value"
+            ]
+        ])
+            ->addColumn("id", ColumnType::PHINX_TYPE_INTEGER, [
+            ColumnOption::OPTION_NULLABLE => false,
+            ColumnOption::OPTION_ID => true
+        ])
+            ->addIndex([
+            "id"
+        ], [
+            "unique" => true
+        ])
             ->addColumn("type", ColumnType::PHINX_TYPE_STRING, [
             ColumnOption::OPTION_LIMIT => 255,
             ColumnOption::OPTION_NULLABLE => false
