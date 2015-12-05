@@ -3,7 +3,7 @@
     "description": "Framework for developing genealogic's tree",
     "require": {
         "zendframework/zend-db": "2.6.*",
-        "robmorgan/phinx": "dev-i-697-options-constants"
+        "robmorgan/phinx": "dev-dev"
     },
     "repositories": [
     	{
