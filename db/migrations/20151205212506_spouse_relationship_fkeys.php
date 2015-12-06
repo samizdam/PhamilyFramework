@@ -30,9 +30,9 @@ class SpouseRelationshipFkeys extends AbstractMigration
      */
     public function change()
     {
-        $this->table("SpouseRelationship")
-            ->addForeignKey("husbandId", "Persona")
-            ->addForeignKey("wifeId", "Persona")
+        $this->table("spouse_relationship")
+            ->addForeignKey("husband_id", "persona")
+            ->addForeignKey("wife_id", "persona")
             ->save();
     }
 }

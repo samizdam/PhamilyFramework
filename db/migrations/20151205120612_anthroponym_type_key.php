@@ -8,12 +8,8 @@ class AnthroponymTypeKey extends AbstractMigration
 
     public function up()
     {
-        $this->table("Anthroponym")
-            ->addForeignKey([
-            "type"
-        ], "AnthroponymType", [
-            "anthroponymType"
-        ], [
+        $this->table("anthroponym")
+            ->addForeignKey("type", "anthroponym_type", "anthroponym_type", [
             "update" => "cascade",
             "delete" => "restrict",
             "constraint" => "fk_anthroponym_to_anthroponym_type"
@@ -23,6 +19,6 @@ class AnthroponymTypeKey extends AbstractMigration
 
     public function down()
     {
-        $this->table("Anthroponym")->dropForeignKey("type", "fk_anthroponym_to_anthroponym_type");
+        $this->table("anthroponym")->dropForeignKey("type", "fk_anthroponym_to_anthroponym_type");
     }
 }

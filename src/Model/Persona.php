@@ -85,8 +85,8 @@ class Persona implements PersonaInterface
     {
         $data = (object) $data;
 
-        $this->setGender($data->gender);
-        $this->id = $data->id;
+        $this->setGender(isset($data->gender) ? $data->gender : null);
+        $this->id = isset($data->id) ? $data->id : null;
 
         return $this;
     }
@@ -276,7 +276,7 @@ class Persona implements PersonaInterface
 
     /**
      * (non-PHPdoc).
-     * 
+     *
      * @see \Phamily\Framework\Model\PersonaInterface::getSpouses()
      *
      * @return SpouseCollectionInterface

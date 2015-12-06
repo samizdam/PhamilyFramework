@@ -10,15 +10,15 @@ class SpouseRelationship extends AbstractMigration
 
     public function up()
     {
-        $this->table("SpouseRelationship")->addColumn("husbandId", ColumnType::PHINX_TYPE_INTEGER, [
+        $this->table("spouse_relationship")->addColumn("husband_id", ColumnType::PHINX_TYPE_INTEGER, [
             ColumnOption::OPTION_NULLABLE => false,
-        ])->addColumn("wifeId", ColumnType::PHINX_TYPE_INTEGER, [
+        ])->addColumn("wife_id", ColumnType::PHINX_TYPE_INTEGER, [
             ColumnOption::OPTION_NULLABLE => false,
         ])->save();
     }
 
     public function down()
     {
-        $this->table("SpouseRelationship")->drop();
+        $this->table("spouse_relationship")->drop();
     }
 }

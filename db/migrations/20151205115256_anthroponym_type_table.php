@@ -8,11 +8,11 @@ class AnthroponymTypeTable extends AbstractMigration
 
     public function up()
     {
-        $this->table("AnthroponymType", [
+        $this->table("anthroponym_type", [
             'id' => false,
-            'primary_key' => 'anthroponymType'
+            'primary_key' => 'anthroponym_type'
         ])
-            ->addColumn("anthroponymType", ColumnType::PHINX_TYPE_STRING, [
+            ->addColumn("anthroponym_type", ColumnType::PHINX_TYPE_STRING, [
             ColumnOption::OPTION_LIMIT => 255,
             ColumnOption::OPTION_NULLABLE => false
         ])
@@ -21,6 +21,6 @@ class AnthroponymTypeTable extends AbstractMigration
 
     public function down()
     {
-        $this->dropTable("AnthroponymType");
+        $this->dropTable("anthroponym_type");
     }
 }

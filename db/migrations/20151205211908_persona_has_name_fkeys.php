@@ -30,9 +30,9 @@ class PersonaHasNameFkeys extends AbstractMigration
      */
     public function change()
     {
-        $this->table("PersonaHasName")
-            ->addForeignKey("personaId", "Persona")
-            ->addForeignKey("nameId", "Anthroponym")
+        $this->table("persona_has_name")
+            ->addForeignKey("persona_id", "persona")
+            ->addForeignKey("name_id", "anthroponym")
             ->save();
     }
 }

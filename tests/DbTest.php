@@ -8,6 +8,8 @@ use Zend\Db\Adapter\Adapter;
 
 /**
  * @author samizdam
+ *
+ *
  */
 abstract class DbTest extends UnitTest
 {
@@ -33,6 +35,7 @@ abstract class DbTest extends UnitTest
     {
         return [
             'gender',
+            'phinxlog'
         ];
     }
 

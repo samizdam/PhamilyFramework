@@ -49,10 +49,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         $rowData = $this->extractData($persona);
 
         if ($this->notSaved($persona)) {
-            $ai = new SequenceFeature($this->primaryKey, 'persona_id_increment');
-            $tgw = $this->createTableGateway($this->tableName, $ai);
+            $ai = new SequenceFeature($this->primaryKey, 'persona_id_seq');
+            $tgw = $this->createTableGateway($this->tableName , $ai );
 
-            $rowData['createdAt'] = date('Y-m-d H:i:s');
+            $rowData['created_at'] = date('Y-m-d H:i:s');
             $tgw->insert($rowData);
             $rowData = $tgw->select([
                 'id' => $tgw->getLastInsertValue(),
@@ -75,10 +75,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         $anthroponymRepo = $this->factory(AnthroponymRepository::class);
         foreach ($persona->getNames() as $name) {
             $anthroponymRepo->save($name);
-            $relationTableGateway = new TableGateway('persona_has_names', $this->adapter);
+            $relationTableGateway = new TableGateway('persona_has_name', $this->adapter);
             $relationRowData = [
-                'personaId' => $persona->getId(),
-                'nameId' => $name->getId(),
+                'persona_id' => $persona->getId(),
+                'name_id' => $name->getId(),
             ];
             $relationTableGateway->insert($relationRowData);
         }
@@ -93,8 +93,8 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
             }
             list($husband, $wife) = $this->normalizeSpousePair($persona, $spouse);
             $data = [
-                'husbandId' => $husband->getId(),
-                'wifeId' => $wife->getId(),
+                'husband_id' => $husband->getId(),
+                'wife_id' => $wife->getId(),
             ];
             $spouseRelationTableGateway->insert($data);
         }
@@ -206,7 +206,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 
     protected function fetchChildren(PersonaInterface $persona, $data, $options)
     {
-        $parentColumnName = ($persona->getGender() === $persona::GENDER_MALE) ? 'fatherId' : 'motherId';
+        $parentColumnName = ($persona->getGender() === $persona::GENDER_MALE) ? 'father_id' : 'mother_id';
 
         $childrenRows = $this->createTableGateway($this->tableName)->select([
             $parentColumnName => $persona->getId(),
@@ -225,10 +225,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         $spouseRelationsSet = [];
         if ($persona->getGender() === $persona::GENDER_MALE) {
             $spouseRelationsSet = $spouseRelationshipTableGateway->select([
-                'husbandId' => $persona->getId(),
+                'husband_id' => $persona->getId(),
             ]);
             foreach ($spouseRelationsSet as $spouseRelation) {
-                $wifeId = $spouseRelation['wifeId'];
+                $wifeId = $spouseRelation['wife_id'];
                 $wife = $this->getById($wifeId, $options);
                 if (!$persona->getSpouses()->contains($wife)) {
                     $persona->addSpouse($wife);
@@ -236,10 +236,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
             }
         } elseif ($persona->getGender() === $persona::GENDER_FEMALE) {
             $spouseRelationsSet = $spouseRelationshipTableGateway->select([
-                'wifeId' => $persona->getId(),
+                'wife_id' => $persona->getId(),
             ]);
             foreach ($spouseRelationsSet as $spouseRelation) {
-                $husbandId = $spouseRelation['husbandId'];
+                $husbandId = $spouseRelation['husband_id'];
                 $husband = $this->getById($husbandId, $options);
                 if (!$persona->getSpouses()->contains($husband)) {
                     $persona->addSpouse($husband);
@@ -250,11 +250,11 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 
     protected function fetchParents(PersonaInterface $persona, $data, $options)
     {
-        if ($fatherId = $data['fatherId']) {
+        if ($fatherId = $data['father_id']) {
             $father = $this->getById($fatherId, $options);
             $persona->setFather($father);
         }
-        if ($motherId = $data['motherId']) {
+        if ($motherId = $data['mother_id']) {
             $mother = $this->getById($motherId, $options);
             $persona->setMother($mother);
         }
@@ -264,8 +264,8 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
     {
         $data = [
             'gender' => $persona->getGender(),
-            'fatherId' => $persona->hasFather() ? $persona->getFather()->getId() : null,
-            'motherId' => $persona->hasMother() ? $persona->getMother()->getId() : null,
+            'father_id' => $persona->hasFather() ? $persona->getFather()->getId() : null,
+            'mother_id' => $persona->hasMother() ? $persona->getMother()->getId() : null,
         ];
         if (!$this->notSaved($persona)) {
             $data['id'] = $persona->getId();
@@ -282,10 +282,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         $spouseTableGateway = $this->createTableGateway('spouse_relationship');
 
         $spouseTableGateway->delete([
-            'husbandId' => $persona->getId(),
+            'husband_id' => $persona->getId(),
         ]);
         $spouseTableGateway->delete([
-            'wifeId' => $persona->getId(),
+            'wife_id' => $persona->getId(),
         ]);
 
         /*
@@ -293,14 +293,14 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
          */
         $table = $this->createTableGateway($this->tableName);
         $table->update([
-            'fatherId' => null,
+            'father_id' => null,
         ], [
-            'fatherId' => $persona->getId(),
+            'father_id' => $persona->getId(),
         ]);
         $table->update([
-            'motherId' => null,
+            'mother_id' => null,
         ], [
-            'motherId' => $persona->getId(),
+            'mother_id' => $persona->getId(),
         ]);
 
         /*

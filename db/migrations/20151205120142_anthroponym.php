@@ -8,7 +8,7 @@ class Anthroponym extends AbstractMigration
 
     public function up()
     {
-        $this->table("Anthroponym", [
+        $this->table("anthroponym", [
             "id" => false,
             'primary_key' => [
                 "type",
@@ -36,6 +36,6 @@ class Anthroponym extends AbstractMigration
 
     public function down()
     {
-        $this->dropTable("Anthroponym");
+        $this->dropTable("anthroponym");
     }
 }

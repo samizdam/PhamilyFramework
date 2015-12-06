@@ -20,8 +20,8 @@ class SiblingsQueryCondition implements KinshipAwareInterface, GenderAwareInterf
     public function __construct($personaData)
     {
         $this->personaId = $personaData['id'];
-        $this->fatherId = $personaData['fatherId'];
-        $this->motherId = $personaData['motherId'];
+        $this->fatherId = $personaData['father_id'];
+        $this->motherId = $personaData['mother_id'];
     }
 
     public function getPredicate($degreesOfKinship = self::SIBLINGS)
@@ -32,8 +32,8 @@ class SiblingsQueryCondition implements KinshipAwareInterface, GenderAwareInterf
         $motherId = $this->motherId;
 
         if ($this->isFlagSet($degreesOfKinship, self::BROTHER)) {
-            $where = (new Where())->equalTo('fatherId', $fatherId)
-                ->equalTo('motherId', $motherId)
+            $where = (new Where())->equalTo('father_id', $fatherId)
+                ->equalTo('mother_id', $motherId)
                 ->equalTo('gender', self::GENDER_MALE)
                 ->notEqualTo('id', $personaId);
 
@@ -41,8 +41,8 @@ class SiblingsQueryCondition implements KinshipAwareInterface, GenderAwareInterf
         }
 
         if ($this->isFlagSet($degreesOfKinship, self::SISTER)) {
-            $where = (new Where())->equalTo('fatherId', $fatherId)
-                ->equalTo('motherId', $motherId)
+            $where = (new Where())->equalTo('father_id', $fatherId)
+                ->equalTo('mother_id', $motherId)
                 ->equalTo('gender', self::GENDER_FEMALE)
                 ->notEqualTo('id', $personaId);
 
@@ -50,45 +50,45 @@ class SiblingsQueryCondition implements KinshipAwareInterface, GenderAwareInterf
         }
 
         if ($this->isFlagSet($degreesOfKinship, self::HALF_BROTHER_PATERNAL)) {
-            $where = (new Where())->equalTo('fatherId', $fatherId)
+            $where = (new Where())->equalTo('father_id', $fatherId)
                 ->equalTo('gender', self::GENDER_MALE)
                 ->notEqualTo('id', $personaId);
 
-            $where->andPredicate((new Where())->notEqualTo('motherId', $motherId)
-                ->orPredicate((new Where())->isNull('motherId')));
+            $where->andPredicate((new Where())->notEqualTo('mother_id', $motherId)
+                ->orPredicate((new Where())->isNull('mother_id')));
 
             $siblingCondition->orPredicate($where);
         }
 
         if ($this->isFlagSet($degreesOfKinship, self::HALF_BROTHER_MATERNAL)) {
-            $where = (new Where())->equalTo('motherId', $motherId)
+            $where = (new Where())->equalTo('mother_id', $motherId)
                 ->equalTo('gender', self::GENDER_MALE)
                 ->notEqualTo('id', $personaId);
 
-            $where->andPredicate((new Where())->notEqualTo('fatherId', $fatherId)
-                ->orPredicate((new Where())->isNull('fatherId')));
+            $where->andPredicate((new Where())->notEqualTo('father_id', $fatherId)
+                ->orPredicate((new Where())->isNull('father_id')));
 
             $siblingCondition->orPredicate($where);
         }
 
         if ($this->isFlagSet($degreesOfKinship, self::HALF_SISTER_PATERNAL)) {
-            $where = (new Where())->equalTo('fatherId', $fatherId)
+            $where = (new Where())->equalTo('father_id', $fatherId)
                 ->equalTo('gender', self::GENDER_FEMALE)
                 ->notEqualTo('id', $personaId);
 
-            $where->andPredicate((new Where())->notEqualTo('motherId', $motherId)
-                ->orPredicate((new Where())->isNull('motherId')));
+            $where->andPredicate((new Where())->notEqualTo('mother_id', $motherId)
+                ->orPredicate((new Where())->isNull('mother_id')));
 
             $siblingCondition->orPredicate($where);
         }
 
         if ($this->isFlagSet($degreesOfKinship, self::HALF_SISTER_MATERNAL)) {
-            $where = (new Where())->equalTo('motherId', $motherId)
+            $where = (new Where())->equalTo('mother_id', $motherId)
                 ->equalTo('gender', self::GENDER_FEMALE)
                 ->notEqualTo('id', $personaId);
 
-            $where->andPredicate((new Where())->notEqualTo('fatherId', $fatherId)
-                ->orPredicate((new Where())->isNull('fatherId')));
+            $where->andPredicate((new Where())->notEqualTo('father_id', $fatherId)
+                ->orPredicate((new Where())->isNull('father_id')));
 
             $siblingCondition->orPredicate($where);
         }

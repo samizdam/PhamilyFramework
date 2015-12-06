@@ -9,23 +9,23 @@ class PersonaHasName extends AbstractMigration
 
     public function up()
     {
-        $this->table("PersonaHasName", [
+        $this->table("persona_has_name", [
             "id" => false,
             'primary_key' => [
-                "personaId",
-                "nameId"
+                "persona_id",
+                "name_id"
             ]
         ])
-            ->addColumn("personaId", ColumnType::PHINX_TYPE_INTEGER, [
+            ->addColumn("persona_id", ColumnType::PHINX_TYPE_INTEGER, [
             ColumnOption::OPTION_NULLABLE => false
         ])
-            ->addColumn("nameId", ColumnType::PHINX_TYPE_INTEGER, [
+            ->addColumn("name_id", ColumnType::PHINX_TYPE_INTEGER, [
             ColumnOption::OPTION_NULLABLE => false
         ])
             ->save();
     }
 
     public function down(){
-        $this->table("PersonaHasName")->drop();
+        $this->table("persona_has_name")->drop();
     }
 }

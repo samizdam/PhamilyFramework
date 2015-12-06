@@ -8,12 +8,12 @@ class Persona extends AbstractMigration
 
     public function up()
     {
-        $this->table("Persona")
-            ->addColumn("fatherId", ColumnType::PHINX_TYPE_INTEGER, [
+        $this->table("persona")
+            ->addColumn("father_id", ColumnType::PHINX_TYPE_INTEGER, [
             ColumnOption::OPTION_NULLABLE => true,
             ColumnOption::OPTION_DEFAULT => null
         ])
-            ->addColumn("motherId", ColumnType::PHINX_TYPE_INTEGER, [
+            ->addColumn("mother_id", ColumnType::PHINX_TYPE_INTEGER, [
             ColumnOption::OPTION_NULLABLE => true,
             ColumnOption::OPTION_DEFAULT => null
         ])
@@ -21,15 +21,15 @@ class Persona extends AbstractMigration
             ColumnOption::OPTION_NULLABLE => true,
             ColumnOption::OPTION_LIMIT => 6
         ])
-            ->addColumn("dateOfBirth", ColumnType::PHINX_TYPE_BIG_INTEGER, [
+            ->addColumn("date_of_birth", ColumnType::PHINX_TYPE_BIG_INTEGER, [
             ColumnOption::OPTION_DEFAULT => null,
             ColumnOption::OPTION_NULLABLE => true
         ])
-            ->addColumn("dateOfDeath", ColumnType::PHINX_TYPE_BIG_INTEGER, [
+            ->addColumn("date_of_death", ColumnType::PHINX_TYPE_BIG_INTEGER, [
             ColumnOption::OPTION_DEFAULT => null,
             ColumnOption::OPTION_NULLABLE => true
         ])
-            ->addTimestamps("createdAt", "updatedAt")
+            ->addTimestamps()
             ->save();
     }
 

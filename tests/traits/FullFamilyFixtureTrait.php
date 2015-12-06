@@ -56,8 +56,8 @@ trait FullFamilyFixtureTrait
         $father = [
             'id' => 3,
             'gender' => $male,
-            'fatherId' => 1,
-            'motherId' => 2,
+            'father_id' => 1,
+            'mother_id' => 2,
         ];
         $mother = [
             'id' => 4,
@@ -69,8 +69,8 @@ trait FullFamilyFixtureTrait
         $son = [
             'id' => 5,
             'gender' => $male,
-            'fatherId' => 3,
-            'motherId' => 4,
+            'father_id' => 3,
+            'mother_id' => 4,
         ];
         $sonWife = [
             'id' => 6,
@@ -79,37 +79,37 @@ trait FullFamilyFixtureTrait
         $daughter = [
             'id' => 7,
             'gender' => $female,
-            'fatherId' => 3,
-            'motherId' => 4,
+            'father_id' => 3,
+            'mother_id' => 4,
         ];
         $sonHalfBrotherOnFatherSide = [
             'id' => 8,
             'gender' => $male,
-            'fatherId' => 3,
+            'father_id' => 3,
         ];
         $sonHalfSisterOnMotherSide = [
             'id' => 9,
             'gender' => $female,
-            'motherId' => 4,
+            'mother_id' => 4,
         ];
 
         $grandsonA = [
             'id' => 10,
             'gender' => $male,
-            'fatherId' => 5,
-            'motherId' => 6,
+            'father_id' => 5,
+            'mother_id' => 6,
         ];
         $grandsonB = [
             'id' => 11,
             'gender' => $male,
-            'fatherId' => 5,
-            'motherId' => 6,
+            'father_id' => 5,
+            'mother_id' => 6,
         ];
         $grandsonC = [
             'id' => 12,
             'gender' => $male,
-            'fatherId' => 5,
-            'motherId' => 6,
+            'father_id' => 5,
+            'mother_id' => 6,
         ];
 
         $fixtures = [
@@ -136,16 +136,16 @@ trait FullFamilyFixtureTrait
 
         $relationships = [
             [
-                'husbandId' => $father['id'],
-                'wifeId' => $mother['id'],
+                'husband_id' => $father['id'],
+                'wife_id' => $mother['id'],
             ],
             [
-                'husbandId' => $fatherGrandPa['id'],
-                'wifeId' => $fatherGrandMa['id'],
+                'husband_id' => $fatherGrandPa['id'],
+                'wife_id' => $fatherGrandMa['id'],
             ],
             [
-                'husbandId' => $son['id'],
-                'wifeId' => $sonWife['id'],
+                'husband_id' => $son['id'],
+                'wife_id' => $sonWife['id'],
             ],
         ];
         foreach ($relationships as $spousesRel) {
