@@ -12,6 +12,7 @@ env:
 before_script:
   - composer self-update
   - composer install
+  - cp phinx.yml.dist phinx.yml
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database phamily_test;' -U postgres; fi" 
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database phamily_test;'; fi"
 

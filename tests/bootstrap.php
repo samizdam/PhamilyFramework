@@ -4,8 +4,8 @@ require __DIR__.'/../vendor/autoload.php';
 use Phinx\Config\Config;
 use Phamily\Framework\Util\DatabaseConfigAdapter;
 use Phinx\Migration\Manager;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Tests\Fixtures\DummyOutput;
+
 
 $config = Config::fromYaml(__DIR__ . '/../phinx.yml');
 $envName = getenv("PHAMILY_TEST_ENV") ?: "testing_sqlite" ;
