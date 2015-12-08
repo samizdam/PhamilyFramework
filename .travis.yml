@@ -13,7 +13,7 @@ before_script:
   - composer self-update
   - composer install
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database phamily_test;' -U postgres; fi" 
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database phamily_test;' fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database phamily_test;'; fi"
 
 script:
   - phpunit tests/
