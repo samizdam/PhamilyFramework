@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
 	bootstrap="tests/bootstrap.php"
->
+	backupGlobals="false"
+	processIsolation="false"
+	>
 	<filter><!-- 
 	  <blacklist>
 	    <directory suffix=".php">../vendor</directory>	  
