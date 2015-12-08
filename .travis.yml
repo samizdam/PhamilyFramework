@@ -1,0 +1,20 @@
+sudo: false
+
+language: php
+
+php:
+  - 5.6
+
+env: 
+  - DB=mysql PHAMILY_TEST_ENV=testing_mysql
+  - DB=pgsql PHAMILY_TEST_ENV=testing_pgsql
+
+before_script:
+  - composer self-update
+  - composer install
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database phamily_test;' -U postgres; fi" 
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database phamily_test;' fi"
+
+script:
+  - phpunit tests/
+

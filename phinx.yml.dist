@@ -38,7 +38,7 @@ environments:
         name: phamily_test
         user: postgres
         pass: ''
-        port: 
+        port: 5432
         charset: utf8
 
     testing_sqlite:
