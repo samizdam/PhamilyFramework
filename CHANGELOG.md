@@ -9,8 +9,11 @@
 - Support for noSQL storages. 
 - Import to some formats and API for representations.
 - Integration with Yii.   
-- Integration with Travis CI.  
 - Search.
+
+## 0.0.6 - 2015-12-09
+### Added
+- Integration with Travis CI.
 
 ## 0.0.5 - 2015-12-08
 ### Changed
