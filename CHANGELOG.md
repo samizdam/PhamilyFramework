@@ -5,18 +5,18 @@
 ## Unreleased
 ### Added
 - Export data from mainstream formats in subj. 
-- More persistanse storages support. 
+- Support for SQLite. 
+- Support for noSQL storages. 
 - Import to some formats and API for representations.
 - Integration with Yii.   
-- Configuration for CI. 
+- Integration with Travis CI.  
 - Search.
 
-### Changed 
-- Use migrations for create database schemas. 
-- Make tests runnable with different db-drivers.   
-
-## 0.0.5 - 2015-12-XX
+## 0.0.5 - 2015-12-08
+### Changed
 - Use UpperCamelCase in namespace for vendor and project.  
+- Use migrations for create database schemas.
+- Make tests runnable with different db-drivers.
 
 ## 0.0.4 - 2015-12-01
 ### Changed
