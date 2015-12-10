@@ -11,6 +11,12 @@ env:
   - DB=mysql PHAMILY_TEST_ENV=testing_mysql
   - DB=pgsql PHAMILY_TEST_ENV=testing_pgsql
 
+
+matrix:
+  exclude:
+    - php: hhvm
+      env: DB=pgsql
+
 before_script:
   - composer self-update
   - composer install
