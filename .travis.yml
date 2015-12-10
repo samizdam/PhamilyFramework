@@ -8,19 +8,18 @@ php:
   - hhvm
 
 env: 
-  - DB=mysql
-  - DB=pgsql
+  - DB=mysql PHAMILY_TEST_ENV=testing_mysql
+  - DB=pgsql PHAMILY_TEST_ENV=testing_pgsql
 
 matrix:
   exclude:
     - php: hhvm
-      env: DB=pgsql
+      env: DB=pgsql PHAMILY_TEST_ENV=testing_pgsql
 
 before_script:
   - composer self-update
   - composer install
   - cp phinx.yml.dist phinx.yml
-  - export PHAMILY_TEST_ENV=testing_mysql
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database phamily_test;' -U postgres; fi" 
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database phamily_test;'; fi"
   - vendor/bin/phinx migrate -e $PHAMILY_TEST_ENV
