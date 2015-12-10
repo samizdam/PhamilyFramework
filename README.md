@@ -4,6 +4,10 @@
 
 Framework for developing genealogic's tree. Under developing, with open source, not commercial, free for all issues use.
 
+Complitable with:
+	- php versions: 5.6 and 7.0.
+	- MySQL and Postgres. 
+
 # Install and Run
 
 1. Clone this repo. 
