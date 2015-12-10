@@ -11,6 +11,11 @@
 - Integration with Yii.   
 - Search.
 
+## 0.0.7 - 2015-12-10
+### Changed
+- Move Bitmask trait to Util namespace.
+- Move migrations execution from testing bootstrap to .travis config.   
+
 ## 0.0.6 - 2015-12-09
 ### Added
 - Integration with Travis CI.

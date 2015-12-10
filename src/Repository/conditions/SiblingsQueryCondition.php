@@ -4,7 +4,7 @@ namespace Phamily\Framework\Repository\conditions;
 
 use Phamily\Framework\KinshipAwareInterface;
 use Phamily\Framework\GenderAwareInterface;
-use Phamily\Framework\traits\BitmaskTrait;
+use Phamily\Framework\Util\BitmaskTrait;
 use Zend\Db\Sql\Where;
 
 class SiblingsQueryCondition implements KinshipAwareInterface, GenderAwareInterface

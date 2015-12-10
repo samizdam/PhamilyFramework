@@ -7,7 +7,7 @@ use Phamily\Framework\Model\PersonaInterface;
 use Phamily\Framework\ValueObject\DateTimeInterface;
 use Phamily\Framework\Repository\PersonaRepositoryInterface;
 use Phamily\Framework\Service\Proxy\PersonaRepositoryProxy;
-use Phamily\Framework\traits\BitmaskTrait;
+use Phamily\Framework\Util\BitmaskTrait;
 
 class PersonaService implements PersonaServiceInterface
 {
