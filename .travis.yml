@@ -25,5 +25,7 @@ before_script:
   - vendor/bin/phinx migrate -e $PHAMILY_TEST_ENV
 
 script:
-  - phpunit tests/
+  - phpunit --coverage-clover build/logs/clover.xml tests/
 
+after_script:
+  - ./vendor/bin/test-reporter
