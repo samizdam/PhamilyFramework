@@ -13,6 +13,10 @@
 - Separete Unit and Integration (DB) tests.  
 - Extract Config Adapter to standalone package.  
 
+## 0.0.9 - 2015-12-XX
+### Changed
+- Rename PersonaService::getById() method to getPersonaById().  
+
 ## 0.0.8 - 2015-12-12
 ### Added
 - Integration with codeclimate. 

@@ -141,7 +141,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
      *
      * @return Persona
      */
-    public function getById($id, $fetchWithOptions = self::WITHOUT_KINSHIP)
+    public function getPersonaById($id, $fetchWithOptions = self::WITHOUT_KINSHIP)
     {
         $options = $fetchWithOptions;
 
@@ -198,7 +198,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         $siblingRows = $this->createTableGateway($this->tableName)->select($where);
 
         foreach ($siblingRows as $row) {
-            $siblings[] = $this->getById($row['id'], $degreeOfKinship);
+            $siblings[] = $this->getPersonaById($row['id'], $degreeOfKinship);
         }
 
         return $siblings;
@@ -212,7 +212,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
             $parentColumnName => $persona->getId(),
         ]);
         foreach ($childrenRows as $childRow) {
-            $child = $this->getById($childRow['id'], $options);
+            $child = $this->getPersonaById($childRow['id'], $options);
             if (!$persona->getChildren()->contains($child)) {
                 $persona->addChild($child);
             }
@@ -229,7 +229,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
             ]);
             foreach ($spouseRelationsSet as $spouseRelation) {
                 $wifeId = $spouseRelation['wife_id'];
-                $wife = $this->getById($wifeId, $options);
+                $wife = $this->getPersonaById($wifeId, $options);
                 if (!$persona->getSpouses()->contains($wife)) {
                     $persona->addSpouse($wife);
                 }
@@ -240,7 +240,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
             ]);
             foreach ($spouseRelationsSet as $spouseRelation) {
                 $husbandId = $spouseRelation['husband_id'];
-                $husband = $this->getById($husbandId, $options);
+                $husband = $this->getPersonaById($husbandId, $options);
                 if (!$persona->getSpouses()->contains($husband)) {
                     $persona->addSpouse($husband);
                 }
@@ -251,11 +251,11 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
     protected function fetchParents(PersonaInterface $persona, $data, $options)
     {
         if ($fatherId = $data['father_id']) {
-            $father = $this->getById($fatherId, $options);
+            $father = $this->getPersonaById($fatherId, $options);
             $persona->setFather($father);
         }
         if ($motherId = $data['mother_id']) {
-            $mother = $this->getById($motherId, $options);
+            $mother = $this->getPersonaById($motherId, $options);
             $persona->setMother($mother);
         }
     }

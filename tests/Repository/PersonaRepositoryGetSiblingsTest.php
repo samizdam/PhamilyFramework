@@ -19,7 +19,7 @@ class PersonaRepositoryGetSiblingsTest extends DbTest
         $repository = $this->getRepository();
         $fixtures = $this->createFullFamilyFixtures();
 
-        $son = $repository->getById($fixtures['son']['id']);
+        $son = $repository->getPersonaById($fixtures['son']['id']);
         $siblings = $repository->getSiblings($son, $repository::HALF_SIBLING);
 
         $this->assertCount(2, $siblings);
@@ -30,7 +30,7 @@ class PersonaRepositoryGetSiblingsTest extends DbTest
         $repository = $this->getRepository();
         $fixtures = $this->createFullFamilyFixtures();
 
-        $son = $repository->getById($fixtures['son']['id']);
+        $son = $repository->getPersonaById($fixtures['son']['id']);
         $siblings = $repository->getSiblings($son, $repository::HALF_BROTHER);
 
         $this->assertCount(1, $siblings);
@@ -41,7 +41,7 @@ class PersonaRepositoryGetSiblingsTest extends DbTest
         $repository = $this->getRepository();
         $fixtures = $this->createFullFamilyFixtures();
 
-        $son = $repository->getById($fixtures['son']['id']);
+        $son = $repository->getPersonaById($fixtures['son']['id']);
         $siblings = $repository->getSiblings($son, $repository::HALF_SISTER);
 
         $this->assertCount(1, $siblings);
@@ -52,7 +52,7 @@ class PersonaRepositoryGetSiblingsTest extends DbTest
         $repository = $this->getRepository();
         $fixtures = $this->createFullFamilyFixtures();
 
-        $son = $repository->getById($fixtures['son']['id']);
+        $son = $repository->getPersonaById($fixtures['son']['id']);
         $siblings = $repository->getSiblings($son, $repository::HALF_SISTER_PATERNAL);
 
         $this->assertCount(0, $siblings);

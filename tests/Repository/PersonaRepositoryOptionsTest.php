@@ -97,6 +97,6 @@ class PersonaRepositoryOptionsTest extends DbTest
 
     private function getPersonaWithOptions($id, $options)
     {
-        return $this->getRepository()->getById($id, $options);
+        return $this->getRepository()->getPersonaById($id, $options);
     }
 }

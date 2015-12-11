@@ -47,7 +47,7 @@ class PersonaServiceWithDbRepositoryTest extends DbTest
         $service = $this->createServiceWithRepository();
         $fixtures = $this->createFullFamilyFixtures();
 
-        $son = $service->getById($fixtures['son']['id']);
+        $son = $service->getPersonaById($fixtures['son']['id']);
         $siblings = $service->getSiblings($son, $service::FULL_SIBLINGS);
         $this->assertCount(1, $siblings);
         $this->assertEquals($service::GENDER_FEMALE, $siblings[0]->getGender());

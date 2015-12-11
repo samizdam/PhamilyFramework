@@ -31,18 +31,10 @@ class PersonaService implements PersonaServiceInterface
     }
 
     /**
-     * (non-PHPdoc).
      *
+     * (non-PHPdoc)
      * @see \Phamily\Framework\Service\PersonaServiceInterface::createPersona()
      *
-     * @param string            $gender
-     * @param array             $names
-     * @param PersonaInterface  $father
-     * @param PersonaInterface  $mother
-     * @param DateTimeInterface $dateOfBirth
-     * @param DateTimeInterface $dateOfDeath
-     *
-     * @return \Phamily\Framework\Model\Persona
      */
     public function createPersona($gender = self::GENDER_UNDEFINED, array $names = [], PersonaInterface $father = null, PersonaInterface $mother = null, DateTimeInterface $dateOfBirth = null, DateTimeInterface $dateOfDeath = null)
     {
@@ -53,9 +45,15 @@ class PersonaService implements PersonaServiceInterface
         return $persona;
     }
 
-    public function getById($id, $fetchWithOptions = self::ALL_KINSHIP)
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Service\PersonaServiceInterface::getPersonaById()
+     *
+     */
+    public function getPersonaById($id, $fetchWithOptions = self::ALL_KINSHIP)
     {
-        return $this->repository->getById($id, $fetchWithOptions);
+        return $this->repository->getPersonaById($id, $fetchWithOptions);
     }
 
     public function delete(PersonaInterface &$persona)

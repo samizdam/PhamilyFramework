@@ -31,7 +31,7 @@ class PersonaRepositoryTest extends DbTest
         $repository = $this->getRepository();
         $fixtures = $this->createFamilyFixtures();
         $son = $fixtures['son'];
-        $sonPersona = $repository->getById($son['id']);
+        $sonPersona = $repository->getPersonaById($son['id']);
         $this->assertEquals($son['id'], $sonPersona->getId());
         $this->assertEquals($son['gender'], $sonPersona->getGender());
     }
@@ -144,7 +144,7 @@ class PersonaRepositoryTest extends DbTest
     {
         $repository = $this->getRepository();
         $this->setExpectedException(NotFoundException::class);
-        $repository->getById(100500);
+        $repository->getPersonaById(100500);
     }
 
     public function testSaveSpousesRelationship()

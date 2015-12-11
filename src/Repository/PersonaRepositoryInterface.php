@@ -9,7 +9,7 @@ interface PersonaRepositoryInterface extends KinshipAwareInterface
 {
     public function save(PersonaInterface $persona);
 
-    public function getById($id, $fetchWithOptions = self::WITHOUT_KINSHIP);
+    public function getPersonaById($id, $fetchWithOptions = self::WITHOUT_KINSHIP);
 
     public function getSiblings(PersonaInterface $persona, $degreeOfKinship = self::SIBLINGS);
 
