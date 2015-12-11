@@ -17,7 +17,7 @@ class PersonaServiceWithDbRepositoryTest extends DbTest
     public function testNewPersonaIsPersisted()
     {
         $service = $this->createServiceWithRepository();
-        $persona = $service->create();
+        $persona = $service->createPersona();
 
         $this->assertTableHasData('persona', [
             'id' => $persona->getId(),
@@ -29,7 +29,7 @@ class PersonaServiceWithDbRepositoryTest extends DbTest
     {
         $service = $this->createServiceWithRepository();
 
-        $persona = $service->create();
+        $persona = $service->createPersona();
         $personaId = $persona->getId();
 
         $this->assertTableHasData('persona', [

@@ -30,7 +30,20 @@ class PersonaService implements PersonaServiceInterface
         return $this->repository->isActive();
     }
 
-    public function create($gender = self::GENDER_UNDEFINED, array $names = [], PersonaInterface $father = null, PersonaInterface $mother = null, DateTimeInterface $dateOfBirth = null, DateTimeInterface $dateOfDeath = null)
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Service\PersonaServiceInterface::createPersona()
+     *
+     * @param string $gender
+     * @param array $names
+     * @param PersonaInterface $father
+     * @param PersonaInterface $mother
+     * @param DateTimeInterface $dateOfBirth
+     * @param DateTimeInterface $dateOfDeath
+     * @return \Phamily\Framework\Model\Persona
+     */
+    public function createPersona($gender = self::GENDER_UNDEFINED, array $names = [], PersonaInterface $father = null, PersonaInterface $mother = null, DateTimeInterface $dateOfBirth = null, DateTimeInterface $dateOfDeath = null)
     {
         $persona = new Persona($gender, $names);
 

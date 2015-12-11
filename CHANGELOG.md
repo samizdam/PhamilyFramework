@@ -10,6 +10,12 @@
 - Import to some formats and API for representations.
 - Integration with Yii.   
 - Search.
+- Separete Unit and Integration (DB) tests.  
+- Extract Config Adapter to standalone package.  
+
+## 0.0.8 - 2015-12-XX
+### Changed 
+- Rename PersonaService::create() method to createPersona(). 
 
 ## 0.0.7 - 2015-12-10
 ### Changed

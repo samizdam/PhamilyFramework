@@ -9,20 +9,20 @@ use Phamily\tests\UnitTest;
  */
 class PersonaServiceTest extends UnitTest
 {
-    public function testPersonaCreatingWithGender()
+    public function testCreatePersonaeWithGender()
     {
         $service = new PersonaService();
         $gender = $service::GENDER_MALE;
-        $persona = $service->create($gender);
+        $persona = $service->createPersona($gender);
 
         $this->assertInstanceOf(\Phamily\Framework\Model\PersonaInterface::class, $persona);
         $this->assertEquals($gender, $persona->getGender());
     }
 
-    public function testPersonaCreatingWithNames()
+    public function testCreatePersonaWithNames()
     {
         $service = new PersonaService();
-        $persona = $service->create(null, [
+        $persona = $service->createPersona(null, [
             'personalName' => 'Vasya',
             'surname' => 'Pupkin',
         ]);
@@ -34,7 +34,7 @@ class PersonaServiceTest extends UnitTest
     public function testDeletePersona()
     {
         $service = new PersonaService();
-        $persona = $service->create();
+        $persona = $service->createPersona();
         $service->delete($persona);
         $this->assertEmpty($persona);
     }
