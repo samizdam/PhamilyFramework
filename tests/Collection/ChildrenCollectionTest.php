@@ -4,7 +4,7 @@ namespace Phamily\Framework\Collection;
 
 use Phamily\tests\UnitTest;
 use Phamily\Framework\Model\traits\PersonaStubTrait;
-use Phamily\Framework\Model\exceptions;
+use Phamily\Framework\Model\Exception;
 
 /**
  * @author samizdam
@@ -35,7 +35,7 @@ class ChildrenCollectionTest extends UnitTest
         $childA = $this->createPersonaStub();
 
         $collection->add($childA);
-        $this->setExpectedException(exceptions\LogicException::class);
+        $this->setExpectedException(Exception\LogicException::class);
         $collection->add($childA);
     }
 
@@ -66,7 +66,7 @@ class ChildrenCollectionTest extends UnitTest
         $child = $this->createPersonaStub();
         $collection->add($child);
 
-        $this->setExpectedException(exceptions\OutOfBoundsException::class);
+        $this->setExpectedException(Exception\OutOfBoundsException::class);
         $collection->seek(5);
     }
 
@@ -75,7 +75,7 @@ class ChildrenCollectionTest extends UnitTest
         $parent = $this->createPersonaStub(ChildrenCollection::GENDER_MALE);
         $collection = new ChildrenCollection($parent);
 
-        $this->setExpectedException(exceptions\LogicException::class);
+        $this->setExpectedException(Exception\LogicException::class);
         $collection->add($parent);
     }
 }

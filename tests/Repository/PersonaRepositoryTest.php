@@ -5,7 +5,7 @@ namespace Phamily\Framework\Repository;
 use Phamily\Framework\Model\Persona;
 use Phamily\tests\DbTest;
 use Phamily\tests\Repository\traits\PersonaRepositoryTrait;
-use Phamily\Framework\Repository\exceptions\NotFoundException;
+use Phamily\Framework\Repository\Exception\NotFoundException;
 
 /**
  * @author samizdam

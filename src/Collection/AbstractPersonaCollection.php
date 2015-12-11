@@ -3,7 +3,7 @@
 namespace Phamily\Framework\Collection;
 
 use Phamily\Framework\Model\PersonaInterface;
-use Phamily\Framework\Model\exceptions\OutOfBoundsException;
+use Phamily\Framework\Model\Exception\OutOfBoundsException;
 
 abstract class AbstractPersonaCollection implements PersonaCollectionInterface
 {

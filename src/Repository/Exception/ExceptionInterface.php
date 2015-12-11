@@ -1,6 +1,6 @@
 <?php
 
-namespace Phamily\Framework\Repository\exceptions;
+namespace Phamily\Framework\Repository\Exception;
 
 use Phamily\Framework\PhamilyExceptionInterface;
 

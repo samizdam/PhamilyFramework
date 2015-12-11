@@ -3,7 +3,7 @@
 namespace Phamily\Framework\Collection;
 
 use Phamily\Framework\Model\PersonaInterface;
-use Phamily\Framework\Model\exceptions\LogicException;
+use Phamily\Framework\Model\Exception\LogicException;
 use Phamily\Framework\Validator\SpouseValidatorInterface;
 use Phamily\Framework\Validator\BaseSpouseValidator;
 

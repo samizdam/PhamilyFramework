@@ -4,7 +4,7 @@ namespace Phamily\Framework\Collection;
 
 use Phamily\tests\UnitTest;
 use Phamily\Framework\Model\traits\PersonaStubTrait;
-use Phamily\Framework\Model\exceptions\LogicException;
+use Phamily\Framework\Model\Exception\LogicException;
 use Phamily\Framework\Validator\FakeTrueValidator;
 
 /**

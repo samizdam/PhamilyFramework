@@ -4,7 +4,7 @@ namespace Phamily\Framework\Model;
 
 use Phamily\Framework\ValueObject\DateTime;
 use Phamily\tests\UnitTest;
-use Phamily\Framework\Model\exceptions\LogicException;
+use Phamily\Framework\Model\Exception\LogicException;
 
 /**
  * @author samizdam
