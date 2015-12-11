@@ -31,16 +31,17 @@ class PersonaService implements PersonaServiceInterface
     }
 
     /**
+     * (non-PHPdoc).
      *
-     * (non-PHPdoc)
      * @see \Phamily\Framework\Service\PersonaServiceInterface::createPersona()
      *
-     * @param string $gender
-     * @param array $names
-     * @param PersonaInterface $father
-     * @param PersonaInterface $mother
+     * @param string            $gender
+     * @param array             $names
+     * @param PersonaInterface  $father
+     * @param PersonaInterface  $mother
      * @param DateTimeInterface $dateOfBirth
      * @param DateTimeInterface $dateOfDeath
+     *
      * @return \Phamily\Framework\Model\Persona
      */
     public function createPersona($gender = self::GENDER_UNDEFINED, array $names = [], PersonaInterface $father = null, PersonaInterface $mother = null, DateTimeInterface $dateOfBirth = null, DateTimeInterface $dateOfDeath = null)

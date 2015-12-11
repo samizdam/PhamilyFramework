@@ -50,7 +50,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 
         if ($this->notSaved($persona)) {
             $ai = new SequenceFeature($this->primaryKey, 'persona_id_seq');
-            $tgw = $this->createTableGateway($this->tableName , $ai );
+            $tgw = $this->createTableGateway($this->tableName, $ai);
 
             $rowData['created_at'] = date('Y-m-d H:i:s');
             $tgw->insert($rowData);

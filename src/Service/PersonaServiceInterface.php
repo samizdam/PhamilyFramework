@@ -8,19 +8,17 @@ use Phamily\Framework\ValueObject\DateTimeInterface;
 use Phamily\Framework\KinshipAwareInterface;
 
 /**
- *
  * @author samizdam
- *
  */
 interface PersonaServiceInterface extends GenderAwareInterface, KinshipAwareInterface
 {
     /**
      * Create new Persona with given attributes.
      *
-     * @param string $gender
-     * @param array $names
-     * @param PersonaInterface $father
-     * @param PersonaInterface $mother
+     * @param string            $gender
+     * @param array             $names
+     * @param PersonaInterface  $father
+     * @param PersonaInterface  $mother
      * @param DateTimeInterface $dateOfBirth
      * @param DateTimeInterface $dateOfDeath
      */

@@ -3,18 +3,15 @@
 namespace Phamily\Framework\Util;
 
 /**
- *
  * @author samizdam
- *
  */
 trait BitmaskTrait
 {
-
     /**
-     *
      * @param int $options
      * @param int $flag
-     * @return boolean
+     *
+     * @return bool
      */
     protected function isFlagSet($options, $flag)
     {
