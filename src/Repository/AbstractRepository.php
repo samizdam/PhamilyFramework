@@ -4,12 +4,23 @@ namespace Phamily\Framework\Repository;
 
 use Zend\Db\RowGateway\RowGateway;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\AdapterInterface;
 
+/**
+ * Repositories layer super class.
+ *
+ * @author samizdam
+ *
+ */
 abstract class AbstractRepository implements RepositoryInterface
 {
     protected $adapter;
 
-    public function __construct($adapter)
+    /**
+     *
+     * @param unknown $adapter
+     */
+    public function __construct(AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
     }

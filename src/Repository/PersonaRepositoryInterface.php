@@ -5,6 +5,11 @@ namespace Phamily\Framework\Repository;
 use Phamily\Framework\Model\PersonaInterface;
 use Phamily\Framework\KinshipAwareInterface;
 
+/**
+ *
+ * @author samizdam
+ *
+ */
 interface PersonaRepositoryInterface extends KinshipAwareInterface
 {
     public function save(PersonaInterface $persona);
