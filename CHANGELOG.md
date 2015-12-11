@@ -15,7 +15,8 @@
 
 ## 0.0.9 - 2015-12-XX
 ### Changed
-- Rename PersonaService::getById() method to getPersonaById().  
+- Rename PersonaService::getById() method to getPersonaById(). 
+- Rename PersonaService::delete() method to deletePersona().
 
 ## 0.0.8 - 2015-12-12
 ### Added

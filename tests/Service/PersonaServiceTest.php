@@ -35,7 +35,7 @@ class PersonaServiceTest extends UnitTest
     {
         $service = new PersonaService();
         $persona = $service->createPersona();
-        $service->delete($persona);
+        $service->deletePersona($persona);
         $this->assertEmpty($persona);
     }
 }

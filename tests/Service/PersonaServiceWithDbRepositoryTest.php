@@ -36,7 +36,7 @@ class PersonaServiceWithDbRepositoryTest extends DbTest
             'id' => $personaId,
         ]);
 
-        $service->delete($persona);
+        $service->deletePersona($persona);
         $this->assertTableHasNotData('persona', [
             'id' => $personaId,
         ]);

@@ -27,7 +27,13 @@ interface PersonaServiceInterface extends GenderAwareInterface, KinshipAwareInte
      */
     public function createPersona($gender, array $names = [], PersonaInterface $father = null, PersonaInterface $mother = null, DateTimeInterface $dateOfBirth = null, DateTimeInterface $dateOfDeath = null);
 
-    public function delete(PersonaInterface &$persona);
+    /**
+     * Delete given persona from persistent storage.
+     *
+     * @param PersonaInterface $persona
+     * @return void
+     */
+    public function deletePersona(PersonaInterface &$persona);
 
 
     /**

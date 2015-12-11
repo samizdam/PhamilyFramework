@@ -9,6 +9,12 @@ use Phamily\Framework\Repository\PersonaRepositoryInterface;
 use Phamily\Framework\Service\Proxy\PersonaRepositoryProxy;
 use Phamily\Framework\Util\BitmaskTrait;
 
+/**
+ * Facade for CRUD and find Persona.
+ *
+ * @author samizdam
+ *
+ */
 class PersonaService implements PersonaServiceInterface
 {
     use BitmaskTrait;
@@ -56,7 +62,13 @@ class PersonaService implements PersonaServiceInterface
         return $this->repository->getPersonaById($id, $fetchWithOptions);
     }
 
-    public function delete(PersonaInterface &$persona)
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Service\PersonaServiceInterface::deletePersona()
+     *
+     */
+    public function deletePersona(PersonaInterface &$persona)
     {
         $this->repository->delete($persona);
 
