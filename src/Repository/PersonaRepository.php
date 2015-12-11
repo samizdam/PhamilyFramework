@@ -1,5 +1,4 @@
 <?php
-
 namespace Phamily\Framework\Repository;
 
 use Phamily\Framework\Model\PersonaInterface;
@@ -9,26 +8,53 @@ use Phamily\Framework\Repository\exceptions\NotFoundException;
 use Phamily\Framework\Util\BitmaskTrait;
 use Phamily\Framework\Repository\conditions\SiblingsQueryCondition;
 use Zend\Db\TableGateway\Feature\SequenceFeature;
+use Zend\Db\Adapter\AdapterInterface;
 
+/**
+ * TODO this class is too big and need refactoring.
+ *
+ * @author samizdam
+ *
+ */
 class PersonaRepository extends AbstractRepository implements PersonaRepositoryInterface
 {
     use BitmaskTrait;
 
+    /**
+     *
+     * @var string
+     */
     protected $tableName = 'persona';
 
+    /**
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
+     *
      * @var PersonaRepositoryCacheInterface
      */
     protected $cache;
 
-    public function __construct($adapter)
+    /**
+     *
+     * @param AdapterInterface $adapter
+     */
+    public function __construct(AdapterInterface $adapter)
     {
         parent::__construct($adapter);
         $this->cache = new BasePersonaRepositoryCache();
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     *
+     * @see \Phamily\Framework\Repository\PersonaRepositoryInterface::save()
+     *
+     */
     public function save(PersonaInterface $persona)
     {
         /*
@@ -55,7 +81,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
             $rowData['created_at'] = date('Y-m-d H:i:s');
             $tgw->insert($rowData);
             $rowData = $tgw->select([
-                'id' => $tgw->getLastInsertValue(),
+                'id' => $tgw->getLastInsertValue()
             ])
                 ->current();
         } else {
@@ -78,7 +104,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
             $relationTableGateway = new TableGateway('persona_has_name', $this->adapter);
             $relationRowData = [
                 'persona_id' => $persona->getId(),
-                'name_id' => $name->getId(),
+                'name_id' => $name->getId()
             ];
             $relationTableGateway->insert($relationRowData);
         }
@@ -91,10 +117,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
             if ($this->notSaved($spouse)) {
                 $this->save($spouse);
             }
-            list($husband, $wife) = $this->normalizeSpousePair($persona, $spouse);
+            list ($husband, $wife) = $this->normalizeSpousePair($persona, $spouse);
             $data = [
                 'husband_id' => $husband->getId(),
-                'wife_id' => $wife->getId(),
+                'wife_id' => $wife->getId()
             ];
             $spouseRelationTableGateway->insert($data);
         }
@@ -115,6 +141,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
     }
 
     /**
+     *
      * @param PersonaInterface $persona
      * @param PersonaInterface $spouse
      *
@@ -124,22 +151,31 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
     {
         return ($persona->getGender() === PersonaInterface::GENDER_MALE) ? [
             $persona,
-            $spouse,
+            $spouse
         ] : [
             $spouse,
-            $persona,
+            $persona
         ];
     }
 
+    /**
+     *
+     *
+     * @param PersonaInterface $persona
+     * @return bool
+     */
     protected function notSaved(PersonaInterface $persona)
     {
         return $persona->getId() === null;
     }
 
     /**
-     * @throws
      *
-     * @return Persona
+     * (non-PHPdoc)
+     *
+     * @see \Phamily\Framework\Repository\PersonaRepositoryInterface::getPersonaById()
+     *
+     * @throws NotFoundException
      */
     public function getPersonaById($id, $fetchWithOptions = self::WITHOUT_KINSHIP)
     {
@@ -154,14 +190,14 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         } else {
             $tableGateway = new TableGateway($this->tableName, $this->adapter);
             $resultSet = $tableGateway->select([
-                'id' => $id,
+                'id' => $id
             ]);
 
             if ($resultSet->count()) {
                 $data = $resultSet->current();
                 $persona = (new Persona())->populate($data);
 
-                if (!$this->cache->has($id)) {
+                if (! $this->cache->has($id)) {
                     $this->cache->add($persona, $data, $options);
                 }
             }
@@ -186,6 +222,12 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         return $persona;
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\PersonaRepositoryInterface::getSiblings()
+     *
+     */
     public function getSiblings(PersonaInterface $persona, $degreeOfKinship = self::SIBLINGS)
     {
         $siblings = [];
@@ -204,51 +246,75 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         return $siblings;
     }
 
-    protected function fetchChildren(PersonaInterface $persona, $data, $options)
+    /**
+     *
+     *
+     * @param PersonaInterface $persona
+     * @param \ArrayAccess $data
+     * @param int $options
+     * @return return_type
+     */
+    protected function fetchChildren(PersonaInterface $persona, \ArrayAccess $data, $options)
     {
         $parentColumnName = ($persona->getGender() === $persona::GENDER_MALE) ? 'father_id' : 'mother_id';
 
         $childrenRows = $this->createTableGateway($this->tableName)->select([
-            $parentColumnName => $persona->getId(),
+            $parentColumnName => $persona->getId()
         ]);
         foreach ($childrenRows as $childRow) {
             $child = $this->getPersonaById($childRow['id'], $options);
-            if (!$persona->getChildren()->contains($child)) {
+            if (! $persona->getChildren()->contains($child)) {
                 $persona->addChild($child);
             }
         }
     }
 
-    protected function fetchSpouses(PersonaInterface $persona, $data, $options)
+    /**
+     *
+     *
+     * @param PersonaInterface $persona
+     * @param \ArrayAccess $data
+     * @param int $options
+     * @return void
+     */
+    protected function fetchSpouses(PersonaInterface $persona, \ArrayAccess $data, $options)
     {
         $spouseRelationshipTableGateway = $this->createTableGateway('spouse_relationship');
         $spouseRelationsSet = [];
         if ($persona->getGender() === $persona::GENDER_MALE) {
             $spouseRelationsSet = $spouseRelationshipTableGateway->select([
-                'husband_id' => $persona->getId(),
+                'husband_id' => $persona->getId()
             ]);
             foreach ($spouseRelationsSet as $spouseRelation) {
                 $wifeId = $spouseRelation['wife_id'];
                 $wife = $this->getPersonaById($wifeId, $options);
-                if (!$persona->getSpouses()->contains($wife)) {
+                if (! $persona->getSpouses()->contains($wife)) {
                     $persona->addSpouse($wife);
                 }
             }
         } elseif ($persona->getGender() === $persona::GENDER_FEMALE) {
             $spouseRelationsSet = $spouseRelationshipTableGateway->select([
-                'wife_id' => $persona->getId(),
+                'wife_id' => $persona->getId()
             ]);
             foreach ($spouseRelationsSet as $spouseRelation) {
                 $husbandId = $spouseRelation['husband_id'];
                 $husband = $this->getPersonaById($husbandId, $options);
-                if (!$persona->getSpouses()->contains($husband)) {
+                if (! $persona->getSpouses()->contains($husband)) {
                     $persona->addSpouse($husband);
                 }
             }
         }
     }
 
-    protected function fetchParents(PersonaInterface $persona, $data, $options)
+    /**
+     *
+     *
+     * @param PersonaInterface $persona
+     * @param \ArrayAccess $data
+     * @param int $options
+     * @return void
+     */
+    protected function fetchParents(PersonaInterface $persona, \ArrayAccess $data, $options)
     {
         if ($fatherId = $data['father_id']) {
             $father = $this->getPersonaById($fatherId, $options);
@@ -260,20 +326,32 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         }
     }
 
+    /**
+     *
+     *
+     * @param PersonaInterface $persona
+     * @return array
+     */
     protected function extractData(PersonaInterface $persona)
     {
         $data = [
             'gender' => $persona->getGender(),
             'father_id' => $persona->hasFather() ? $persona->getFather()->getId() : null,
-            'mother_id' => $persona->hasMother() ? $persona->getMother()->getId() : null,
+            'mother_id' => $persona->hasMother() ? $persona->getMother()->getId() : null
         ];
-        if (!$this->notSaved($persona)) {
+        if (! $this->notSaved($persona)) {
             $data['id'] = $persona->getId();
         }
 
         return $data;
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\PersonaRepositoryInterface::delete()
+     *
+     */
     public function delete(PersonaInterface $persona)
     {
         /*
@@ -282,10 +360,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
         $spouseTableGateway = $this->createTableGateway('spouse_relationship');
 
         $spouseTableGateway->delete([
-            'husband_id' => $persona->getId(),
+            'husband_id' => $persona->getId()
         ]);
         $spouseTableGateway->delete([
-            'wife_id' => $persona->getId(),
+            'wife_id' => $persona->getId()
         ]);
 
         /*
@@ -293,14 +371,14 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
          */
         $table = $this->createTableGateway($this->tableName);
         $table->update([
-            'father_id' => null,
+            'father_id' => null
         ], [
-            'father_id' => $persona->getId(),
+            'father_id' => $persona->getId()
         ]);
         $table->update([
-            'mother_id' => null,
+            'mother_id' => null
         ], [
-            'mother_id' => $persona->getId(),
+            'mother_id' => $persona->getId()
         ]);
 
         /*
