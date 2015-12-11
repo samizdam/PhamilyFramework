@@ -14,8 +14,11 @@
 - Extract Config Adapter to standalone package.  
 
 ## 0.0.8 - 2015-12-XX
+### Added
+- Integration with codeclimate. 
+
 ### Changed 
-- Rename PersonaService::create() method to createPersona(). 
+- Rename PersonaService::create() method to createPersona().  
 
 ## 0.0.7 - 2015-12-10
 ### Changed
