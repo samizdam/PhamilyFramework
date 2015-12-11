@@ -18,9 +18,10 @@ class PersonaIdentityMap implements PersonaIdentityMapInterface
      * RowGateway?) instead of $rowData,
      * that can be using as prototype for ResultSet in TableGateway.
      *
-     * @param PersonaInterface $persona
-     * @param unknown          $rowData
-     * @param number           $options
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\PersonaIdentityMapInterface::add($persona, $rowData)
+     *
      */
     public function add(PersonaInterface $persona, $rowData, $options = 0)
     {
@@ -31,26 +32,56 @@ class PersonaIdentityMap implements PersonaIdentityMapInterface
         ];
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\PersonaIdentityMapInterface::getObject()
+     *
+     */
     public function getObject($id)
     {
         return $this->items[$id]['object'];
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\PersonaIdentityMapInterface::getData()
+     *
+     */
     public function getData($id)
     {
         return $this->items[$id]['data'];
     }
 
+    /**
+     *
+     *
+     * @param mixed $id
+     * @return mixed
+     */
     public function getOptions($id)
     {
         return $this->items[$id]['options'];
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\PersonaIdentityMapInterface::has()
+     *
+     */
     public function has($id)
     {
         return isset($this->items[$id]);
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\PersonaIdentityMapInterface::remove()
+     *
+     */
     public function remove($id)
     {
         unset($this->items[$id]);

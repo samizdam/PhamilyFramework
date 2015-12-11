@@ -36,7 +36,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
      *
      * @var PersonaIdentityMapInterface
      */
-    protected $cache;
+    protected $identityMap;
 
     /**
      *
@@ -45,7 +45,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
     public function __construct(AdapterInterface $adapter)
     {
         parent::__construct($adapter);
-        $this->cache = new PersonaIdentityMap();
+        $this->identityMap = new PersonaIdentityMap();
     }
 
     /**
@@ -181,10 +181,10 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
     {
         $options = $fetchWithOptions;
 
-        if ($this->cache->has($id)) {
-            $persona = $this->cache->getObject($id);
-            $data = $this->cache->getData($id);
-            if ($this->cache->getOptions($id) === $options) {
+        if ($this->identityMap->has($id)) {
+            $persona = $this->identityMap->getObject($id);
+            $data = $this->identityMap->getData($id);
+            if ($this->identityMap->getOptions($id) === $options) {
                 return $persona;
             }
         } else {
@@ -197,8 +197,8 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
                 $data = $resultSet->current();
                 $persona = (new Persona())->populate($data);
 
-                if (! $this->cache->has($id)) {
-                    $this->cache->add($persona, $data, $options);
+                if (! $this->identityMap->has($id)) {
+                    $this->identityMap->add($persona, $data, $options);
                 }
             }
         }
@@ -232,7 +232,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
     {
         $siblings = [];
 
-        $personaData = $this->cache->getData($persona->getId());
+        $personaData = $this->identityMap->getData($persona->getId());
 
         $siblingCondition = new SiblingsQueryCondition($personaData);
         $where = $siblingCondition->getPredicate($degreeOfKinship);

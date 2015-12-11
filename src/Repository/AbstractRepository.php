@@ -16,6 +16,11 @@ use Zend\Db\TableGateway\TableGatewayInterface;
  */
 abstract class AbstractRepository implements RepositoryInterface
 {
+
+    /**
+     *
+     * @var AdapterInterface
+     */
     protected $adapter;
 
     /**

@@ -5,15 +5,34 @@ namespace Phamily\Framework\Repository;
 use Phamily\Framework\Model\AnthroponymInterface;
 use Phamily\Framework\Model\Anthroponym;
 
+/**
+ *
+ * @author samizdam
+ *
+ */
 class AnthroponymRepository extends AbstractRepository implements AnthroponymRepositoryInterface
 {
+    /**
+     *
+     * @var string
+     */
     protected $tableName = 'anthroponym';
 
+    /**
+     *
+     * @var array
+     */
     protected $primaryKey = [
         'type',
         'value',
     ];
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\AnthroponymRepositoryInterface::save()
+     *
+     */
     public function save(AnthroponymInterface $anthroponym)
     {
         $exists = $this->checkAnthroponymExists($anthroponym);
@@ -28,6 +47,12 @@ class AnthroponymRepository extends AbstractRepository implements AnthroponymRep
         return $anthroponym->populate($row);
     }
 
+    /**
+     *
+     *
+     * @param AnthroponymInterface $anthroponym
+     * @return array
+     */
     protected function extractData(AnthroponymInterface $anthroponym)
     {
         $data = [
@@ -41,6 +66,12 @@ class AnthroponymRepository extends AbstractRepository implements AnthroponymRep
         return $data;
     }
 
+    /**
+     *
+     *
+     * @param AnthroponymInterface $anthroponym
+     * @return bool
+     */
     protected function checkAnthroponymExists(AnthroponymInterface &$anthroponym)
     {
         $tableGateway = $this->createTableGateway($this->tableName);
@@ -55,6 +86,12 @@ class AnthroponymRepository extends AbstractRepository implements AnthroponymRep
         return (bool) $resultSet->count();
     }
 
+    /**
+     *
+     *
+     * @param string $type
+     * @return bool
+     */
     protected function checkTypeExists($type)
     {
         $tableGateway = $this->createTableGateway('anthroponym_type');
@@ -69,6 +106,12 @@ class AnthroponymRepository extends AbstractRepository implements AnthroponymRep
         }
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\AnthroponymRepositoryInterface::delete()
+     *
+     */
     public function delete(AnthroponymInterface $anthroponym)
     {
         $tableGateway = $this->createTableGateway($this->tableName);
@@ -78,6 +121,12 @@ class AnthroponymRepository extends AbstractRepository implements AnthroponymRep
         ]);
     }
 
+    /**
+     *
+     * (non-PHPdoc)
+     * @see \Phamily\Framework\Repository\AnthroponymRepositoryInterface::getByType()
+     *
+     */
     public function getByType($type)
     {
         $tableGateway = $this->createTableGateway('anthroponym');
