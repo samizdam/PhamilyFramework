@@ -4,7 +4,12 @@ namespace Phamily\Framework\Repository;
 
 use Phamily\Framework\Model\PersonaInterface;
 
-class BasePersonaRepositoryCache implements PersonaRepositoryCacheInterface
+/**
+ *
+ * @author samizdam
+ *
+ */
+class PersonaIdentityMap implements PersonaIdentityMapInterface
 {
     protected $items = [];
 

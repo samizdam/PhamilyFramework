@@ -9,7 +9,7 @@ use Phamily\Framework\Model\PersonaInterface;
  * 
  * @author samizdam
  */
-interface PersonaRepositoryCacheInterface
+interface PersonaIdentityMapInterface
 {
     public function add(PersonaInterface $persona, $rowData);
 

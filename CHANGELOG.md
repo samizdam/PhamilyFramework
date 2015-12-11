@@ -17,6 +17,7 @@
 ### Changed
 - Rename PersonaService::getById() method to getPersonaById(). 
 - Rename PersonaService::delete() method to deletePersona().
+- Rename PersonaRepositoryCache classes (in-memory) to  PersonaIdentityMap. 
 
 ## 0.0.8 - 2015-12-12
 ### Added

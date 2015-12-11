@@ -34,7 +34,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
 
     /**
      *
-     * @var PersonaRepositoryCacheInterface
+     * @var PersonaIdentityMapInterface
      */
     protected $cache;
 
@@ -45,7 +45,7 @@ class PersonaRepository extends AbstractRepository implements PersonaRepositoryI
     public function __construct(AdapterInterface $adapter)
     {
         parent::__construct($adapter);
-        $this->cache = new BasePersonaRepositoryCache();
+        $this->cache = new PersonaIdentityMap();
     }
 
     /**
