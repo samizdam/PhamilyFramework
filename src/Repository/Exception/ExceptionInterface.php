@@ -2,8 +2,13 @@
 
 namespace Phamily\Framework\Repository\Exception;
 
-use Phamily\Framework\PhamilyExceptionInterface;
+use Phamily\Framework\Exception\PhamilyExceptionInterface;
 
+/**
+ *
+ * @author samizdam
+ *
+ */
 interface ExceptionInterface extends PhamilyExceptionInterface
 {
 }
