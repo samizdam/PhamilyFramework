@@ -2,6 +2,13 @@
 
 namespace Phamily\Framework\Model\Exception;
 
-class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface
+use Phamily\Framework\Exception;
+
+/**
+ *
+ * @author samizdam
+ *
+ */
+class OutOfBoundsException extends Exception\OutOfBoundsException implements ExceptionInterface
 {
 }

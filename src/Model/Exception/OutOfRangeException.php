@@ -2,6 +2,13 @@
 
 namespace Phamily\Framework\Model\Exception;
 
-class OutOfRangeException extends \OutOfRangeException implements ExceptionInterface
+use Phamily\Framework\Exception;
+
+/**
+ *
+ * @author samizdam
+ *
+ */
+class OutOfRangeException extends Exception\OutOfRangeException implements ExceptionInterface
 {
 }

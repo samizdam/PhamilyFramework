@@ -7,6 +7,7 @@ use Phamily\Framework\Exception\PhamilyExceptionInterface;
 /**
  *
  * @author samizdam
+ *
  */
 interface ExceptionInterface extends PhamilyExceptionInterface
 {

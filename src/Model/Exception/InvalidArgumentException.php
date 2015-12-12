@@ -2,6 +2,13 @@
 
 namespace Phamily\Framework\Model\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+use Phamily\Framework\Exception;
+
+/**
+ *
+ * @author samizdam
+ *
+ */
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }

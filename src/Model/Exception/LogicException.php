@@ -2,6 +2,13 @@
 
 namespace Phamily\Framework\Model\Exception;
 
-class LogicException extends \LogicException implements ExceptionInterface
+use Phamily\Framework\Exception;
+
+/**
+ *
+ * @author samizdam
+ *
+ */
+class LogicException extends Exception\LogicException implements ExceptionInterface
 {
 }
