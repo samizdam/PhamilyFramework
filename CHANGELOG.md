@@ -13,6 +13,13 @@
 - Separete Unit and Integration (DB) tests.  
 - Extract Config Adapter to standalone package.  
 
+## 0.1.1 - 2015-12-XX
+### Added
+- Library level Exceptions.
+
+### Changed
+- Exceptions hierarchy. 
+
 ## 0.1.0 - 2015-12-12
 ### Changed
 - Rename exceptions packages with psr. 
