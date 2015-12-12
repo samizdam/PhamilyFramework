@@ -7,13 +7,16 @@
 - Export data from mainstream formats in subj. 
 - Support for SQLite. 
 - Support for noSQL storages. 
-- Import to some formats and API for representations.
+- Import to some formats (xml, GEDCOM) and API for representations.
 - Integration with Yii.   
 - Search.
-- Separete Unit and Integration (DB) tests.  
-- Extract Config Adapter to standalone package.  
 
-## 0.1.1 - 2015-12-XX
+### Changed
+- Separete Unit and Integration (DB) tests.  
+- Extract Config Adapter to standalone package. 
+- Use actual Vendor in namespace? Samizdam or FreeElephants.  
+
+## 0.1.1 - 2015-12-12
 ### Added
 - Library level Exceptions.
 
