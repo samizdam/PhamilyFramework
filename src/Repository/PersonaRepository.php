@@ -6,7 +6,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Phamily\Framework\Model\Persona;
 use Phamily\Framework\Repository\Exception\NotFoundException;
 use Phamily\Framework\Util\BitmaskTrait;
-use Phamily\Framework\Repository\conditions\SiblingsQueryCondition;
+use Phamily\Framework\Repository\Condition\SiblingsQueryCondition;
 use Zend\Db\TableGateway\Feature\SequenceFeature;
 use Zend\Db\Adapter\AdapterInterface;
 

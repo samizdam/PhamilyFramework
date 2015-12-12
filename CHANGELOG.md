@@ -13,6 +13,11 @@
 - Separete Unit and Integration (DB) tests.  
 - Extract Config Adapter to standalone package.  
 
+## 0.1.0 - 2015-12-12
+### Changed
+- Rename exceptions packages with psr. 
+- Rename conditions package with psr. 
+
 ## 0.0.9 - 2015-12-12
 ### Changed
 - Rename PersonaService::getById() method to getPersonaById(). 
