@@ -2,6 +2,13 @@
 
 namespace Phamily\Framework\Repository\Exception;
 
-class NotFoundException extends \OutOfBoundsException implements ExceptionInterface
+use Phamily\Framework\Exception\OutOfBoundsException;
+
+/**
+ *
+ * @author samizdam
+ *
+ */
+class NotFoundException extends OutOfBoundsException implements ExceptionInterface
 {
 }
